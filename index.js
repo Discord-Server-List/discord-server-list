@@ -79,9 +79,9 @@ const strats = new Strategy({
 
 passport.use("discord", strats);
 
-app.get("/", (req, res) => {
+app.get("/", async(req, res) => {
     res.render("index", {
-        title: "<%= lingua.index.page_title %>",
+        title: "Noisy Penguin Server List",
         icon: "/img/favicon.png",
         siteFont: "<%= lingua.font %>"
     })

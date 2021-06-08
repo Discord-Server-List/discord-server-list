@@ -22,7 +22,7 @@ connectDB(process.env.MONGODB_TEST)
 app.use(lingua(app, {
     defaultLocale: 'en',
     path: __dirname + '/locales',
-    storageKey: 'locales',
+    storageKey: 'locale',
     cookieOptions: {
         httpOnly: true
     }

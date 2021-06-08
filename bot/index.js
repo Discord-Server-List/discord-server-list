@@ -13,8 +13,7 @@ bot.on("ready", () => {
 
 bot.on("message", async(message) => {
     let data = await Guild.findOne({ guildID: message.guild.id });
-    let uData = await User.findOne({ userID: message.author.id});
-    
+    let uData = await User.findOne({ userID: message.author.id })
     let channelID;
     let channels = message.guild.channels.cache;
     let defaultC = message.guild.systemChannel;
@@ -45,29 +44,38 @@ bot.on("message", async(message) => {
         return;
     }
 
-    if(!uData){
+    /*if(!uData){
         User.create({
             userID: message.author.id,
             userTag: message.author.tag,
             username: message.author.username,
             userIcon: message.author.displayAvatarURL({dynamic: true, size: 512})
         })
-    }
-
+    }*/
 
     //if (!message.content.toLowerCase().startsWith(process.env.PREFIX)) return;
     if(message.content == "r/serverinfo") {
         let e = new Discord.MessageEmbed()
         .setTitle(data.guildName)
         .setDescription(data.description)
+        .setImage(data.icon)
         .addField('Join', `[Click Here](${process.env.DOMAIN}/server/join/${data.guildID})`, true)
         .addField('Owner', `<@${data.ownerID}>`, true)
+        .setTimestamp(new Date())
         .setAuthor(data.guildName, data.icon, `${process.env.DOMAIN}/server/${data.guildID}`)
         message.channel.send(e);
     }
     if(message.content == "r/userinfo") {
-
+        let e = new Discord.MessageEmbed()
+        .setTitle(`${uData.username} Profile`)
+        .setImage(`${uData.userIcon}.png`)
+        .setDescription(uData.description)
+        .addField('Add As Friend', `[Click Here](${process.env.DOMAIN}/user/add/${uData.userID})`, true)
+        .setAuthor(uData.username, uData.userIcon, `${process.env.DOMAIN}/user/${uData.userID}`, true)
+        .setTimestamp(new Date())
+        message.channel.send(e);
     }
+
     if(message.content =="r/guildchangedesc") {
         //let db = Guild.updateOne({description: })
     }

@@ -1,0 +1,35 @@
+{
+  "name": "discord-serverlist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon ."
+  },
+  "author": "Wisly Ong",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "canvas-constructor": "^4.1.0",
+    "cookie-parser": "^1.4.5",
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "lingua": "^0.4.0",
+    "module-alias": "^2.2.2",
+    "mongoose": "^5.12.13",
+    "passport": "^0.4.1",
+    "passport-discord": "^0.1.4",
+    "path": "^0.12.7"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@views": "./views",
+    "@bot": "./bot",
+    "@routes": "./routes",
+    "@models": "./models",
+    "@utils": "./utils"
+  }
+}

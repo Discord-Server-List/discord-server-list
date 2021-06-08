@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("../partials/head.ejs") %>
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include("../partials/nav.ejs") %>
+    <header class="masthead text-center text-white">
+        <div class="masthead-content">
+            <div class="container">
+                <img class="img-fluid bot-avatar rounded-circle" src="<%= icon %>" width="200px" height="200px"
+              alt="">
+          </div>
+        </div>
+        </header>
+    <h2 style="text-align: center;">Submit New Blog</h2>
+    <form action="/api/blog/support/new" method="post" class="post-form">
+        <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="username" name="username" class="form-control" />
+                <label class="form-label" for="username">Enter Your Username</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="email" id="email" name="email" class="form-control" />
+                <label class="form-label" for="email">Enter Your Email</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" id="title" name="title" class="form-control" />
+            <label class="form-label" for="title">Blog Title</label>
+          </div>
+
+        <div class="form-outline mb-4">
+            <textarea class="form-control" id="body" name="body" rows="4"></textarea>
+            <label class="form-label" for="body">Enter your description...</label>
+        </div>  
+
+        <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+    </form>
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

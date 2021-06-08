@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta property="og:title" content="<%= title %>"/>
+    <meta itemprop="name" content="<%= title %>">
+    <meta property="twitter:title" content="<%= title %>">
+    <meta itemprop="description" content="<%= desc %>">
+    <meta itemprop="image" content="<%= icon %>">
+    <meta name="description" content="<%= desc %>">
+    <meta name="theme-color" content="#7289DA" />
+    <meta name="twitter:description" content="<%= desc %>">
+    <meta name="twitter:image" content="<%= icon %>">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:url" content="http://localhost:5000/server/<%= guildid %>">
+    <meta property="og:url" content="http://localhost:5000/server/<%= guildid %>">
+    <meta property="og:site_name" content="Noisy Penguin Server List" />
+    <meta property="og:description" content="<%= desc %>" />
+    <meta property="og:image" content="<%= icon %>" />
+    <meta property="og:type" content="website" />
+    <%- include("../partials/head.ejs") %>  
+</head>
+<body>
+    <%- include("../partials/nav.ejs") %>
+    <header class="masthead text-center text-white">
+        <div class="masthead-content">
+            <div class="container">
+                <img class="img-fluid bot-avatar rounded-circle" src="<%= icon %>" width="200px" height="200px"
+              alt="">
+              <h3 class="masthead-heading mb-0" style="font-size: 3em !important;"><%= header %></h3>
+              <br />
+              <a class="btn" href="/server/join/<%= join %>" role="button" target="blank" style="color: white;">
+                <span>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </span>
+                Join Server
+              </a>
+              
+              <a class="btn loginHB" href="/user/add/<%= add %>" role="button" style="color: white;">
+                <span>
+                  <i class="fa fa-sign-in" aria-hidden="true"></i>
+                </span>
+                Contact Owner
+              </a>
+          </div>
+        </div>
+        </header>
+
+        <section>
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-6 order-lg-2">
+                <div class="p-5">
+                  <img class="img-fluid" src="<%= ownerAvatar %>" alt="<%= ownerTag %>-icon">
+                </div>
+              </div>
+              <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                  <h3 class="display-5">Owned By: <%= ownerTag %></h3>
+                  <p><%= userDesc %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        
+    <section>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="p-5">
+              <img class="img-fluid" src="<%= icon %>" alt="server-icon">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="p-5">
+              <h2 class="display-5">Server Description</h2>
+              <p><%= desc %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

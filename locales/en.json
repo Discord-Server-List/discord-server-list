@@ -1,6 +1,6 @@
 {
     "locale": "en-US",
-    "font": "font-family: 'Roboto', sans-serif;",
+    "font": "style=font-family: 'Roboto', sans-serif;",
     "index": {
         "page_title": "Noisy Chicken Server List"
     }

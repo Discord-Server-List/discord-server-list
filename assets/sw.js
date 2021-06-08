@@ -1,6 +1,5 @@
 var CACHE_NAME = 'noisy-penguin-cache-sw';
 var urlsToCache = [
-    '/',
     '/css/mdb.min.css',
     '/js/mdb.min.js'
 ];

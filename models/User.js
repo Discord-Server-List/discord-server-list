@@ -36,6 +36,12 @@ var userSchema = new Schema({
     },
     userIcon: {
         type: String
+    },
+    guilds: [String],
+    atoken: String,
+    atoken: String,
+    discriminator: {
+        type: String
     }
 })
 

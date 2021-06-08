@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang="<%= lingua.locale %>">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include("partials/head.ejs") %>
 </head>
-<body <%= siteFont %>>
+<body>
     <%- include("partials/nav.ejs") %>
-    
+    <header class="masthead text-center text-white">
+        <div class="masthead-content">
+            <div class="container">
+                <img class="img-fluid bot-avatar rounded-circle" src="/img/favicon.png" width="200px" height="200px"
+              alt="">
+              <h3 class="masthead-heading mb-0" style="font-size: 3em !important;">Noisy Penguin Server List</h3>
+              <br />
+              <a class="btn" href="https://discord.com/invite/pErSSK5zjx" role="button" target="blank" style="color: white;">
+                <span>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </span>
+                Join Support Server
+              </a>
+              
+              <a class="btn loginHB" role="button" href="/login" style="color: white;">
+                <span>
+                  <i class="fa fa-sign-in" aria-hidden="true"></i>
+                </span>
+                Login
+              </a>
+          </div>
+        </div>
+        </header>
     <%- include("partials/footer.ejs") %>
 </body>
 </html>

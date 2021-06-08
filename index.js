@@ -12,6 +12,9 @@ const { checkAuth } = require("@utils/auth");
 const Post = require("@models/Post");
 var app = express();
 
+//Trello Board(private)
+//https://trello.com/b/sZf3SGWF/discord-server-list
+
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/assets"))
 connectDB(process.env.MONGODB_TEST)
@@ -43,7 +46,30 @@ const strats = new Strategy({
     try {
         let userdata = await User.findOne({userID: profile.id});
         if(userdata) {
-
+            User.findOneAndUpdate(
+                { userID: profile.id },
+                { guilds: profile.guilds, rtoken: refreshToken, atoken: accessToken },
+      
+                async (err) => {
+                  if (err) throw err;
+                  let newUser = await User.findOne({ userID: profile.id });
+                  done(null, newUser);
+                }
+              );
+        } else {
+            const newUser = await User.create({
+                userID: profile.id,
+                username: profile.username,
+                discriminator: profile.discriminator,
+                userIcon: profile.avatar,
+                guilds: profile.guilds,
+                rtoken: refreshToken,
+                atoken: accessToken,
+            });
+      
+            const savedUser = await newUser.save();
+      
+            done(null, savedUser);
         }
     } catch (error) {
         console.log(error);
@@ -51,11 +77,13 @@ const strats = new Strategy({
     }
 })
 
+passport.use("discord", strats);
+
 app.get("/", (req, res) => {
     res.render("index", {
         title: "<%= lingua.index.page_title %>",
         icon: "/img/favicon.png",
-        siteFont: "style=<%= lingua.font %>"
+        siteFont: "<%= lingua.font %>"
     })
 })
 

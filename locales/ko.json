@@ -2,6 +2,16 @@
     "locale": "ko",
     "font": "font-family: 'Do Hyeon', sans-serif;",
     "index": {
-        "page_title": "Noisy Chicken Server List"
+        "page_title": "Noisy Chicken 서버 목록"
+    },
+    "dropdown": {
+        "title": "언어 선택 ",
+        "list": {
+            "en": "영어 (미국)",
+            "ja": "일본어",
+            "id": "인도네시아어",
+            "zh_CN": "중국어 (간체)",
+            "ko": "한국어"
+        }
     }
 }

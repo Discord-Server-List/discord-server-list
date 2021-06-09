@@ -1,17 +1,17 @@
 {
-    "locale": "en-US",
+    "locale": "id",
     "font": "font-family: Roboto, sans-serif;",
     "index": {
         "page_title": "Noisy Chicken Server List"
     },
     "dropdown": {
-        "title": "Choose Languages",
+        "title": "Pilih Bahasa",
         "list": {
-            "en": "English",
-            "ja": "日本語",
+            "en": "Bahasa Inggris",
+            "ja": "Bahasa Jepang",
             "id": "Bahasa Indonesia",
-            "zh_CN": "中文",
-            "ko": "한국어"
+            "zh_CN": "Bahasa Cina(Sederhana)",
+            "ko": "Bahasa Korea"
         }
     }
 }

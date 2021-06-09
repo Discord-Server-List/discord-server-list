@@ -2,12 +2,14 @@ require("dotenv").config();
 require('module-alias/register')
 var express = require("express");
 const { connectDB } = require("@utils/db");
+var session = require("express-session");
 var lingua = require("lingua");
 const Guild  = require("@models/Guild");
 const User = require("@models/User");
 var bot = require("@bot/index");
 const { Strategy } = require('passport-discord');
 const passport = require('passport');
+var path = require('path')
 const { checkAuth } = require("@utils/auth");
 const Post = require("@models/Post");
 var app = express();
@@ -17,7 +19,15 @@ var app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/assets"))
+app.use(session({
+    secret: "DiscordServerList",
+    resave: false,
+    saveUninitialized: false
+}));
+
+
 connectDB(process.env.MONGODB_TEST)
+
 
 app.use(lingua(app, {
     defaultLocale: 'en',
@@ -27,6 +37,9 @@ app.use(lingua(app, {
         httpOnly: true
     }
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -87,17 +100,17 @@ app.get("/", async(req, res) => {
     })
 })
 
-app.get("/login", passport.authenticate('discord', { scope: ["identify"], prompt: "consent" }), (req, res) => {})
+app.get("/login", passport.authenticate('discord'), (req, res) => {})
 
 app.get("/login/callback", checkAuth, passport.authenticate("discord", {
     failureRedirect: "/",
     successRedirect: "/me"
 }))
 
-app.get("/me", checkAuth,async(req, res) => {
-    var user = await bot.user.fetch(req.user.userid);
+app.get("/me", checkAuth, async(req, res) => {
+    var user = await User.findOne({})
     if(user){
-        res.send(user)
+        res.send(user.userID)
     } else {
         res.send("User Not Found")
     }

@@ -2,6 +2,16 @@
     "locale": "zh-CN",
     "font": "font-family: 'Noto Sans SC', sans-serif;",
     "index": {
-        "page_title": "Noisy Chicken Server List"
+        "page_title": "Noisy Chicken 服务器列表"
+    },
+    "dropdown": {
+        "title": "语言选择",
+        "list": {
+            "en": "英文(美国)",
+            "ja": "日文",
+            "id": "印度尼西亚文",
+            "zh_CN": "中文(简化汉字)",
+            "ko": "韩文"
+        }
     }
 }

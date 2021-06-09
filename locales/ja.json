@@ -2,6 +2,16 @@
     "locale": "ja",
     "font": "font-family: 'Sawarabi Gothic', sans-serif;",
     "index": {
-        "page_title": "Noisy Chicken Server List"
+        "page_title": "Noisy Chicken サーバー・リスト"
+    },
+    "dropdown": {
+        "title": "言語選択",
+        "list": {
+            "en": "英語(アメリカ)",
+            "ja": "日本語",
+            "id": "インドネシア語",
+            "zh_CN": "中国語(簡体字)",
+            "ko": "韓国語"
+        }
     }
 }

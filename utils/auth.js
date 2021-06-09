@@ -1,7 +1,7 @@
 
 
 module.exports.checkAuth = (req, res, next) => {
-    if (!req.user) { 
+    if (!req.isAuthenticated()) { 
         return res.redirect("/login");
     } else {
         return next();

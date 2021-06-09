@@ -7,6 +7,10 @@
             "title": "Noisy Penguin Server List",
             "support_btn": "Join Support Server",
             "login_btn": "Login"
+        },
+        "section1": {
+            "title": "Twitter Timeline",
+            "description": "Our Twitter timeline feel free to follow us:"
         }
     },
     "dropdown": {
@@ -25,6 +29,12 @@
             "list": {
                 "link1": "wislyong8@gmail.com",
                 "link2": "Twitter"
+            }
+        },
+        "row2": {
+            "title": "Resources",
+            "list": {
+                "link1": "Support"
             }
         }
     },

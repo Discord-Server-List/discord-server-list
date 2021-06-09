@@ -7,6 +7,10 @@
             "title": "Noisy Chicken サーバー・リスト",
             "support_btn": "サポートサーバーに参加する",
             "login_btn": "ログイン"
+        },
+        "section1": {
+            "title": "Twitter Timeline",
+            "description": "ツイッターのタイムラインを見てください、私たちのツイッターのアカウントを確認することができます:"
         }
     },
     "dropdown": {
@@ -25,6 +29,12 @@
             "list": {
                 "link1": "wislyong8@gmail.com",
                 "link2": "ツイッター"
+            }
+        },
+        "row2": {
+            "title": "ヘルプ",
+            "list": {
+                "link1": "サポート"
             }
         }
     },

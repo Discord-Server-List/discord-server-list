@@ -7,6 +7,10 @@
             "title": "Noisy Chicken 서버 목록",
             "support_btn": "지원 서버 가입",
             "login_btn": "로그인"
+        },
+        "section1": {
+            "title": "Twitter Timeline",
+            "description": "트위터 타임 라인은 언제든지 팔로우하세요 :"
         }
     },
     "dropdown": {
@@ -25,6 +29,12 @@
             "list": {
                 "link1": "wislyong8@gmail.com",
                 "link2": "Twitter"
+            }
+        },
+        "row2": {
+            "title": "자원",
+            "list": {
+                "link1": "지원하다"
             }
         }
     },

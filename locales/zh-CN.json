@@ -7,6 +7,10 @@
             "title": "Noisy Chicken 服务器列表",
             "support_btn": "加入支持服务器",
             "login_btn": "登录"
+        },
+        "section1": {
+            "title": "Twitter时间线",
+            "description": "我们的Twitter时间线，请随时关注我们。"
         }
     },
     "dropdown": {
@@ -25,6 +29,12 @@
             "list": {
                 "link1": "wislyong8@gmail.com",
                 "link2": "Twitter"
+            }
+        },
+        "row2": {
+            "title": "资源",
+            "list": {
+                "link1": "支持"
             }
         }
     },

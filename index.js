@@ -2,6 +2,7 @@ require("dotenv").config();
 require('module-alias/register')
 var express = require("express");
 const { connectDB } = require("@utils/db");
+const refresh = require('passport-oauth2-refresh');
 var session = require("express-session");
 var lingua = require("lingua");
 const Guild  = require("@models/Guild");
@@ -91,6 +92,8 @@ const strats = new Strategy({
 })
 
 passport.use("discord", strats);
+refresh.use("discord", strats);
+
 
 app.get("/", async(req, res) => {
     res.render("index", {

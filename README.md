@@ -4,6 +4,9 @@ Here are the codes for Noisy Penguin Server List! Feel free to submit an issue o
 ## Self Hosting
 This node application uses [Mongodb](https://www.mongodb.com) for its databases. Some files may be missing due to security reasons and can be found [here](https://github.com/Discord-Server-List/discord-server-list/tree/main/secret).
 
+## Localization
+This Project uses [Lingua](https://www.npmjs.com/package/lingua) for its localization
+
 ## License
 This project is licensed under the terms of [MIT License](https://github.com/Discord-Server-List/discord-server-list/blob/main/LICENSE)
 

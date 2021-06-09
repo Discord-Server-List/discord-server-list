@@ -2,7 +2,12 @@
     "locale": "ja",
     "font": "font-family: 'Sawarabi Gothic', sans-serif;",
     "index": {
-        "page_title": "Noisy Chicken サーバー・リスト"
+        "page_title": "Noisy Chicken サーバー・リスト",
+        "header": {
+            "title": "Noisy Chicken サーバー・リスト",
+            "support_btn": "サポートサーバーに参加する",
+            "login_btn": "ログイン"
+        }
     },
     "dropdown": {
         "title": "言語選択",
@@ -13,5 +18,19 @@
             "zh_CN": "中国語(簡体字)",
             "ko": "韓国語"
         }
+    },
+    "footer": {
+        "row1": {
+            "title": "連絡先",
+            "list": {
+                "link1": "wislyong8@gmail.com",
+                "link2": "ツイッター"
+            }
+        }
+    },
+    "navbar": {
+        "search": "サーバー検索",
+        "Server": "サーバー閲覧",
+        "About": "概要"
     }
 }

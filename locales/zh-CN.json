@@ -2,7 +2,12 @@
     "locale": "zh-CN",
     "font": "font-family: 'Noto Sans SC', sans-serif;",
     "index": {
-        "page_title": "Noisy Chicken 服务器列表"
+        "page_title": "Noisy Chicken 服务器列表",
+        "header": {
+            "title": "Noisy Chicken 服务器列表",
+            "support_btn": "加入支持服务器",
+            "login_btn": "登录"
+        }
     },
     "dropdown": {
         "title": "语言选择",
@@ -13,5 +18,19 @@
             "zh_CN": "中文(简化汉字)",
             "ko": "韩文"
         }
+    },
+    "footer": {
+        "row1": {
+            "title": "联系我们",
+            "list": {
+                "link1": "wislyong8@gmail.com",
+                "link2": "Twitter"
+            }
+        }
+    },
+    "navbar": {
+        "search": "服务器搜索",
+        "Server": "服务器浏览",
+        "About": "纲要"
     }
 }

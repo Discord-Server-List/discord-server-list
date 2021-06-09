@@ -2,7 +2,12 @@
     "locale": "id",
     "font": "font-family: Roboto, sans-serif;",
     "index": {
-        "page_title": "Noisy Chicken Server List"
+        "page_title": "Noisy Chicken Server List",
+        "header": {
+            "title": "Noisy Penguin Server List",
+            "support_btn": "Join Support Server",
+            "login_btn": "Login"
+        }
     },
     "dropdown": {
         "title": "Pilih Bahasa",
@@ -13,5 +18,19 @@
             "zh_CN": "Bahasa Cina(Sederhana)",
             "ko": "Bahasa Korea"
         }
+    },
+    "footer": {
+        "row1": {
+            "title": "Kontak",
+            "list": {
+                "link1": "wislyong8@gmail.com",
+                "link2": "Twitter"
+            }
+        }
+    },
+    "navbar": {
+        "search": "Jelajah",
+        "Server": "Server",
+        "About": "Tentang Kami"
     }
 }

@@ -32,13 +32,13 @@ bot.on("message", async(message) => {
             guildID: message.guild.id,
             owner:  message.guild.owner.user.tag,
             ownerID: message.guild.ownerID,
-            icon: message.guild.iconURL({dynamic: true, size: 512}),
+            icon: message.guild.iconURL({dynamic: true, size: 512, format: "png"}),
             guildRegion: message.guild.region,
             guildCreatedAt: message.guild.createdAt.toLocaleString(),
             guildName: message.guild.name,
             guildInvite: "https://discord.gg/" + invite,
             defaultChannel: message.guild.systemChannel.toString(),
-            ownerIcon: message.guild.owner.user.displayAvatarURL({dynamic: true, size: 512})
+            ownerIcon: message.guild.owner.user.displayAvatarURL({dynamic: true, size: 512, format: "png"})
         });
         newGuild.save();
         return;

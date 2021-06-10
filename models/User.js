@@ -1,4 +1,5 @@
 var {Schema, model} = require("mongoose")
+var findOrCreate = require('mongoose-findorcreate')
 
 var userSchema = new Schema({
     userID: {
@@ -38,11 +39,28 @@ var userSchema = new Schema({
         type: String
     },
     guilds: [String],
-    atoken: String,
+    rtoken: String,
     atoken: String,
     discriminator: {
         type: String
+    },
+    userEmail: {
+        type: String,
+        required: true
+    },
+    is_premium: {
+        type: Boolean,
+        default: false
+    },
+    next_payment_date: {
+        type: Date
+    },
+    locale: {
+        type: String,
+        default: "en-US"
     }
 })
+
+userSchema.plugin(findOrCreate);
 
 module.exports = model("User", userSchema);

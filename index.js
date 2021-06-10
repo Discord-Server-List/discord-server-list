@@ -5,14 +5,18 @@ const { connectDB } = require("@utils/db");
 const refresh = require('passport-oauth2-refresh');
 var session = require("express-session");
 var lingua = require("lingua");
+var {admin} = require("./admin.json");
 const Guild  = require("@models/Guild");
-const User = require("@models/User");
+const User = require("./models/User");
 var bot = require("@bot/index");
 const { Strategy } = require('passport-discord');
 const passport = require('passport');
-var path = require('path')
 const { checkAuth } = require("@utils/auth");
 const Post = require("@models/Post");
+const {rateLimit} = require("./utils/rateLimit");
+const { errrorHandler } = require("./utils/errorHandler");
+const { resolveImage, Canvas } = require("canvas-constructor");
+const path = require("path");
 var app = express();
 
 //Trello Board(private)
@@ -51,64 +55,77 @@ passport.deserializeUser(async (id, done) => {
     if (user) done(null, user);
 });
 
-const strats = new Strategy({
+/*
+    https://www.npmjs.com/package/passport-oauth2-refresh
+    https://stackoverflow.com/questions/62878689/discord-js-oauth2-with-passport-js
+*/
+const strategy = new Strategy({
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
     callbackURL: process.env.REDIRECT,
-    scope: ["identify", "guilds"]
+    scope: ["identify", "email", "guilds"]
 }, async(accessToken, refreshToken, profile, done) => {
     try {
-        let userdata = await User.findOne({userID: profile.id});
-        if(userdata) {
-            User.findOneAndUpdate(
-                { userID: profile.id },
-                { guilds: profile.guilds, rtoken: refreshToken, atoken: accessToken },
-      
-                async (err) => {
-                  if (err) throw err;
-                  let newUser = await User.findOne({ userID: profile.id });
-                  done(null, newUser);
-                }
-              );
+        let user = await User.findOne({userID: profile.id});
+        if(user) {
+            User.findOrCreate({
+                userID: profile.id,
+                guilds: profile.guilds,
+                rtoken: refreshToken,
+                atoken: accessToken
+            })
+            async(err) => {
+                if(err) throw err;
+                let newUser = await User.findOne({userID: profile.id})
+                done(null, newUser)
+            }
         } else {
-            const newUser = await User.create({
+            let newUser = User.create({
                 userID: profile.id,
                 username: profile.username,
                 discriminator: profile.discriminator,
-                userIcon: profile.avatar,
-                guilds: profile.guilds,
                 rtoken: refreshToken,
                 atoken: accessToken,
-            });
-      
+                userIcon: profile.avatar,
+                userEmail: profile.email,
+                staff: false,
+                guilds: profile.guilds,
+                is_premium: false
+            })
             const savedUser = await newUser.save();
-      
             done(null, savedUser);
         }
-    } catch (error) {
-        console.log(error);
-        done(error, null);
+    } catch(err) {
+        console.error(err);
+        done(err, null);
     }
+    console.log(profile);
 })
 
-passport.use("discord", strats);
-refresh.use("discord", strats);
-
+passport.use("discord", strategy);
 
 app.get("/", async(req, res) => {
     res.render("index", {
         title: "Noisy Penguin Server List",
-        icon: "/img/favicon.png",
-        siteFont: "<%= lingua.font %>"
+        icon: "/img/favicon.png"
     })
 })
 
+
 app.get("/login", passport.authenticate('discord'), (req, res) => {})
 
-app.get("/login/callback", checkAuth, passport.authenticate("discord", {
-    failureRedirect: "/",
-    successRedirect: "/me"
-}))
+app.get("/login/callback", passport.authenticate("discord", {failureRedirect: "/"}), async(req, res) => {
+    let user = await User.findOne({})
+    if(admin.includes(req.user.id)) {
+        user.staff = true
+    } else {
+        user.staff = false
+    }
+    res.redirect("/me")
+})
+
+
+
 
 app.get("/me", checkAuth, async(req, res) => {
     var user = await User.findOne({})
@@ -125,7 +142,16 @@ app.get("/logout", async(req, res) => {
 });
 
 app.get("/search", (req, res) => {
+    res.render("search.ejs", {
+        icon: "/img/favicon.png"
+    });
+})
 
+app.get("/search/?q=", (req, res) => {
+    var search_key = req.query("q");
+    Guild.find({guildName: search_key})
+    .then(data => res.json(data))
+    .catch(err => res.status(404).json({ success: false }));
 });
 
 app.get("/server", async(req, res) => {
@@ -197,6 +223,50 @@ app.get("/server/:id", async(req, res) => {
     }
 })
 
+app.get("/api/server/:id", rateLimit(15000, 4), async(req, res) => {
+    let data = await Guild.findOne({guildID: req.params.id});
+
+    if(!data){
+        res.sendStatus(404).json({
+            error: true,
+            code: 404,
+            message: "Server not found"
+        })
+    }
+    try {
+        let avatar = await resolveImage(data.icon);
+        //let admin = await resolveImage(path.join(__dirname + "/assets/img/admin.png"));
+        let verified = await resolveImage(path.join(__dirname + "/assets/img/Verified.png"));
+
+        let img = new Canvas()
+        .setColor("#404E5C")
+        .printRectangle(0, 0, 500, 250)
+        .setColor("#DCE2F9")
+        .setTextFont("bold 35px sans")
+        .printText(data.guildName, 120, 75)
+        .printRoundedImage(avatar, 30, 30, 70, 70, 20)
+        .setTextAlign("left")
+        .setTextFont('bold 12px Verdana')
+        if(data.verified == true)
+            img.printImage(verified, 420, 55)
+        img
+            .printText(`Server Region: ${data.guildRegion}`, 30, 145)
+            .setTextFont('normal 15px Verdana')
+            .printWrappedText(data.description,  30, 175, 440, 15)
+            .setTextFont('bold 12px sans-serif')
+            .printText(data.owner, 10, 245)
+            .setTextAlign("right")
+            .printText(process.env.DOMAIN, 490, 245);
+        res.writeHead(200, {
+            "Content-Type": "image/png"
+        })
+        res.end(await img.toBuffer(), "binary")
+    } catch (error) {
+        throw error;
+        res.sendStatus(500);
+    }
+})
+
 app.get("/server/join/:guildid", async(req, res) => {
     var serv = await Guild.findOne({guildID: req.params.guildid});
     if(serv) {
@@ -227,6 +297,10 @@ app.get("/user/add/:ownerid", async(req, res) => {
     } else {
         res.send("User Not Found")
     }
+})
+
+app.get("/donate", (req, res) => {
+
 })
 
 bot.login(process.env.DISCORD_CLIENT_SECRET)

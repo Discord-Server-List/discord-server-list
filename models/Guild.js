@@ -1,4 +1,5 @@
 var {Schema, model} = require("mongoose")
+var findOrCreate = require('mongoose-findorcreate')
 
 var guildSchema = new Schema({
     guildID: String,
@@ -60,7 +61,13 @@ var guildSchema = new Schema({
     },
     ownerIcon: {
         type: String
+    },
+    verified: {
+        type: Boolean,
+        default: false
     }
 })
+
+guildSchema.plugin(findOrCreate);
 
 module.exports = model("Guild", guildSchema);

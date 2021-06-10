@@ -6,11 +6,10 @@ const refresh = require('passport-oauth2-refresh');
 var session = require("express-session");
 var lingua = require("lingua");
 const Guild  = require("@models/Guild");
-const User = require("@models/User");
+const User = require("./models/User");
 var bot = require("@bot/index");
 const { Strategy } = require('passport-discord');
 const passport = require('passport');
-var path = require('path')
 const { checkAuth } = require("@utils/auth");
 const Post = require("@models/Post");
 var app = express();
@@ -51,64 +50,68 @@ passport.deserializeUser(async (id, done) => {
     if (user) done(null, user);
 });
 
-const strats = new Strategy({
+/*
+    https://www.npmjs.com/package/passport-oauth2-refresh
+    https://stackoverflow.com/questions/62878689/discord-js-oauth2-with-passport-js
+*/
+const strategy = new Strategy({
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
     callbackURL: process.env.REDIRECT,
-    scope: ["identify", "guilds"]
+    scope: ["identify", "email", "guilds"]
 }, async(accessToken, refreshToken, profile, done) => {
     try {
-        let userdata = await User.findOne({userID: profile.id});
-        if(userdata) {
-            User.findOneAndUpdate(
-                { userID: profile.id },
-                { guilds: profile.guilds, rtoken: refreshToken, atoken: accessToken },
-      
-                async (err) => {
-                  if (err) throw err;
-                  let newUser = await User.findOne({ userID: profile.id });
-                  done(null, newUser);
-                }
-              );
+        let user = await User.findOne({userID: profile.id});
+        if(user) {
+            User.findOrCreate({
+                userID: profile.id,
+                guilds: profile.guilds,
+                rtoken: refreshToken,
+                atoken: accessToken
+            })
+            async(err) => {
+                if(err) throw err;
+                let newUser = await User.findOne({userID: profile.id})
+                done(null, newUser)
+            }
         } else {
-            const newUser = await User.create({
+            let newUser = User.create({
                 userID: profile.id,
                 username: profile.username,
                 discriminator: profile.discriminator,
-                userIcon: profile.avatar,
-                guilds: profile.guilds,
                 rtoken: refreshToken,
                 atoken: accessToken,
-            });
-      
+                userIcon: profile.avatar,
+                userEmail: profile.email,
+                staff: false,
+                guilds: profile.guilds,
+                is_premium: false
+            })
             const savedUser = await newUser.save();
-      
             done(null, savedUser);
         }
-    } catch (error) {
-        console.log(error);
-        done(error, null);
+    } catch(err) {
+        console.error(err);
+        done(err, null);
     }
+    console.log(profile);
 })
 
-passport.use("discord", strats);
-refresh.use("discord", strats);
-
+passport.use("discord", strategy);
 
 app.get("/", async(req, res) => {
     res.render("index", {
         title: "Noisy Penguin Server List",
-        icon: "/img/favicon.png",
-        siteFont: "<%= lingua.font %>"
+        icon: "/img/favicon.png"
     })
 })
 
 app.get("/login", passport.authenticate('discord'), (req, res) => {})
 
-app.get("/login/callback", checkAuth, passport.authenticate("discord", {
-    failureRedirect: "/",
-    successRedirect: "/me"
-}))
+app.get("/login/callback", passport.authenticate("discord", {failureRedirect: "/"}), async(req, res) => {
+    res.redirect("/me")
+})
+
 
 app.get("/me", checkAuth, async(req, res) => {
     var user = await User.findOne({})
@@ -227,6 +230,10 @@ app.get("/user/add/:ownerid", async(req, res) => {
     } else {
         res.send("User Not Found")
     }
+})
+
+app.get("/donate", (req, res) => {
+
 })
 
 bot.login(process.env.DISCORD_CLIENT_SECRET)

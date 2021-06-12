@@ -14,6 +14,7 @@ bot.on("ready", () => {
 bot.on("message", async(message) => {
     let data = await Guild.findOne({ guildID: message.guild.id });
     let uData = await User.findOne({ userID: message.author.id })
+    let args = message.content.slice(process.env.PREFIX.length).trim().split(/ + /g);
     let channelID;
     let channels = message.guild.channels.cache;
     let defaultC = message.guild.systemChannel;
@@ -76,8 +77,14 @@ bot.on("message", async(message) => {
         message.channel.send(e);
     }
 
-    if(message.content =="r/guildchangedesc") {
-        //let db = Guild.updateOne({description: })
+    if(message.content == "r/guildchangedesc") {
+        let desc = args[0].length()
+        let db = Guild.updateOne({description: desc});
+        
+    }
+
+    if(message.content == "r/userchangedesc") {
+        
     }
 })
 

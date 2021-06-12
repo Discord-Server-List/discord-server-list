@@ -18,7 +18,7 @@ var guildSchema = new Schema({
     description: {
         type: String,
         required: false,
-        default: ""
+        default: "This Server has no description."
     },
     country: String,
     category: {

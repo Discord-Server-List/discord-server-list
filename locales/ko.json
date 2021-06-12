@@ -11,6 +11,10 @@
         "section1": {
             "title": "Twitter Timeline",
             "description": "트위터 타임 라인은 언제든지 팔로우하세요 :"
+        },
+        "section2": {
+            "title": "Discord 서버 위젯",
+            "description": "지원 서버 위젯"
         }
     },
     "dropdown": {
@@ -42,5 +46,15 @@
         "search": "검색",
         "Server": "섬기는 사람",
         "About": "약"
+    },
+    "chatbox": {
+        "title": "문제가 있습니까? 문의하기",
+        "form": {
+            "title": "잡담", 
+            "msg": "메시지",
+            "msg_btn": "메시지 입력 ..",
+            "send_btn": "내몰다",
+            "clost_btn": "닫기"
+        }
     }
 }

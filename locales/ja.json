@@ -11,6 +11,10 @@
         "section1": {
             "title": "Twitter Timeline",
             "description": "ツイッターのタイムラインを見てください、私たちのツイッターのアカウントを確認することができます:"
+        },
+        "section2": {
+            "title": "Discord サーバーウィジェット",
+            "description": "私たちのサポートサーバーウィジェットです"
         }
     },
     "dropdown": {
@@ -25,7 +29,7 @@
     },
     "footer": {
         "row1": {
-            "title": "連絡先",
+            "title": "ご連絡先",
             "list": {
                 "link1": "wislyong8@gmail.com",
                 "link2": "ツイッター"
@@ -34,7 +38,8 @@
         "row2": {
             "title": "ヘルプ",
             "list": {
-                "link1": "サポート"
+                "link1": "サポート",
+                "link2": "支援する"
             }
         }
     },
@@ -42,5 +47,15 @@
         "search": "サーバー検索",
         "Server": "サーバー閲覧",
         "About": "サイト概要"
+    },
+    "chatbox": {
+        "title": "問題がありますか？ ご連絡ください",
+        "form": {
+            "title": "チャット", 
+            "msg": "メッセージ",
+            "msg_btn": "メッセージ入力。。",
+            "send_btn": "送信",
+            "close_btn": "閉じる"
+        }
     }
 }

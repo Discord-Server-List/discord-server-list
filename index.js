@@ -2,21 +2,24 @@ require("dotenv").config();
 require('module-alias/register')
 var express = require("express");
 const { connectDB } = require("@utils/db");
-const refresh = require('passport-oauth2-refresh');
 var session = require("express-session");
 var lingua = require("lingua");
 var {admin} = require("./admin.json");
 const Guild  = require("@models/Guild");
+const nodemailer = require('nodemailer');
 const User = require("./models/User");
+const Support = require("./models/Support");
 var bot = require("@bot/index");
 const { Strategy } = require('passport-discord');
 const passport = require('passport');
 const { checkAuth } = require("@utils/auth");
 const Post = require("@models/Post");
 const {rateLimit} = require("./utils/rateLimit");
-const { errrorHandler } = require("./utils/errorHandler");
 const { resolveImage, Canvas } = require("canvas-constructor");
 const path = require("path");
+const { errorHandler } = require("./utils/errorHandler");
+const { connectMail } = require("./utils/connectMail");
+const request = require("request");
 var app = express();
 
 //Trello Board(private)
@@ -31,7 +34,23 @@ app.use(session({
 }));
 
 
-connectDB(process.env.MONGODB_TEST)
+connectDB(process.env.MONGODB_TEST);
+
+let transport = (err) => {
+    nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        auth: {
+           user: process.env.SMTP_USER,
+           pass: process.env.SMTP_PASS
+        }
+    })
+    if(err) {
+        console.error(err)
+    } else {
+        console.log(`Connected to host ${process.env.SMTP_HOST}`)
+    }
+}
 
 
 app.use(lingua(app, {
@@ -199,7 +218,8 @@ app.get("/server/add", checkAuth, async(req, res) => {
 })
 
 app.post("/api/server/add", async(req, res) => {
-    
+    var g = new Guild()
+    g.guildID = req.body.guildid
 })
 
 app.get("/server/:id", async(req, res) => {
@@ -223,7 +243,30 @@ app.get("/server/:id", async(req, res) => {
     }
 })
 
-app.get("/api/server/:id", rateLimit(15000, 4), async(req, res) => {
+app.get("/api", (req, res) => {
+    res.render("api/index", {
+        icon: "/img/favicon.png" 
+    })
+})
+
+
+app.get("/api/stats/server/:id", rateLimit(15000, 4), async(req, res) => {
+    let guildData = await Guild.findOne({guildID: req.params.id});
+    if(!guildData) {
+        res.sendStatus(404).json({
+            error: true,
+            code: 404,
+            message: "Server not found"
+        })
+    } 
+    try {
+        res.send(guildData)
+    } catch(e) {
+        throw e;
+    }
+})
+
+app.get("/api/embed/server/:id", rateLimit(15000, 4), async(req, res) => {
     let data = await Guild.findOne({guildID: req.params.id});
 
     if(!data){
@@ -300,7 +343,58 @@ app.get("/user/add/:ownerid", async(req, res) => {
 })
 
 app.get("/donate", (req, res) => {
+    res.render("donate", {
+        icon: "img/favicon.png"
+    })
+})
 
+
+app.get("/support", async(req, res) => {
+    let d = await User.findOne({});
+    res.render("support", {
+        icon: "/img/favicon.png"
+    })
+})
+
+app.post("/add/support", async(req, res) => {
+    let data = await User.findOne({userID: req.params.id});
+    let s = new Support()
+    s.title = req.body.title;
+    s.body = req.body.body;
+    //s.locale = req.body.locale;
+    s.username = req.body.username;
+    s.userID = data.userID;
+    s.email = data.userEmail;
+    s.file = req.body.attachments;
+
+    const message = {
+        from: data.userEmail, // Sender address
+        to: process.env.EMAIL,         // List of recipients
+        subject: s.title, // Subject line
+        text: s.body // Plain text body
+    };
+
+    transport.sendMail(message, (err, info) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(info);
+        }
+    })
+
+    s.save();
+})
+
+app.get("/support/:userid/:ticketid", async(req, res) => {
+    let data = await Support.findOne({userID: req.params.userid, supportID: req.params.ticketid});
+    if(!data) {
+        res.sendStatus(404).json({
+            error: true,
+            code: 404,
+            message: "Support Ticket Not Found"
+        })
+    } 
+    res.json(data);
 })
 
 bot.login(process.env.DISCORD_CLIENT_SECRET)

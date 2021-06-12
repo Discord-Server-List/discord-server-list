@@ -11,6 +11,10 @@
         "section1": {
             "title": "Twitter时间线",
             "description": "我们的Twitter时间线，请随时关注我们。"
+        },
+        "section2": {
+            "title": "Discord服务器小工具",
+            "description": "我们的支持服务器小工具"
         }
     },
     "dropdown": {
@@ -42,5 +46,15 @@
         "search": "服务器搜索",
         "Server": "服务器浏览",
         "About": "纲要"
+    },
+    "chatbox": {
+        "title": "有问题吗？ 请联系我们",
+        "form": {
+            "title": "聊天", 
+            "msg": "信息",
+            "msg_btn": "信息输入。。",
+            "send_btn": "发送",
+            "close_btn": "关闭"
+        }
     }
 }

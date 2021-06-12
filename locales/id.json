@@ -11,6 +11,10 @@
         "section1": {
             "title": "Twitter Timeline",
             "description": "Twitter timeline kami silakan di ikuti akun twitter kami:"
+        },
+        "section2": {
+            "title": "Discord Server Widget",
+            "description": "Support Server Kami"
         }
     },
     "dropdown": {
@@ -42,5 +46,15 @@
         "search": "Jelajah",
         "Server": "Server",
         "About": "Tentang Kami"
+    },
+    "chatbox": {
+        "title": "Terjadi Masalah? Kontak Kami",
+        "form": {
+            "title": "Chat", 
+            "msg": "Pesan",
+            "msg_btn": "Masukkan Pesan",
+            "send_btn": "Kirim",
+            "close_btn": "Tutup"
+        }
     }
 }

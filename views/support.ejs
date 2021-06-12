@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="<%= lingua.locale %>">
+<head>
+    <%- include("partials/head.ejs") %>
+    <title>Support | Noisy Penguin Server List</title>
+    <style>
+        input {
+            margin: auto;
+        }
+    </style>
+</head>
+<body style="<%= lingua.font %>">
+    <%- include("partials/nav.ejs") %>
+    <form action="/add/support" method="post" accept-charset="UTF-8">
+        <label for="username">Username(4 to 12 characters):</label>
+        <input type="text" id="username" name="username" required
+        minlength="4" maxlength="12" size="20">
+        <br/>
+
+        <label for="title">Subject:</label>
+        <input type="text" id="title" name="title" required>
+
+        <br/>
+
+        <label for="body">Description</label>
+        <br/>
+        <textarea name="body" id="body" cols="50" rows="10"></textarea>
+
+        <br/>
+
+        <label for="attachments">Attachments(optional):</label>
+        <input type="file" name="attachments" id="attachments">
+
+        <br/>
+        <input type="submit" value="Send Request">
+    </form>
+</body>
+</html>

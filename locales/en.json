@@ -11,6 +11,10 @@
         "section1": {
             "title": "Twitter Timeline",
             "description": "Our Twitter timeline feel free to follow us:"
+        },
+        "section2": {
+            "title": "Discord Server Widget",
+            "description": "Our Support Server Widget"
         }
     },
     "dropdown": {
@@ -42,5 +46,18 @@
         "search": "Search",
         "Server": "Server",
         "About": "About"
+    },
+    "support": {
+        "page_title": "test"
+    },
+    "chatbox": {
+        "title": "Any Problem? Contact Us",
+        "form": {
+            "title": "Chat", 
+            "msg": "Message",
+            "msg_btn": "Type message..",
+            "send_btn": "Send",
+            "close_btn": "Close"
+        }
     }
 }

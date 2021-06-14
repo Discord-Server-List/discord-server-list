@@ -76,11 +76,11 @@
 <button class="open-button" onclick="openForm()"><%= lingua.chatbox.title %></button>
 
 <div class="chat-popup" id="myForm">
-  <form action="/action_page.php" class="form-container">
+  <form action="/api/send" method="POST" class="form-container">
     <h1><%= lingua.chatbox.form.title %></h1>
 
-    <label for="msg"><b><%= lingua.chatbox.form.msg %></b></label>
-    <textarea placeholder="<%= lingua.chatbox.form.msg_btn %>" name="msg" required></textarea>
+    <label for="body"><b><%= lingua.chatbox.form.msg %></b></label>
+    <textarea placeholder="<%= lingua.chatbox.form.msg_btn %>" name="body" id="support_msg" required></textarea>
 
     <button type="submit" class="btn"><%= lingua.chatbox.form.send_btn %></button>
     <button type="button" class="btn cancel" onclick="closeForm()"><%= lingua.chatbox.form.close_btn %></button>

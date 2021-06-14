@@ -38,7 +38,8 @@
         "row2": {
             "title": "Bantuan",
             "list": {
-                "link1": "Layanan"
+                "link1": "Layanan",
+                "link2": "Donasi"
             }
         }
     },

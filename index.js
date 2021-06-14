@@ -4,11 +4,14 @@ var express = require("express");
 const { connectDB } = require("@utils/db");
 var session = require("express-session");
 var lingua = require("lingua");
+var fs = require("fs");
 var {admin} = require("./admin.json");
 const Guild  = require("@models/Guild");
+var device = require('express-device');
 const nodemailer = require('nodemailer');
 const User = require("./models/User");
 const Support = require("./models/Support");
+const Chat_Support = require("./models/Chat_Support");
 var bot = require("@bot/index");
 const { Strategy } = require('passport-discord');
 const passport = require('passport');
@@ -19,7 +22,7 @@ const { resolveImage, Canvas } = require("canvas-constructor");
 const path = require("path");
 const { errorHandler } = require("./utils/errorHandler");
 const { connectMail } = require("./utils/connectMail");
-const request = require("request");
+const fetch = require('node-fetch');
 var app = express();
 
 //Trello Board(private)
@@ -27,14 +30,12 @@ var app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/assets"))
-app.use(session({
-    secret: "DiscordServerList",
-    resave: false,
-    saveUninitialized: false
-}));
-
+app.use(device.capture());
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((obj, don) => done(null, obj));
 
 connectDB(process.env.MONGODB_TEST);
+
 
 let transport = (err) => {
     nodemailer.createTransport({
@@ -52,7 +53,6 @@ let transport = (err) => {
     }
 }
 
-
 app.use(lingua(app, {
     defaultLocale: 'en',
     path: __dirname + '/locales',
@@ -62,97 +62,57 @@ app.use(lingua(app, {
     }
 }));
 
+var scopes = ['identify', 'email', 'guilds'];
+var prompt = 'consent'
+
+passport.use(new Strategy({
+    clientID: process.env.DISCORD_CLIENT_ID,
+    clientSecret: process.env.DISCORD_CLIENT_SECRET,
+    callbackURL: 'http://localhost:5000/login/callback',
+    scope: scopes,
+    prompt: prompt
+}, function (accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+        return done(null, profile);
+    });
+}))
+
+app.use(session({
+    secret: "DiscordServerList",
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-  
-passport.deserializeUser(async (id, done) => {
-    const user = await User.findById(id);
-    if (user) done(null, user);
-});
 
-/*
-    https://www.npmjs.com/package/passport-oauth2-refresh
-    https://stackoverflow.com/questions/62878689/discord-js-oauth2-with-passport-js
-*/
-const strategy = new Strategy({
-    clientID: process.env.DISCORD_CLIENT_ID,
-    clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    callbackURL: process.env.REDIRECT,
-    scope: ["identify", "email", "guilds"]
-}, async(accessToken, refreshToken, profile, done) => {
-    try {
-        let user = await User.findOne({userID: profile.id});
-        if(user) {
-            User.findOrCreate({
-                userID: profile.id,
-                guilds: profile.guilds,
-                rtoken: refreshToken,
-                atoken: accessToken
-            })
-            async(err) => {
-                if(err) throw err;
-                let newUser = await User.findOne({userID: profile.id})
-                done(null, newUser)
-            }
-        } else {
-            let newUser = User.create({
-                userID: profile.id,
-                username: profile.username,
-                discriminator: profile.discriminator,
-                rtoken: refreshToken,
-                atoken: accessToken,
-                userIcon: profile.avatar,
-                userEmail: profile.email,
-                staff: false,
-                guilds: profile.guilds,
-                is_premium: false
-            })
-            const savedUser = await newUser.save();
-            done(null, savedUser);
-        }
-    } catch(err) {
-        console.error(err);
-        done(err, null);
-    }
-    console.log(profile);
-})
+let API_KEY = process.env.IPREGISTRY_API_KEY
 
-passport.use("discord", strategy);
 
 app.get("/", async(req, res) => {
-    res.render("index", {
-        title: "Noisy Penguin Server List",
-        icon: "/img/favicon.png"
+    fetch(`https://api.ipregistry.co?key=${API_KEY}`)
+    .then(function (response) {
+        return response.json();
     })
+    .then(function (json) {
+        res.cookie('country', json['location']['country']['code']);
+        res.cookie('locale', json['location']['country']['languages']['0']['code']);
+        res.cookie('device', req.device.type)
+        res.render("index", {
+            title: "Noisy Penguin Server List",
+            icon: "/img/favicon.png"
+        })
+    });
+    
 })
 
+app.get('/login', passport.authenticate('discord', { scope: scopes, prompt: prompt }), function(req, res) {});
+app.get('/login/callback',
+    passport.authenticate('discord', { failureRedirect: '/' }), function(req, res) { res.redirect('/me') } // auth success
+);
 
-app.get("/login", passport.authenticate('discord'), (req, res) => {})
-
-app.get("/login/callback", passport.authenticate("discord", {failureRedirect: "/"}), async(req, res) => {
-    let user = await User.findOne({})
-    if(admin.includes(req.user.id)) {
-        user.staff = true
-    } else {
-        user.staff = false
-    }
-    res.redirect("/me")
-})
-
-
-
-
-app.get("/me", checkAuth, async(req, res) => {
-    var user = await User.findOne({})
-    if(user){
-        res.send(user.userID)
-    } else {
-        res.send("User Not Found")
-    }
+app.get("/me", checkAuth, (req, res) => {
+    console.log(req.user)
 })
 
 app.get("/logout", async(req, res) => {
@@ -395,6 +355,24 @@ app.get("/support/:userid/:ticketid", async(req, res) => {
         })
     } 
     res.json(data);
+})
+
+app.post("/api/send", async(req, res) => {
+    let m = new Chat_Support()
+    m.message = req.body.body;
+
+    m.save((err) => {
+        if(err) {
+            console.error(err);
+        } else {
+            res.redirect("/");
+        }
+    })
+})
+
+app.get("/api/guilds/:server_id", async(req, res) => {
+    let d = await Guild.findOne({guildID: req.params.server_id});
+    res.json(d);
 })
 
 bot.login(process.env.DISCORD_CLIENT_SECRET)

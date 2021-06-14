@@ -38,7 +38,8 @@
         "row2": {
             "title": "Resources",
             "list": {
-                "link1": "Support"
+                "link1": "Support",
+                "link2": "Donate"
             }
         }
     },

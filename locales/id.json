@@ -41,6 +41,10 @@
                 "link1": "Layanan",
                 "link2": "Donasi"
             }
+        },
+        "icon_Link_title": {
+            "github": "Noisy Penguin Di Github",
+            "twitter": "Noisy Penguin Di Twitter"
         }
     },
     "navbar": {
@@ -56,6 +60,19 @@
             "msg_btn": "Masukkan Pesan",
             "send_btn": "Kirim",
             "close_btn": "Tutup"
+        }
+    },
+    "guild": {
+        "page_title": "Noisy Chicken Server List",
+        "header": {
+            "join_btn": "Gabung Server",
+            "contact_btn": "Kontak Pemilik"
+        },
+        "section1": {
+            "title": "Dimiliki Oleh:"
+        },
+        "section2": {
+            "title": "Deskripsi Server"
         }
     }
 }

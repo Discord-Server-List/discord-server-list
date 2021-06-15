@@ -41,6 +41,10 @@
                 "link1": "Support",
                 "link2": "Donate"
             }
+        },
+        "icon_Link_title": {
+            "github": "Noisy Penguin On Github",
+            "twitter": "Noisy Penguin On Twitter"
         }
     },
     "navbar": {
@@ -59,6 +63,19 @@
             "msg_btn": "Type message..",
             "send_btn": "Send",
             "close_btn": "Close"
+        }
+    },
+    "guild": {
+        "page_title": "Noisy Chicken Server List",
+        "header": {
+            "join_btn": "Join Server",
+            "contact_btn": "Contact Owner"
+        },
+        "section1": {
+            "title": "Owned By:"
+        },
+        "section2": {
+            "title": "Server Description"
         }
     }
 }

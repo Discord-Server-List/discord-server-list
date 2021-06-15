@@ -18,7 +18,7 @@
     <meta property="og:image" content="<%= icon %>" />
     <meta property="og:type" content="website" />
     <%- include("../partials/head.ejs") %>  
-    <title><%= title %></title>
+    <title><%= title %> | <%= lingua.guild.page_title %></title>
 </head>
 <body>
     <%- include("../partials/nav.ejs") %>
@@ -33,14 +33,14 @@
                 <span>
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </span>
-                Join Server
+                <%= lingua.guild.header.join_btn %>
               </a>
               
               <a class="btn loginHB" href="/user/add/<%= add %>" role="button" style="color: white;">
                 <span>
                   <i class="fa fa-sign-in" aria-hidden="true"></i>
                 </span>
-                Contact Owner
+                <%= lingua.guild.header.contact_btn %>
               </a>
           </div>
         </div>
@@ -56,7 +56,7 @@
               </div>
               <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
-                  <h3 class="display-5">Owned By: <%= ownerTag %></h3>
+                  <h3 class="display-5"><%= lingua.guild.section1.title %> <%= ownerTag %></h3>
                   <p><%= userDesc %></p>
                 </div>
               </div>
@@ -76,14 +76,13 @@
           </div>
           <div class="col-lg-6">
             <div class="p-5">
-              <h2 class="display-5">Server Description</h2>
+              <h2 class="display-5"><%= lingua.guild.section2.title %></h2>
               <p><%= desc %></p>
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <%- include("../partials/footer.ejs") %>
 </body>
 </html>

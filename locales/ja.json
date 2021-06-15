@@ -41,6 +41,10 @@
                 "link1": "サポート",
                 "link2": "支援する"
             }
+        },
+        "icon_Link_title": {
+            "github": "Noisy PenguinのGithubアカウント",
+            "twitter": "Noisy Penguinのツイッターアカウント"
         }
     },
     "navbar": {
@@ -56,6 +60,19 @@
             "msg_btn": "メッセージ入力。。",
             "send_btn": "送信",
             "close_btn": "閉じる"
+        }
+    },
+    "guild": {
+        "page_title": "Noisy Chicken サーバー・リスト",
+        "header": {
+            "join_btn": "サーバーに参加する",
+            "contact_btn": "所有者ご連絡する"
+        },
+        "section1": {
+            "title": "所有者:"
+        },
+        "section2": {
+            "title": "サーバー概要"
         }
     }
 }

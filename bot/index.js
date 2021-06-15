@@ -28,6 +28,27 @@ bot.on("message", async(message) => {
         }
     }
 
+    let Emojis = "";
+    let EmojisAnimated = "";
+    let EmojiCount = 0;
+    let Animated = 0;
+    let OverallEmojis = 0;
+
+    function Emoji(id) {
+        return bot.emojis.cache.get(id).toString()
+    }
+
+    message.guild.emojis.cache.forEach(emoji => {
+        OverallEmojis++;
+        if(emoji.animated) {
+            Animated++;
+            EmojisAnimated+=Emoji(emoji.id)
+        }else {
+            EmojiCount++;
+            Emojis+=Emoji(emoji.id)
+        }
+    })
+
     if (!data) {
         const newGuild = new Guild({ 
             guildID: message.guild.id,

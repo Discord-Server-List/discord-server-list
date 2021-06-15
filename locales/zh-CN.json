@@ -41,6 +41,10 @@
                 "link1": "技术支持",
                 "link2": "支持"
             }
+        },
+        "icon_Link_title": {
+            "github": "Noisy Penguin在Github上",
+            "twitter": "Noisy Penguin在Twitter上"
         }
     },
     "navbar": {
@@ -56,6 +60,19 @@
             "msg_btn": "信息输入。。",
             "send_btn": "发送",
             "close_btn": "关闭"
+        }
+    },
+    "guild": {
+        "page_title": "Noisy Chicken 服务器列表",
+        "header": {
+            "join_btn": "加入服务器",
+            "contact_btn": "业主联系"
+        },
+        "section1": {
+            "title": "所有权:"
+        },
+        "section2": {
+            "title": "服务器概述"
         }
     }
 }

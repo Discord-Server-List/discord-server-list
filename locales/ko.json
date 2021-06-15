@@ -41,6 +41,10 @@
                 "link1": "지원하다",
                 "link2": "지원"
             }
+        },
+        "icon_Link_title": {
+            "github": "시끄러운 펭귄 Github에서",
+            "twitter": "트위터에 시끄러운 펭귄"
         }
     },
     "navbar": {
@@ -56,6 +60,19 @@
             "msg_btn": "메시지 입력 ..",
             "send_btn": "내몰다",
             "clost_btn": "닫기"
+        }
+    },
+    "guild": {
+        "page_title": "Noisy Chicken 서버 목록",
+        "header": {
+            "join_btn": "서버 가입",
+            "contact_btn": "소유자에게 문의"
+        },
+        "section1": {
+            "title": "에게 소유 된:"
+        },
+        "section2": {
+            "title": "서버 설명"
         }
     }
 }

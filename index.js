@@ -96,7 +96,7 @@ app.get("/", async(req, res) => {
     })
     .then(function (json) {
         res.cookie('country', json['location']['country']['code']);
-        res.cookie('locale', json['location']['country']['languages']['0']['code']);
+        //res.cookie('locale', json['location']['country']['languages']['0']['code']);
         res.cookie('device', req.device.type)
         res.render("index", {
             title: "Noisy Penguin Server List",
@@ -104,6 +104,14 @@ app.get("/", async(req, res) => {
         })
     });
     
+})
+
+app.get("/github/repo", (req, res) => {
+    res.redirect("https://github.com/Discord-Server-List")
+})
+
+app.get("/twitter", (req, res) => {
+    res.redirect("https://twitter.com/penguin_noisy");
 })
 
 app.get('/login', passport.authenticate('discord', { scope: scopes, prompt: prompt }), function(req, res) {});
@@ -186,8 +194,8 @@ app.get("/server/:id", async(req, res) => {
     var data = await Guild.findOne({guildID: req.params.id});
     var userD = await User.findOne({})
     if(data) {
-        res.render("guild/views", {
-            title: data.guildName + " | Noisy Penguin Server List", 
+        return res.render("guild/views", {
+            title: data.guildName, 
             header: data.guildName,
             icon: "/img/favicon.png",
             add: data.ownerID,
@@ -196,7 +204,8 @@ app.get("/server/:id", async(req, res) => {
             ownerAvatar: data.ownerIcon,
             guildid: data.guildID,
             desc: data.description,
-            userDesc: userD.description
+            userDesc: userD.description,
+            verify: data.verified
         })
     } else {
         res.send("Server not found")

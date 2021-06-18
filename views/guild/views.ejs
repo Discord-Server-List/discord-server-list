@@ -19,6 +19,11 @@
     <meta property="og:type" content="website" />
     <%- include("../partials/head.ejs") %>  
     <title><%= title %> | <%= lingua.guild.page_title %></title>
+    <style>
+        .facebook-span-text {
+          font-weight: 500;
+        }
+    </style>
 </head>
 <body>
     <%- include("../partials/nav.ejs") %>
@@ -83,6 +88,55 @@
         </div>
       </div>
     </section>
+
+    <section>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="p-5">
+              <img class="img-fluid" src="/img/share.png" alt="share-icon">
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+              <h3 class="display-5">Share It:</h3>
+              
+              <a
+                class="btn btn-link btn-floating btn-lg text-dark m-1"
+                href="/server/<%= join %>/share/facebook"
+                role="button"
+                data-mdb-ripple-color="dark"
+              ><i class="fab fa-facebook-f fa-3x"></i
+              >              
+            </a>
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="/server/<%= join %>/share/twitter"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-twitter fa-3x"></i>
+              </a>
+              <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="/server/<%= join %>/share/whatsapp"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-whatsapp fa-3x"></i>
+              </a>
+              <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="/server/<%= join %>/share/reddit"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-reddit fa-3x"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <%- include("../partials/chatbox.ejs") %>
+    <%- include("../partials/fbapi.ejs") %>
     <%- include("../partials/footer.ejs") %>
 </body>
 </html>

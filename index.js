@@ -77,10 +77,14 @@ passport.use(new Strategy({
     });
 }))
 
+var sessionid = 1000 * 60 * 60 * 24;
 app.use(session({
     secret: "DiscordServerList",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        sessionID: sessionid
+    }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -96,6 +100,7 @@ app.get("/", async(req, res) => {
     })
     .then(function (json) {
         res.cookie('country', json['location']['country']['code']);
+        res.cookie('theme', 'light')
         //res.cookie('locale', json['location']['country']['languages']['0']['code']);
         res.cookie('device', req.device.type)
         res.render("index", {
@@ -113,6 +118,7 @@ app.get("/github/repo", (req, res) => {
 app.get("/twitter", (req, res) => {
     res.redirect("https://twitter.com/penguin_noisy");
 })
+
 
 app.get('/login', passport.authenticate('discord', { scope: scopes, prompt: prompt }), function(req, res) {});
 app.get('/login/callback',
@@ -210,6 +216,40 @@ app.get("/server/:id", async(req, res) => {
     } else {
         res.send("Server not found")
     }
+})
+
+/*
+    encoded url
+    https://www.url-encode-decode.com
+*/
+app.get("/server/:guild_id/share/twitter", async(req, res) => {
+    let guildid = req.params.guild_id;
+    let data = await Guild.findOne({guildID: guildid});
+    let uri = `http://localhost:5000/server/${data.guildID}`
+    res.redirect(`https://twitter.com/intent/tweet?text=Check+out+${data.guildName}+Page+on+Noisy+Penguin+Server+List+%23noisy_penguin+${uri}`)
+})
+
+app.get("/server/:guild_id/share/facebook", async(req, res) => {
+    let guildid = req.params.guild_id;
+    let data = await Guild.findOne({guildID: guildid});
+    let uri = `http%3A%2F%2Flocalhost%3A5000%2Fserver%2F${data.guildID}`
+    res.redirect(`https://www.facebook.com/dialog/share?app_id=${process.env.FB_APP_ID}&href=${uri}&display=popup`)
+})
+
+app.get("/server/:guild_id/share/whatsapp", async(req, res) => {
+    let guildid = req.params.guild_id;
+    let data = await Guild.findOne({guildID: guildid});
+    let uri = `http%3A%2F%2Flocalhost%3A5000%2Fserver%2F${data.guildID}`
+    let redirect = `https://api.whatsapp.com/send/?phone&text=Check+out+${data.guildName}+Page+on+Noisy+Penguin+Server+List+${uri}&app_absent=0`
+    res.redirect(redirect);
+})
+
+app.get("/server/:guild_id/share/reddit", async(req, res) => {
+    let guildid = req.params.guild_id;
+    let data = await Guild.findOne({guildID: guildid});
+    let uri = `http%3A%2F%2Flocalhost%3A5000%2Fserver%2F${data.guildID}`
+    let redirect = `https://www.reddit.com/submit?url=${uri}&title=Check+out+${data.guildName}+Page+on+Noisy+Penguin+Server+List`
+    res.redirect(redirect);
 })
 
 app.get("/api", (req, res) => {
@@ -382,6 +422,23 @@ app.post("/api/send", async(req, res) => {
 app.get("/api/guilds/:server_id", async(req, res) => {
     let d = await Guild.findOne({guildID: req.params.server_id});
     res.json(d);
+})
+
+
+app.all("/js", (req, res, next) => {
+    return res.sendStatus(403).send(
+    {
+            message: 'Access Forbidden'
+    });
+    next();
+})
+
+app.all("/css", (req, res, next) => {
+    return res.sendStatus(403).send(
+    {
+            message: 'Access Forbidden'
+    });
+    next();
 })
 
 bot.login(process.env.DISCORD_CLIENT_SECRET)

@@ -77,5 +77,69 @@
         "section2": {
             "title": "Server Description"
         }
+    },
+    "api": {
+        "content": {
+            "section1": {
+                "title": "Guild Structure",
+                "example": "Live Example",
+                "table": {
+                    "row1": {
+                        "title": "Field",
+                        "content": {
+                            "td": {
+                                "name1": "guildID",
+                                "name2": "guildName",
+                                "name3": "icon",
+                                "name4": "owner",
+                                "name5": "ownerID",
+                                "name6": "guildRegion",
+                                "name7": "guildCreatedAt",
+                                "name8": "addedAt",
+                                "name9": "likes",
+                                "name10": "dislikes",
+                                "name11": "nsfw",
+                                "name12": "verified",
+                                "name13": "description",
+                                "name14": "defaultChannel"
+                            }
+                        }
+                    },
+                    "row2": {
+                        "title": "Type",
+                        "td": {
+                            "type1": "snowflake",
+                            "type2": "string",
+                            "type3": "?string",
+                            "type4": "boolean",
+                            "type5": "ISO8601 timestamp",
+                            "type6": "integer"
+                        }
+                    },
+                    "row3": {
+                        "title": "Description",
+                        "td": {
+                            "desc1": "guild id",
+                            "desc2": "guild name",
+                            "desc3": "icon hash",
+                            "desc4": "owner of the guild",
+                            "desc5": "id of owner",
+                            "desc6": {
+                                "text": "Discord",
+                                "link": "Voice Region"   
+                            },
+                            "desc7": "when this guild was created",
+                            "desc8": "when this guild was added on the server list",
+                            "desc9": "how many likes on the guild",
+                            "desc10": "how many dislikes on the guild",
+                            "desc11": "is the guild nsfw",
+                            "desc12": "is the guild verified on the server list",
+                            "desc13": "description of the guild on the server list",
+                            "desc14": "guild default channel"
+                        }
+                    }
+                }
+            }
+        }
     }
 }

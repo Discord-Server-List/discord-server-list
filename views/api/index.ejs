@@ -2,9 +2,140 @@
 <html dir="ltr" lang="<%= lingua.locale %>">
     <head>
     <%- include("../partials/head.ejs") %>
-    <title>Test</title>
+    <title>Noisy Penguin Server List | API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/api.css">
 </head>
-<body>
-    
+<body class="bg-dark">
+    <%- include("../partials/nav.ejs") %> 
+    <header class="masthead text-center text-white">
+        <div class="masthead-content">
+            <div class="container">
+                <img class="img-fluid bot-avatar rounded-circle" src="/img/favicon.png" width="200px" height="200px"
+              alt="">
+              <h3 class="masthead-heading mb-0" style="font-size: 3em !important;"><%= lingua.index.header.title %> API</h3>
+              <br />
+              <a class="btn" href="https://discord.com/invite/pErSSK5zjx" role="button" target="blank" style="color: white;">
+                <span>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </span>
+                <%= lingua.index.header.support_btn %>
+              </a>
+              
+              <a class="btn loginHB" role="button" href="/login" style="color: white;">
+                <span>
+                  <i class="fa fa-sign-in" aria-hidden="true"></i>
+                </span>
+                <%= lingua.index.header.login_btn %>
+              </a>
+          </div>
+        </div>
+        </header>
+
+        <section>
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-6 order-lg-2">
+                <div class="p-5">
+                 <h3 class="h3-guild-example">Example Structure</h3>
+                 <img src="/img/example_1.png" alt="live_example-1-img" width="800" height="500">
+                </div>
+              </div>
+              <div class="col-lg-6 order-lg-1">
+                <!--<div class="p-5">
+                  <span class="http-req-verb">GET</span>
+                  <h3 class="display-5 http-req-url">
+                    /api/embed/server/<a class="http-req-variable" href="/api#guild-object">{guild.id}</a>
+                  </h3>-->
+                  <h6 class="h6-guild-object" id="guild-object">Guild Structure</h6>
+                  <table>
+                    <thead>
+                        <tr>
+                          <th scope="col">Field</th>
+                          <th scope="col">Type</th>
+                          <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td>guildID</td>
+                          <td>snowflake</td>
+                          <td>guild id</td>
+                        </tr>
+                        <tr>
+                          <td>guildName</td>
+                          <td>string</td>
+                          <td>guild name</td>
+                        </tr>
+                        <tr>
+                          <td>icon</td>
+                          <td>?string</td>
+                          <td><a href="https://discord.com/developers/docs/reference#image-formatting" class="link-3NP4-r" title="information about icon hash">icon hash</a></td>
+                        </tr>
+                        <tr>
+                          <td>owner</td>
+                          <td>string</td>
+                          <td>owner of the guild</td>
+                        </tr>
+                        <tr>
+                          <td>ownerID</td>
+                          <td>snowflake</td>
+                          <td>id of owner</td>
+                        </tr>
+                        <tr>
+                            <td>guildRegion</td>
+                            <td>?string</td>
+                            <td>Discord <a href="https://discord.com/developers/docs/resources/voice#voice-region-object" class="link-3NP4-r" title="information about voice region">Voice Region</a></td>
+                        </tr>
+                        <tr>
+                          <td>guildCreatedAt</td>
+                          <td>ISO8601 timestamp</td>
+                          <td>when this guild was created</td>
+                        </tr>
+                        <tr>
+                          <td>addedAt</td>
+                          <td>ISO8601 timestamp</td>
+                          <td>when this guild was added on the server list</td>
+                        </tr>
+                        <tr>
+                          <td>likes</td>
+                          <td>integer</td>
+                          <td>how many likes on the guild</td>
+                        </tr>
+                        <tr>
+                          <td>dislikes</td>
+                          <td>integer</td>
+                          <td>how many dislikes on the guild</td>
+                        </tr>
+                        <tr>
+                          <td>nsfw</td>
+                          <td>boolean</td>
+                          <td>is the guild nsfw</td>
+                        </tr>
+                        <tr>
+                          <td>verified</td>
+                          <td>boolean</td>
+                          <td>is the guild verified on the server list</td>
+                        </tr>
+                        <tr>
+                          <td>description</td>
+                          <td>string</td>
+                          <td>description of the guild on the server list</td>
+                        </tr>
+                        <tr>
+                          <td>defaultChannel</td>
+                          <td>string</td>
+                          <td>guild default channel</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+    <%- include("../partials/chatbox.ejs") %>
+    <%- include("../partials/footer.ejs") %>
 </body>
 </html>

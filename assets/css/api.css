@@ -1,0 +1,94 @@
+.http-req-verb {
+    font-size: 40px;
+    color: #fee75c;
+    font-family: Menlo,Consolas,Monaco,monospace;
+    text-transform: uppercase;
+    margin-right: 10px;
+}
+.http-req-url {
+    font-family: Menlo,Consolas,Monaco,monospace;
+    color: hsla(0,0%,100%,.9);
+    font-size: 25px;
+}
+.http-req-variable {
+    color: hsla(0,0%,100%,.9);
+    font-size: 25px;
+    margin-right: 5%;
+}
+code {
+    background-color: #202225;
+}
+.http-paragraph {
+    color: #dcddde;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 18px 0;
+    display: block;
+}
+.h6-guild-object {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    /*background-color: #36393f;*/
+    color: #e3e5e8;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    margin: 24px 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    height: 36px;
+}
+table {
+    width: 100%;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 14px;
+    line-height: 22px;
+    margin-top: 0;
+    margin-bottom: 5%;
+    font-weight: 300;
+    overflow: hidden;
+    word-break: break-word;
+    background-color: #202225;
+}
+thead {
+    background: #35383c;
+}
+tr {
+    border: 1px solid transparent;
+}
+th {
+    border-bottom: 1px solid #040405;
+    padding: 8px;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+    color: hsla(0,0%,100%,.8);
+}
+.h3-guild-example {
+    color: #fff;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+tbody {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+td {
+    vertical-align: top;
+    padding: 8px;
+    font-weight: 500;
+    max-width: 272px;
+    color: #fff
+}
+.link-3NP4-r {
+    text-decoration: none;
+}

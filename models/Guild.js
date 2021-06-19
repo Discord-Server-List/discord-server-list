@@ -6,14 +6,21 @@ var guildSchema = new Schema({
     owner: String,
     ownerID: String,
     icon: String,
-    emojis: {
-            name: String,
+    emojis: [
+        {
+            emojiName: String,
             emojiID: String,
             animated: {
                 type: Boolean,
                 default: false
+            },
+            emojiURL: {
+                type: String,
+                required: true,
+                default: ""
             }
-    },
+        }
+    ],
     guildRegion: String,
     description: {
         type: String,

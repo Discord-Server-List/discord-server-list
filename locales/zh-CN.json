@@ -73,6 +73,9 @@
         },
         "section2": {
             "title": "服务器概述"
+        },
+        "section3": {
+            "title": "分享:"
         }
     },
     "api": {

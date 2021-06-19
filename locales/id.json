@@ -73,6 +73,9 @@
         },
         "section2": {
             "title": "Deskripsi Server"
+        },
+        "section3": {
+            "title": "Membagi:"
         }
     },
     "api": {

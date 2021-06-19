@@ -73,6 +73,9 @@
         },
         "section2": {
             "title": "サーバー概要"
+        },
+        "section3": {
+            "title": "共有する:"
         }
     },
     "api": {

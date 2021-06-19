@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" lang="<%= lingua.locale %>">
 <head>
     <meta property="og:title" content="<%= title %>"/>
     <meta itemprop="name" content="<%= title %>">
@@ -25,7 +25,7 @@
         }
     </style>
 </head>
-<body>
+<body style="<%= lingua.font %>">
     <%- include("../partials/nav.ejs") %>
     <header class="masthead text-center text-white">
         <div class="masthead-content">
@@ -99,7 +99,7 @@
           </div>
           <div class="col-lg-6 order-lg-1">
             <div class="p-5">
-              <h3 class="display-5">Share It:</h3>
+              <h3 class="display-5"><%= lingua.guild.section3.title %></h3>
               
               <a
                 class="btn btn-link btn-floating btn-lg text-dark m-1"

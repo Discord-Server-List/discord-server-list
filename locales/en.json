@@ -76,6 +76,9 @@
         },
         "section2": {
             "title": "Server Description"
+        },
+        "section3": {
+            "title": "Share It:"
         }
     },
     "api": {

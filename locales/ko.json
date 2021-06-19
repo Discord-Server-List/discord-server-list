@@ -73,6 +73,73 @@
         },
         "section2": {
             "title": "서버 설명"
+        },
+        "section3": {
+            "title": "공유하기:"
+        }
+    },
+    "api": {
+        "content": {
+            "section1": {
+                "title": "길드 구조",
+                "example": "예",
+                "table": {
+                    "row1": {
+                        "title": "표제",
+                        "content": {
+                            "td": {
+                                "name1": "guildID",
+                                "name2": "guildName",
+                                "name3": "icon",
+                                "name4": "owner",
+                                "name5": "ownerID",
+                                "name6": "guildRegion",
+                                "name7": "guildCreatedAt",
+                                "name8": "addedAt",
+                                "name9": "likes",
+                                "name10": "dislikes",
+                                "name11": "nsfw",
+                                "name12": "verified",
+                                "name13": "description",
+                                "name14": "defaultChannel"
+                            }
+                        }
+                    },
+                    "row2": {
+                        "title": "유형",
+                        "td": {
+                            "type1": "snowflake",
+                            "type2": "string",
+                            "type3": "?string",
+                            "type4": "boolean",
+                            "type5": "ISO8601 timestamp",
+                            "type6": "integer"
+                        }
+                    },
+                    "row3": {
+                        "title": "기술",
+                        "td": {
+                            "desc1": "길드 ID",
+                            "desc2": "길드 이름",
+                            "desc3": "아이콘 해시",
+                            "desc4": "길드의 소유자",
+                            "desc5": "소유자 ID",
+                            "desc6": {
+                                "text": "Discord",
+                                "link": "음성 지역"   
+                            },
+                            "desc7": "이 길드가 생성되었을 때",
+                            "desc8": "이 길드가 서버 목록에 추가되었을 때",
+                            "desc9": "길드에 좋아요 몇 개",
+                            "desc10": "길드에서 싫어하는 사람이 몇 명입니까?",
+                            "desc11": "길드 nsfw입니다",
+                            "desc12": "서버 목록에서 확인 된 길드입니다.",
+                            "desc13": "서버 목록에있는 길드에 대한 설명",
+                            "desc14": "길드 기본 채널"
+                        }
+                    }
+                }
+            }
         }
     }
 }

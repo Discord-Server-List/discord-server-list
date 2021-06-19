@@ -1,5 +1,6 @@
 var Discord = require("discord.js");
 var bot = new Discord.Client();
+var fetch = require("node-fetch");
 var Guild = require("../models/Guild");
 const User = require("../models/User");
 
@@ -28,26 +29,10 @@ bot.on("message", async(message) => {
         }
     }
 
-    let Emojis = "";
-    let EmojisAnimated = "";
-    let EmojiCount = 0;
-    let Animated = 0;
-    let OverallEmojis = 0;
-
-    function Emoji(id) {
-        return bot.emojis.cache.get(id).toString()
-    }
-
-    message.guild.emojis.cache.forEach(emoji => {
-        OverallEmojis++;
-        if(emoji.animated) {
-            Animated++;
-            EmojisAnimated+=Emoji(emoji.id)
-        }else {
-            EmojiCount++;
-            Emojis+=Emoji(emoji.id)
-        }
-    })
+    let emojiuri = message.guild.emojis.cache.find((e) => e.url.toString());
+    let emojiname = message.guild.emojis.cache.find((e) => e.name)
+    let emojiid = message.guild.emojis.cache.find((emj) => emj.id)
+    let isanimated = message.guild.emojis.cache.find((anim) => anim.animated)
 
     if (!data) {
         const newGuild = new Guild({ 
@@ -60,7 +45,15 @@ bot.on("message", async(message) => {
             guildName: message.guild.name,
             guildInvite: "https://discord.gg/" + invite,
             defaultChannel: message.guild.systemChannel.toString(),
-            ownerIcon: message.guild.owner.user.displayAvatarURL({dynamic: true, size: 512, format: "png"})
+            ownerIcon: message.guild.owner.user.displayAvatarURL({dynamic: true, size: 512, format: "png"}),
+            emojis: [
+               {
+                    emojiName: emojiname,
+                    emojiID: emojiid,
+                    animated: isanimated,
+                    emojiURL: emojiuri
+               }
+            ]
         });
         newGuild.save();
         return;

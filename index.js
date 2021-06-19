@@ -13,6 +13,7 @@ const nodemailer = require('nodemailer');
 const User = require("./models/User");
 const Support = require("./models/Support");
 const Chat_Support = require("./models/Chat_Support");
+var Category = require("./models/Category");
 var bot = require("@bot/index");
 const { Strategy } = require('passport-discord');
 const passport = require('passport');
@@ -24,6 +25,7 @@ const path = require("path");
 const { errorHandler } = require("./utils/errorHandler");
 const { connectMail } = require("./utils/connectMail");
 const fetch = require('node-fetch');
+const { check } = require("./utils/checkVersion");
 var app = express();
 
 //Trello Board(private)
@@ -68,6 +70,8 @@ imageCache.setOptions({
     dir: path.join(__dirname + "/assets/img/"),
     extname: ".cacheimg"
 })
+
+check();
 
 var scopes = ['identify', 'email', 'guilds'];
 var prompt = 'consent'
@@ -191,6 +195,22 @@ app.post("/api/blog/support/new", (req, res) => {
     })
 })
 
+
+app.get("/admin/add/category", (req, res) => {
+    res.render("admin/add_category.ejs", {
+        icon: "/img/favicon.png",
+        title: "Admin Add Category | Noisy Penguin Server List"
+    });
+})
+
+app.post("/api/admin/add/category", (req, res) => {
+    var c = new Category({
+        categoryName: req.body.name
+    });
+    c.save().then(() => {
+        return res.redirect("/")
+    }).catch(err => console.log(err));
+})
 
 app.get("/error", (req, res) => {
     res.render("error")

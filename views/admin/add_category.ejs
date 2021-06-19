@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="<%= lingua.locale %>">
+<head>
+    <%- include("../partials/head.ejs") %>
+    <title><%= title %></title>
+</head>
+<body>
+    <form action="/api/admin/add/category"  method="post">
+        <div class="form-outline mb-4">
+            <input type="text" id="category-name-input" name="name" class="form-control" />
+            <label class="form-label" for="category-name-input">Name</label>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</body>
+</html>

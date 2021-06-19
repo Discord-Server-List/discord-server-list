@@ -6,6 +6,7 @@ var session = require("express-session");
 var lingua = require("lingua");
 var fs = require("fs");
 var {admin} = require("./admin.json");
+var imageCache = require('image-cache');
 const Guild  = require("@models/Guild");
 var device = require('express-device');
 const nodemailer = require('nodemailer');
@@ -62,6 +63,12 @@ app.use(lingua(app, {
     }
 }));
 
+imageCache.setOptions({
+    compressed: false,
+    dir: path.join(__dirname + "/assets/img/"),
+    extname: ".cacheimg"
+})
+
 var scopes = ['identify', 'email', 'guilds'];
 var prompt = 'consent'
 
@@ -88,6 +95,8 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 
 
 let API_KEY = process.env.IPREGISTRY_API_KEY
@@ -250,6 +259,49 @@ app.get("/server/:guild_id/share/reddit", async(req, res) => {
     let uri = `http%3A%2F%2Flocalhost%3A5000%2Fserver%2F${data.guildID}`
     let redirect = `https://www.reddit.com/submit?url=${uri}&title=Check+out+${data.guildName}+Page+on+Noisy+Penguin+Server+List`
     res.redirect(redirect);
+})
+
+app.get("/server/:guild_id/edit", async(req, res) => {
+    let guildid = req.params.guild_id;
+    let data = await Guild.findOne({guildID: guildid});
+    if(data)  return res.render("guild/edit", {
+        icon: "/img/favicon.png",
+        title:  "Edit " + data.guildName + " | Noisy Penguin Server List",
+        name: data.guildName,
+        servIcon: data.icon,
+        servID: data.guildID,
+        servDesc: data.description
+    })
+    else res.json({
+        message: 'Server Not Found',
+        statusCode: 404
+    }).sendStatus(404)
+})
+
+/*
+    JP:サーバーの概要を変更するのPOSTリクエスト
+    EN: POST request for updating server description
+    ID: Method POST untuk memperbarui deskripsi server
+    zh_CN: 更新服务器描述的POST请求
+    ko: 서버 설명 업데이트를위한 POST 요청
+*/
+app.post("/server/:guild_id/desc/edit", async(req, res, next) => {
+    var desc = new Guild({
+        guildID: req.params.guild_id,
+        description: req.body.desc
+    });
+    desc.save().then(result => {
+        console.log(result);
+        return res.sendStatus(201).json({
+            message: "Handling POST requests to /server/:guild_id/desc/edit",
+            description: result
+        })
+    }).catch(err => {
+        console.log(err);
+        return res.sendStatus(500).json({
+            error: err
+        })
+    })
 })
 
 app.get("/api", (req, res) => {

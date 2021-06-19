@@ -74,5 +74,69 @@
         "section2": {
             "title": "Deskripsi Server"
         }
+    },
+    "api": {
+        "content": {
+            "section1": {
+                "title": "Struktur Server",
+                "example": "Contoh",
+                "table": {
+                    "row1": {
+                        "title": "Field",
+                        "content": {
+                            "td": {
+                                "name1": "guildID",
+                                "name2": "guildName",
+                                "name3": "icon",
+                                "name4": "owner",
+                                "name5": "ownerID",
+                                "name6": "guildRegion",
+                                "name7": "guildCreatedAt",
+                                "name8": "addedAt",
+                                "name9": "likes",
+                                "name10": "dislikes",
+                                "name11": "nsfw",
+                                "name12": "verified",
+                                "name13": "description",
+                                "name14": "defaultChannel"
+                            }
+                        }
+                    },
+                    "row2": {
+                        "title": "Tipe",
+                        "td": {
+                            "type1": "snowflake",
+                            "type2": "string",
+                            "type3": "?string",
+                            "type4": "boolean",
+                            "type5": "ISO8601 timestamp",
+                            "type6": "integer"
+                        }
+                    },
+                    "row3": {
+                        "title": "Deskripsi",
+                        "td": {
+                            "desc1": "id guild",
+                            "desc2": "nama guild tersebut",
+                            "desc3": "icon hash",
+                            "desc4": "pemilik guild tersebut",
+                            "desc5": "id pemilih guild",
+                            "desc6": {
+                                "text": "Discord",
+                                "link": "Voice Region"   
+                            },
+                            "desc7": "ketika guild ini dibuat",
+                            "desc8": "ketika guild ini ditambahkan di server list",
+                            "desc9": "berapa banyak suka di guild tersebut",
+                            "desc10": "berapa banyak yang tidak disuka di guild tersebut",
+                            "desc11": "apakah guild tersebut nsfw",
+                            "desc12": "apakah guild terverifikasi di server list",
+                            "desc13": "desckripsi guild tersebut di server list",
+                            "desc14": "channel sistem guild tersebut"
+                        }
+                    }
+                }
+            }
+        }
     }
 }

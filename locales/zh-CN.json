@@ -74,5 +74,69 @@
         "section2": {
             "title": "服务器概述"
         }
+    },
+    "api": {
+        "content": {
+            "section1": {
+                "title": "Guild结构",
+                "example": "例子",
+                "table": {
+                    "row1": {
+                        "title": "命名方式",
+                        "content": {
+                            "td": {
+                                "name1": "guildID",
+                                "name2": "guildName",
+                                "name3": "icon",
+                                "name4": "owner",
+                                "name5": "ownerID",
+                                "name6": "guildRegion",
+                                "name7": "guildCreatedAt",
+                                "name8": "addedAt",
+                                "name9": "likes",
+                                "name10": "dislikes",
+                                "name11": "nsfw",
+                                "name12": "verified",
+                                "name13": "description",
+                                "name14": "defaultChannel"
+                            }
+                        }
+                    },
+                    "row2": {
+                        "title": "类型",
+                        "td": {
+                            "type1": "snowflake",
+                            "type2": "string",
+                            "type3": "?string",
+                            "type4": "boolean",
+                            "type5": "ISO8601 timestamp",
+                            "type6": "integer"
+                        }
+                    },
+                    "row3": {
+                        "title": "描述",
+                        "td": {
+                            "desc1": "guild id",
+                            "desc2": "guild名",
+                            "desc3": "图标哈希",
+                            "desc4": "guild的所有者",
+                            "desc5": "业主的ID",
+                            "desc6": {
+                                "text": "Discord",
+                                "link": "语音区域"   
+                            },
+                            "desc7": "这个公会是什么时候创建的",
+                            "desc8": "当这个行会被添加到服务器列表中时",
+                            "desc9": "公会上有多少人喜欢",
+                            "desc10": "有多少个不喜欢的公会",
+                            "desc11": "協會是否是Nsfw的？",
+                            "desc12": "该公会是否在服务器列表中得到验证？",
+                            "desc13": "服务器列表中对公会的描述",
+                            "desc14": "公会默认频道"
+                        }
+                    }
+                }
+            }
+        }
     }
 }

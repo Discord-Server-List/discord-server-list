@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../partials/head.ejs") %>
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="<%= servIcon %>" type="image/x-icon">
+</head>
+<body>
+    <%- include("../partials/nav.ejs") %>
+
+    <form action="/server/<%= servID %>/desc/edit" method="post">
+        <label for="update_description-textarea">Current Description: <%= servDesc %></label>
+        <textarea name="desc" id="update_description-textarea" cols="30" rows="10"></textarea>
+        <input type="submit" value="Update Description">
+    </form>
+
+    <%- include("../partials/chatbox.ejs") %>
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

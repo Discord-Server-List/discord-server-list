@@ -207,9 +207,16 @@ app.post("/api/admin/add/category", (req, res) => {
     var c = new Category({
         categoryName: req.body.name
     });
-    c.save().then(() => {
-        return res.redirect("/")
-    }).catch(err => console.log(err));
+    c.save((err) => {
+        if(err) {
+            return res.json({
+                message: err
+            })
+        } else {
+            return res.redirect("/?status=ok")
+        }
+    })
+    
 })
 
 app.get("/error", (req, res) => {

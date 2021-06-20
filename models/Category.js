@@ -4,6 +4,12 @@ var categorySchemas = new Schema({
     categoryName: {
         type: String,
         required: true
+    },
+    categoryID: {
+        type: Schema.Types.ObjectId,
+        index: true,
+        auto: true,
+        required: true
     }
 })
 

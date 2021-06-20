@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "60cedd4a2bd3080524a78dbe"
+  },
+  "categoryID": {
+    "$oid": "60cedd4a2bd3080524a78dbd"
+  },
+  "categoryName": "FPS",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60cee7c0c423784328d94636"
+  },
+  "categoryID": {
+    "$oid": "60cee7c0c423784328d94635"
+  },
+  "categoryName": "RPG",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60cee8acc423784328d9463a"
+  },
+  "categoryID": {
+    "$oid": "60cee8acc423784328d94639"
+  },
+  "categoryName": "Music",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60cee9481e988e473c3c4e3f"
+  },
+  "categoryID": {
+    "$oid": "60cee9481e988e473c3c4e3e"
+  },
+  "categoryName": "Movie",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60cee9711e988e473c3c4e41"
+  },
+  "categoryID": {
+    "$oid": "60cee9711e988e473c3c4e40"
+  },
+  "categoryName": "Community",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60cee9801e988e473c3c4e43"
+  },
+  "categoryID": {
+    "$oid": "60cee9801e988e473c3c4e42"
+  },
+  "categoryName": "Language ",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60cee99e1e988e473c3c4e45"
+  },
+  "categoryID": {
+    "$oid": "60cee99e1e988e473c3c4e44"
+  },
+  "categoryName": "Others",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60cee9a81e988e473c3c4e47"
+  },
+  "categoryID": {
+    "$oid": "60cee9a81e988e473c3c4e46"
+  },
+  "categoryName": "Game",
+  "__v": 0
+}]

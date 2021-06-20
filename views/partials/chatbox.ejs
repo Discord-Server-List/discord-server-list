@@ -78,9 +78,20 @@
 <div class="chat-popup" id="myForm">
   <form action="/api/send" method="POST" class="form-container">
     <h1><%= lingua.chatbox.form.title %></h1>
-
-    <label for="body"><b><%= lingua.chatbox.form.msg %></b></label>
-    <textarea placeholder="<%= lingua.chatbox.form.msg_btn %>" name="body" id="support_msg" required></textarea>
+    <div class="form-outline">
+      <input
+        class="form-control"
+        id="email-form"
+        name="email_input"
+        type="email"
+        placeholder="<%= lingua.chatbox.form.email_btn %>"
+        required
+      />
+      <label class="form-label" for="email-form"><%= lingua.chatbox.form.email %></label>
+    </div>
+    <br>
+    <label for="message"><b><%= lingua.chatbox.form.msg %></b></label>
+    <textarea placeholder="<%= lingua.chatbox.form.msg_btn %>" name="message" id="support_msg_textarea" required></textarea>
 
     <button type="submit" class="btn"><%= lingua.chatbox.form.send_btn %></button>
     <button type="button" class="btn cancel" onclick="closeForm()"><%= lingua.chatbox.form.close_btn %></button>

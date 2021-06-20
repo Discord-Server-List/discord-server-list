@@ -59,7 +59,9 @@
             "msg": "メッセージ",
             "msg_btn": "メッセージ入力。。",
             "send_btn": "送信",
-            "close_btn": "閉じる"
+            "close_btn": "閉じる",
+            "email": "メール",
+            "email_btn": "メール入力。。"
         }
     },
     "guild": {

@@ -59,7 +59,9 @@
             "msg": "信息",
             "msg_btn": "信息输入。。",
             "send_btn": "发送",
-            "close_btn": "关闭"
+            "close_btn": "关闭",
+            "email": "电子邮件",
+            "email_btn": "输入你的电子邮件"
         }
     },
     "guild": {

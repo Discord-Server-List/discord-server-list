@@ -59,7 +59,9 @@
             "msg": "메시지",
             "msg_btn": "메시지 입력 ..",
             "send_btn": "내몰다",
-            "clost_btn": "닫기"
+            "clost_btn": "닫기",
+            "email": "이메일",
+            "email_btn": "이메일을 입력하세요"
         }
     },
     "guild": {

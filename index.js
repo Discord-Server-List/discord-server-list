@@ -73,6 +73,21 @@ imageCache.setOptions({
 
 check();
 
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
+var sessionid = 1000 * 60 * 60 * 24;
+app.use(session({
+    secret: "DiscordServerList",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        sessionID: sessionid
+    }
+}));
+
 var scopes = ['identify', 'email', 'guilds'];
 var prompt = 'consent'
 
@@ -87,20 +102,6 @@ passport.use(new Strategy({
         return done(null, profile);
     });
 }))
-
-var sessionid = 1000 * 60 * 60 * 24;
-app.use(session({
-    secret: "DiscordServerList",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        sessionID: sessionid
-    }
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
 
 
 let API_KEY = process.env.IPREGISTRY_API_KEY
@@ -203,6 +204,7 @@ app.get("/admin/add/category", (req, res) => {
     });
 })
 
+//サーバーのカテゴリー追加するとPOSTリクエスト
 app.post("/api/admin/add/category", (req, res) => {
     var c = new Category({
         categoryName: req.body.name
@@ -213,7 +215,7 @@ app.post("/api/admin/add/category", (req, res) => {
                 message: err
             })
         } else {
-            return res.redirect("/?status=ok")
+            return res.redirect("/")
         }
     })
     
@@ -228,11 +230,11 @@ app.get("/server/add", checkAuth, async(req, res) => {
 })
 
 app.post("/api/server/add", async(req, res) => {
-    var g = new Guild()
-    g.guildID = req.body.guildid
+    
 })
 
 app.get("/server/:id", async(req, res) => {
+    //TODO: render server page
     var data = await Guild.findOne({guildID: req.params.id});
     var userD = await User.findOne({})
     if(data) {
@@ -485,17 +487,35 @@ app.get("/support/:userid/:ticketid", async(req, res) => {
     res.json(data);
 })
 
-app.post("/api/send", async(req, res) => {
-    let m = new Chat_Support()
-    m.message = req.body.body;
+app.post("/api/send", (req, res) => {
+    let m = new Chat_Support({
+        message: req.body.message,
+        userEmail: req.body.email_input
+    }) 
 
     m.save((err) => {
         if(err) {
-            console.error(err);
+            res.json({
+                message: err
+            })
         } else {
             res.redirect("/");
         }
     })
+})
+
+app.get("/admin/message/:message_id", async(req, res, next) => {
+    let data = await Chat_Support.findOne({messageID: req.params.message_id});
+    if(data) {
+        res.render("admin/chat_support.ejs", {
+            page_title: data.userEmail + " | Noisy Penguin Server List Support",
+            msg: data.message,
+            id: data._id,
+            email: data.userEmail
+        })
+    } else {
+        next()
+    }
 })
 
 app.get("/api/guilds/:server_id", async(req, res) => {

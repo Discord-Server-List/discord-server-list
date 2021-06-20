@@ -59,7 +59,9 @@
             "msg": "Pesan",
             "msg_btn": "Masukkan Pesan",
             "send_btn": "Kirim",
-            "close_btn": "Tutup"
+            "close_btn": "Tutup",
+            "email": "Email",
+            "email_btn": "Masukan Email Anda"
         }
     },
     "guild": {

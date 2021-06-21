@@ -29,9 +29,8 @@ bot.on("message", async(message) => {
         }
     }
 
-    let emojiuri = message.guild.emojis.cache.forEach((e) => e.url);
-    let emojiname = message.guild.emojis.cache.forEach((e) => e.name)
-    let emojiid = message.guild.emojis.cache.forEach((emj) => emj.id)
+    let emojiname = message.guild.emojis.cache.find((e) => e.name.toString().toLowerCase())
+    let emojiid = message.guild.emojis.cache.find((emj) => emj.id)
     let isanimated = message.guild.emojis.cache.forEach((anim) => anim.animated)
 
     if (!data) {
@@ -50,8 +49,7 @@ bot.on("message", async(message) => {
                {
                     emojiName: emojiname,
                     emojiID: emojiid,
-                    animated: isanimated,
-                    emojiURL: emojiuri
+                    animated: isanimated
                }
             ]
         });

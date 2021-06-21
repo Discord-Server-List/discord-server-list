@@ -48,9 +48,11 @@
         }
     },
     "navbar": {
-        "search": "검색",
         "Server": "섬기는 사람",
-        "About": "약"
+        "About": "약",
+        "search": {
+            "title": "서버 이름을 검색"
+        }
     },
     "chatbox": {
         "title": "문제가 있습니까? 문의하기",

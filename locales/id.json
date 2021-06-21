@@ -48,9 +48,11 @@
         }
     },
     "navbar": {
-        "search": "Jelajah",
         "Server": "Server",
-        "About": "Tentang Kami"
+        "About": "Tentang Kami",
+        "search": {
+            "title": "Cari Server"
+        }
     },
     "chatbox": {
         "title": "Terjadi Masalah? Kontak Kami",

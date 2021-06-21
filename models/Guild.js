@@ -13,11 +13,6 @@ var guildSchema = new Schema({
             animated: {
                 type: Boolean,
                 default: false
-            },
-            emojiURL: {
-                type: String,
-                required: true,
-                default: ""
             }
         }
     ],

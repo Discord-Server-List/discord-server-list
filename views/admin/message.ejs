@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Chat Support | Noisy Penguin Server List</title>
+    <style>
+        table {
+        border-collapse: collapse;
+        border: 2px solid rgb(100, 100, 100);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        letter-spacing: 1px;
+        font-size: .7rem;
+    }
+    td,
+    th {
+        border: 1px solid rgb(100, 100, 100);
+        padding: 10px 10px;
+    }
+
+    td {
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    
+    <table>
+        <colgroup span="5" class="columns"></colgroup>
+        <tr>
+            <th>Message</th>
+            <th>Sent By</th>
+            <th>Id</th>
+            <th>Link</th>
+        </tr>
+        <% data.forEach(function(message) { %>
+            <tr>
+                <td><%= message.message %></td>
+                <td><%= message.userEmail %></td>
+                <td><%= message._id %></td>
+                <td><a href="/admin/message/<%= message.messageID %>">View Message</a></td>
+            </tr>
+        <% }) %>
+        </table>
+</body>
+</html>

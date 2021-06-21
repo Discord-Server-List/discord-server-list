@@ -48,9 +48,11 @@
         }
     },
     "navbar": {
-        "search": "服务器搜索",
         "Server": "服务器浏览",
-        "About": "纲要"
+        "About": "纲要",
+        "search": {
+            "title": "搜索服务器名称"
+        }
     },
     "chatbox": {
         "title": "有问题吗？ 请联系我们",

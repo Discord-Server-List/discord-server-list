@@ -148,17 +148,26 @@ app.get("/logout", async(req, res) => {
     res.redirect(`/`);
 });
 
-app.get("/search", (req, res) => {
-    res.render("search.ejs", {
-        icon: "/img/favicon.png"
-    });
-})
-
-app.get("/search/?q=", (req, res) => {
-    var search_key = req.query("q");
-    Guild.find({guildName: search_key})
-    .then(data => res.json(data))
-    .catch(err => res.status(404).json({ success: false }));
+app.get("/search", (req, res, next) => {
+    try {
+        Guild.find({$or: [{guildName: { '$regex':req.query.guildsearch }}]}, (err, data) => {
+            if(err) {
+                res.json({
+                    message: err
+                })
+            } else {
+                res.render("search", {
+                    icon: "/img/favicon.png",
+                    guild: data
+                })
+            }
+        })
+    } catch (error) {
+        res.sendStatus(500).json({
+            message: error,
+            statusCode: 500
+        })
+    }
 });
 
 app.get("/server", async(req, res) => {
@@ -501,6 +510,19 @@ app.post("/api/send", (req, res) => {
             res.redirect("/");
         }
     })
+})
+
+app.get("/admin/message", async(req, res) => {
+    try {
+        let m = await Chat_Support.find({}).lean();
+        res.render("admin/message", {
+            data: m
+        })
+    } catch (error) {
+        res.sendStatus(500).json({
+            message: error
+        })
+    }
 })
 
 app.get("/admin/message/:message_id", async(req, res, next) => {

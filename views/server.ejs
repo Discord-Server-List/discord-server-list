@@ -1,12 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lingua.locale %>">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%- include("partials/head.ejs") %>
+    <title>Discover Server | Noisy Penguin Server List</title>
+    <style>
+    table {
+        border-collapse: collapse;
+        border: 2px solid rgb(100, 100, 100);
+        letter-spacing: 1px;
+        font-size: .7rem;
+    }
+    td,
+    th {
+        border: 1px solid rgb(100, 100, 100);
+        padding: 10px 10px;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    </style>
 </head>
 <body>
-    
+    <%- include("partials/nav.ejs") %>
+    <table>
+    <colgroup span="5" class="columns"></colgroup>
+    <tr>
+        <th>Guild Name</th>
+        <th>Guild Icon</th>
+        <th>Guild Description</th>
+        <th>Guild Owner</th>
+    </tr>
+    <% guild.forEach(function(data) { %>
+        <tr>
+            <td><%= data.guildName %></td>
+            <td><img src="<%= data.icon %>" width="15px" height="15px" alt="guild-icon"/></td>
+            <td><%= data.description %></td>
+            <td><%= data.owner %></td>
+            <td>
+                <a href="/server/<%= data.guildID %>">View Server</a>
+            </td>
+        </tr>
+    <% }) %> 
+    </table>
+    <%- include("partials/chatbox.ejs") %> 
+    <%- include("partials/footer.ejs") %> 
 </body>
 </html>

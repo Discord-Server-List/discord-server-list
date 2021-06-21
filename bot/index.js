@@ -29,10 +29,10 @@ bot.on("message", async(message) => {
         }
     }
 
-    let emojiuri = message.guild.emojis.cache.find((e) => e.url.toString());
-    let emojiname = message.guild.emojis.cache.find((e) => e.name)
-    let emojiid = message.guild.emojis.cache.find((emj) => emj.id)
-    let isanimated = message.guild.emojis.cache.find((anim) => anim.animated)
+    let emojiuri = message.guild.emojis.cache.forEach((e) => e.url);
+    let emojiname = message.guild.emojis.cache.forEach((e) => e.name)
+    let emojiid = message.guild.emojis.cache.forEach((emj) => emj.id)
+    let isanimated = message.guild.emojis.cache.forEach((anim) => anim.animated)
 
     if (!data) {
         const newGuild = new Guild({ 
@@ -44,7 +44,7 @@ bot.on("message", async(message) => {
             guildCreatedAt: message.guild.createdAt.toLocaleString(),
             guildName: message.guild.name,
             guildInvite: "https://discord.gg/" + invite,
-            defaultChannel: message.guild.systemChannel.toString(),
+            defaultChannel: message.guild.systemChannel.toString().toLocaleLowerCase(),
             ownerIcon: message.guild.owner.user.displayAvatarURL({dynamic: true, size: 512, format: "png"}),
             emojis: [
                {

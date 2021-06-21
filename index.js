@@ -162,9 +162,18 @@ app.get("/search/?q=", (req, res) => {
 });
 
 app.get("/server", async(req, res) => {
-    let filter = {};
-    let d = await Guild.find(filter);
-    res.send(d);
+    try {
+        let d = await Guild.find({}).lean();
+        res.render("server", {
+            guild: d,
+            icon: "/img/favicon.png",
+        })
+    } catch (error) {
+        res.sendStatus(500).json({
+            message: error,
+            statusCode: 500
+        })
+    }
 })
 
 app.get("/blog/support", (req, res) => {
@@ -314,23 +323,13 @@ app.get("/server/:guild_id/edit", async(req, res) => {
     zh_CN: 更新服务器描述的POST请求
     ko: 서버 설명 업데이트를위한 POST 요청
 */
-app.post("/server/:guild_id/desc/edit", async(req, res, next) => {
-    var desc = new Guild({
-        guildID: req.params.guild_id,
-        description: req.body.desc
-    });
-    desc.save().then(result => {
-        console.log(result);
-        return res.sendStatus(201).json({
-            message: "Handling POST requests to /server/:guild_id/desc/edit",
-            description: result
-        })
-    }).catch(err => {
-        console.log(err);
-        return res.sendStatus(500).json({
-            error: err
-        })
-    })
+app.put("/server/:guild_id/desc/edit", (req, res, next) => {
+    var Data = Guild.findById({guildID: req.params.guild_id});
+    if(!Data) {
+        next();
+    } else {
+        Data.description = req.body.desc;
+    }
 })
 
 app.get("/api", (req, res) => {

@@ -7,6 +7,10 @@
     "test": "nodemon .",
     "start": "nodejs ."
   },
+  "repository": "https://github.com/Discord-Server-List/discord-server-list.git",
+  "keywords": [
+    "Discord"
+  ],
   "author": "Wisly Ong",
   "license": "MIT",
   "dependencies": {
@@ -21,6 +25,7 @@
     "express-device": "^0.4.2",
     "express-rate-limit": "^5.2.6",
     "express-session": "^1.17.2",
+    "form-data": "^4.0.0",
     "helmet": "^4.6.0",
     "image-cache": "^1.0.1",
     "lingua": "^0.4.0",

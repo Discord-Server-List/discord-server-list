@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include("../partials/head.ejs") %>
     <title><%= title %></title>
+    <script src="/js/lokqEHT9.js"></script>
 </head>
 <body>
     <%- include("../partials/nav.ejs") %>
@@ -17,34 +18,34 @@
           </div>
         </div>
         </header>
-    <h2 style="text-align: center;">Submit New Blog</h2>
-    <form action="/api/blog/support/new" method="post" class="post-form">
+    <h2 style="text-align: center; margin-bottom: 10px; margin-top: 10px;">Submit New Blog</h2>
+    <form action="/api/blog/support/new" method="post" class="post-form" accept-charset="utf-8">
         <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" id="username" name="username" class="form-control" />
+                <input type="text" id="username" name="username" class="form-control" required />
                 <label class="form-label" for="username">Enter Your Username</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="email" id="email" name="email" class="form-control" />
+                <input type="email" id="email" name="email" class="form-control" required/>
                 <label class="form-label" for="email">Enter Your Email</label>
               </div>
             </div>
           </div>
 
           <div class="form-outline mb-4">
-            <input type="text" id="title" name="title" class="form-control" />
+            <input type="text" id="title" name="title" class="form-control" required />
             <label class="form-label" for="title">Blog Title</label>
           </div>
 
         <div class="form-outline mb-4">
-            <textarea class="form-control" id="body" name="body" rows="4"></textarea>
+            <textarea class="form-control" id="body" name="body" rows="4" required></textarea>
             <label class="form-label" for="body">Enter your description...</label>
         </div>  
 
-        <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+        <button type="submit" id="submitBTN" class="btn btn-primary btn-block mb-4">Submit</button>
     </form>
     <%- include("../partials/footer.ejs") %>
 </body>

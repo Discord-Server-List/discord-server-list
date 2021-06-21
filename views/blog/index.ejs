@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="<%= lingua.locale %>">
+<head>
+    <%- include("../partials/head.ejs") %>
+    <title>Support Blog | Noisy Penguin Server List</title>
+    <link rel="stylesheet" href="/css/blog-main-content.css">
+    <script src="/js/blog-main-content.js"></script>
+    <script src="/js/4EH49SHA7RNPLGK.js"></script>
+</head>
+<body>
+    <%- include("../partials/nav.ejs") %>
+
+    <section id="blog-main-content" class="section main-content">
+        <div class="main-inner-content">
+            <h5 class="main-text-inner-content">Support Blog</h5>
+            <button class="fas fa-search search-btn search-icon" id="search-btn" type="submit"></button>
+            <form action="/support/blog/search" autocomplete="off" accept-charset="utf-8" class="search search-full" method="GET">
+                <input name="utf8" type="hidden" value="✓">
+                <input type="search" name="blogquery" id="blogquery" placeholder="Search" autocomplete="off" aria-label="Search" />
+                <input type="hidden" name="filter_by" value="knowledge_base">
+            </form>
+        </div>
+    </section>
+    
+    <section class="intro">
+        <h1>Need help? We've got your back.</h1>
+        <p>
+            From Login To Account, find help for everything at Noisy Penguin Server List
+        </p>
+    </section>
+
+    <section class="category-grid">
+        <ul class="flex-container">
+           <% supportData.forEach(function(data) { %>
+            <a id="item-container" href="/support/blog/articles/<%= data._id %>">
+                <li class="flex-item">
+                    <h2><%= data.title %></h2>
+                    <hr>
+                    <h3><%= data.body %></h3>
+                </li>
+            </a>
+            <% }) %>
+        </ul>
+    </section>
+
+    <%- include("../partials/chatbox.ejs") %>
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

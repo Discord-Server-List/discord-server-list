@@ -1,11 +1,7 @@
-var {Schema, model, isValidObjectId} = require("mongoose");
+var { Schema, model } = require("mongoose");
+const { nanoid } = require("nanoid");
 
 var supportSchema = new Schema({
-    userID: {
-        type: String,
-        required: true,
-        unique: true
-    },
     title: {
         type: String,
         required: true
@@ -30,12 +26,21 @@ var supportSchema = new Schema({
         type: Schema.Types.ObjectId,
         index: true,
         required: true,
-        auto: true
+        default: nanoid(20)
     },
     locale: {
         type: String
     },
-    file: [Array]
+    file: [
+        {
+            file_name: String,
+            file_size: Number,
+            uploadedAt: {
+                type: Date,
+                default: () => new Date()
+            }
+        }
+    ]
 })  
 
 module.exports = model("Support Ticket", supportSchema)

@@ -1,13 +1,9 @@
 var {Schema, model} = require("mongoose");
 
 var postSchema = new Schema({
-    userID: {
-        type: String,
-        required: true,
-        unique: true
-    },
     username: {
-        type: String
+        type: String,
+        required: true
     },
     createdAt: {
         type: Date,

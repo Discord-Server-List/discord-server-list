@@ -24,6 +24,7 @@ const { resolveImage, Canvas } = require("canvas-constructor");
 const path = require("path");
 const { errorHandler } = require("./utils/errorHandler");
 const { connectMail } = require("./utils/connectMail");
+const FormData = require('form-data');
 const fetch = require('node-fetch');
 const { check } = require("./utils/checkVersion");
 var app = express();
@@ -34,8 +35,6 @@ var app = express();
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/assets"))
 app.use(device.capture());
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, don) => done(null, obj));
 
 connectDB(process.env.MONGODB_TEST);
 
@@ -73,9 +72,6 @@ imageCache.setOptions({
 
 check();
 
-
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 var sessionid = 1000 * 60 * 60 * 24;
@@ -89,20 +85,6 @@ app.use(session({
 }));
 
 var scopes = ['identify', 'email', 'guilds'];
-var prompt = 'consent'
-
-passport.use(new Strategy({
-    clientID: process.env.DISCORD_CLIENT_ID,
-    clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    callbackURL: 'http://localhost:5000/login/callback',
-    scope: scopes,
-    prompt: prompt
-}, function (accessToken, refreshToken, profile, done) {
-    process.nextTick(function() {
-        return done(null, profile);
-    });
-}))
-
 
 let API_KEY = process.env.IPREGISTRY_API_KEY
 
@@ -133,20 +115,75 @@ app.get("/twitter", (req, res) => {
     res.redirect("https://twitter.com/penguin_noisy");
 })
 
+app.get("/login", (req, res) => {
+    if (req.session.user) return res.redirect('/me');
 
-app.get('/login', passport.authenticate('discord', { scope: scopes, prompt: prompt }), function(req, res) {});
-app.get('/login/callback',
-    passport.authenticate('discord', { failureRedirect: '/' }), function(req, res) { res.redirect('/me') } // auth success
-);
+    const authorizeUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Flogin%2Fcallback&response_type=code&scope=identify%20guilds%20email`;
+    res.redirect(authorizeUrl);
+})
+
+app.get("/login/callback", (req, res) => {
+    if(req.session.user) return res.redirect("/me");
+
+    const accessCode = req.query.code;
+    if (!accessCode) throw new Error('No access code returned from Discord');
+
+    var data = new FormData()
+    data.append('client_id', process.env.DISCORD_CLIENT_ID);
+    data.append('client_secret', process.env.DISCORD_CLIENT_SECRET);
+    data.append('grant_type', 'authorization_code');
+    data.append('redirect_uri', process.env.REDIRECT);
+    data.append('scope', scopes.join(" "));
+    data.append('code', accessCode);
+
+    fetch('https://discordapp.com/api/oauth2/token', {
+        method: 'POST',
+        body: data
+    })
+    .then(res => res.json())
+    .then(response => {
+        fetch('https://discordapp.com/api/users/@me', {
+            method: 'GET',
+            headers: {
+                authorization: `${response.token_type} ${response.access_token}`
+            }
+        })
+        .then(res2 => res2.json())
+        .then(userRes => {
+            userRes.tag = `${userRes.username}#${userRes.discriminator}`
+            userRes.avatarURL = userRes.avatar ? `https://cdn.discordapp.com/avatars/${userRes.id}/${userRes.avatar}.png?size=1024` : null;
+            let user = new User({
+                userID: userRes.id,
+                userTag: userRes.tag,
+                username: userRes.username,
+                userIcon: userRes.avatarURL,
+                discriminator: userRes.discriminator,
+                rtoken: userRes.refresh_token,
+                atoken: userRes.access_token,
+                userEmail: userRes.email
+            }) 
+            user.save((err) => {
+                if(err) {
+                    res.json({message: err})
+                } else {
+                    res.redirect("/me")
+                }
+            })
+        })
+    })
+})
 
 app.get("/me", checkAuth, (req, res) => {
-    console.log(req.user)
+    res.json({
+        message: req.session.user
+    })
 })
 
 app.get("/logout", async(req, res) => {
     req.logout();
     res.redirect(`/`);
 });
+
 
 app.get("/search", (req, res, next) => {
     try {
@@ -185,10 +222,18 @@ app.get("/server", async(req, res) => {
     }
 })
 
-app.get("/blog/support", (req, res) => {
-    Post.find().where('title').all(function (data) {
-        res.send(data);
-    })
+app.get("/blog/support", async(req, res) => {
+    try {
+        let data = await Post.find({}).lean();
+        res.render("blog/index", {
+            icon: "/img/favicon.png",
+            supportData: data
+        })
+    } catch (error) {
+        res.sendStatus(500).json({
+            message: error
+        })  
+    }
 })
 
 
@@ -200,18 +245,25 @@ app.get("/blog/support/new", (req, res) => {
 })
 //https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
 app.post("/api/blog/support/new", (req, res) => {
-    var d = new Post();
-    d.title = req.body.title;
-    d.body = req.body.body;
-    d.username = req.body.username;
-    d.email = req.body.email;
-    d.save((err) => {
-        if(err) {
-            res.send(err)
-        } else {
-            res.redirect("/blog/support")
-        }
-    })
+        let p = new Post({
+            username: req.body.username,
+            email: req.body.email,
+            title: req.body.title,
+            body: req.body.body
+        })
+        p.save((err) => {
+            if(err) {
+                res.json({
+                    message: err
+                })
+            } else {
+                res.redirect("/blog/support?status=submitted");
+            }
+        })
+})
+
+app.get("/support/blog/search", async(req, res) => {
+
 })
 
 
@@ -220,6 +272,19 @@ app.get("/admin/add/category", (req, res) => {
         icon: "/img/favicon.png",
         title: "Admin Add Category | Noisy Penguin Server List"
     });
+})
+
+app.get("/support/blog/articles/:support_id", async(req, res, next) => {
+    let supportParam = req.params.support_id;
+    let data = await Post.findOne({_id: supportParam});
+    if(data) {
+        res.render("blog/views", {
+            icon: "/img/favicon.png",
+            supportData: data
+        })
+    } else {
+        next();
+    }
 })
 
 //サーバーのカテゴリー追加するとPOSTリクエスト

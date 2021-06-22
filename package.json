@@ -14,6 +14,7 @@
   "author": "Wisly Ong",
   "license": "MIT",
   "dependencies": {
+    "assert": "^2.0.0",
     "axios": "^0.21.1",
     "canvas": "^2.8.0",
     "canvas-constructor": "^4.1.0",

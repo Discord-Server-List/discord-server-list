@@ -15,9 +15,8 @@
             <h5 class="main-text-inner-content"><%= lingua.support.index.content.section_title %></h5>
             <button class="fas fa-search search-btn search-icon" id="search-btn" type="submit"></button>
             <form action="/support/blog/search" autocomplete="off" accept-charset="utf-8" class="search search-full" method="GET">
-                <input name="utf8" type="hidden" value="✓">
-                <input type="search" name="blogquery" id="blogquery" placeholder="<%= lingua.support.index.content.search_input %>" autocomplete="off" aria-label="Search" />
-                <input type="hidden" name="filter_by" value="knowledge_base">
+                <input type="search" name="blogquery" id="blogquery" placeholder="<%= lingua.support.index.content.search_input %>" autocomplete="off" aria-label="Search" required />
+                <input type="hidden" name="locale" value="<%= lingua.locale %>">
             </form>
         </div>
     </section>
@@ -37,6 +36,8 @@
                     <h2><%= data.title %></h2>
                     <hr>
                     <h3><%= data.body %></h3>
+                    <i class="far fa-thumbs-up fa-xs like-icon"><span class="like-count"><%= data.upvoted %></span></i>
+                    <i class="far fa-thumbs-down fa-xs disliked-icon"><span class="disliked-count"><%= data.downvoted %></span></i>
                     <h6><%= lingua.support.index.content.flex_items.created_at %> <%= data.createdAt.toLocaleString() %></h6>
                 </li>
             </a>

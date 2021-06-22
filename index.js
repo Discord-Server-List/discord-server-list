@@ -251,21 +251,31 @@ app.post("/api/blog/support/new", (req, res) => {
             title: req.body.title,
             body: req.body.body
         })
-        p.save((err) => {
-            if(err) {
-                res.json({
-                    message: err
-                })
+        p.save((err) => { 
+            if(err)  {
+             res.json({
+                 message: err
+             })
             } else {
                 res.redirect("/blog/support?status=submitted");
             }
         })
 })
 
-app.get("/support/blog/search", async(req, res) => {
-
+app.post("/support/blog/search", (req, res, next) => {
+    Post.findOne({title: req.body.blogquery}).exec(function(data) {
+        res.redirect(`/support/blog/search/${req.body.blogquery}`)
+    })
 })
 
+app.get("/support/blog/search/:title", async(req, res) => {
+    let post = await Post.find(req.params.title);
+    if(post) {
+        res.redirect(`/support/blog/articles/${post._id}`)
+    } else {
+        res.redirect(`/support/blog/search/404?name=${req.params.title}`)
+    }
+})
 
 app.get("/admin/add/category", (req, res) => {
     res.render("admin/add_category.ejs", {

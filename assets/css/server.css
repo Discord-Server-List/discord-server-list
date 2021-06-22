@@ -195,3 +195,12 @@ p {
     flex-direction: row;
     flex-wrap: nowrap;
 }
+.verifiedIcon {
+    position: absolute;
+    z-index: 100000;
+    top: -180px;
+    left: -190px;
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.1);
+}

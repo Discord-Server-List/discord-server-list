@@ -162,5 +162,23 @@
                 }
             }
         }
+    },
+    "server": {
+        "page_title": "Discover Server | Noisy Penguin Server List",
+        "content": {
+            "header": {
+                "title": "Top Servers",
+                "paragraph": "The most liked Discord servers"
+            },
+            "section": {
+                "guild_card": {
+                    "like_title": "Number of likes for",
+                    "members_count": "members",
+                    "emojis_count": "emotes",
+                    "view_btn": "View",
+                    "join_btn": "Join"
+                }
+            }
+        }
     }
 }

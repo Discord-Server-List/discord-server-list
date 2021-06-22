@@ -162,5 +162,23 @@
                 }
             }
         }
+    },
+    "server": {
+        "page_title": "サーバー閲覧 | Noisy Penguin サーバー・リスト",
+        "content": {
+            "header": {
+                "title": "トップ・サーバー",
+                "paragraph": "最も人気のあるDiscordサーバー"
+            },
+            "section": {
+                "guild_card": {
+                    "like_title": "いいね数",
+                    "members_count": "メンバー",
+                    "emojis_count": "絵文字数",
+                    "view_btn": "サーバーを見る",
+                    "join_btn": "サーバーを参加する"
+                }
+            }
+        }
     }
 }

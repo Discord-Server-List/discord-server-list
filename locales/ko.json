@@ -162,5 +162,23 @@
                 }
             }
         }
+    },
+    "server": {
+        "page_title": "서버보기 | Noisy Penguin 서버 목록",
+        "content": {
+            "header": {
+                "title": "상위 서버",
+                "paragraph": "가장 인기있는 Discord 서버"
+            },
+            "section": {
+                "guild_card": {
+                    "like_title": "호가 수",
+                    "members_count": "회원",
+                    "emojis_count": "이모티콘 수",
+                    "view_btn": "서버보기",
+                    "join_btn": "서버를 등록한다"
+                }
+            }
+        }
     }
 }

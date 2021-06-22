@@ -162,5 +162,23 @@
                 }
             }
         }
+    },
+    "server": {
+        "page_title": "Jelajahi Server | Noisy Penguin Server List",
+        "content": {
+            "header": {
+                "title": "Top Servers",
+                "paragraph": "Server Discord yang paling disukai"
+            },
+            "section": {
+                "guild_card": {
+                    "like_title": "Jumlah suka untuk",
+                    "members_count": "anggota",
+                    "emojis_count": "emotes",
+                    "view_btn": "Lihat",
+                    "join_btn": "Bergabung"
+                }
+            }
+        }
     }
 }

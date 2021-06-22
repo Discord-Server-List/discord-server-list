@@ -2,7 +2,7 @@
 <html dir="ltr" lang="<%= lingua.locale %>">
 <head>
     <%- include("partials/head.ejs") %>
-    <title>Discover Server | Noisy Penguin Server List</title>
+    <title><%= lingua.server.page_title %></title>
     <link rel="stylesheet" href="/css/server.css">
 </head>
 <body>
@@ -10,11 +10,11 @@
     
     <div id="server">
         <div class="container is-fullhd">
-            <div onclick="outlinkDuplicate('/server/top')" style="cursor: pointer;" class="section-title is-flex">
+            <div onclick="window.location.href = '/server/top';" style="cursor: pointer;" class="section-title is-flex">
                 <img src="/img/top.png" alt="server-top-icon" width="55px" class="mr-4" title="Top Servers">
                 <span>
-                    <h4>Top Servers</h4>
-                    <p>The most liked Discord servers</p>
+                    <h4><%= lingua.server.content.header.title %></h4>
+                    <p><%= lingua.server.content.header.paragraph %></p>
                 </span>
             </div>
         </div>
@@ -29,26 +29,53 @@
                             </div>
                             <div class="top is-flex">
                                 <div class="ub_container"></div>
-                                <div class="img-container">
+                                <% if(data.verified == false) { %>
+                                <div class="img-container">                        
                                     <div class="guild-img">
                                         <img onclick="visitCommunity('/server/<%= data.guildID %>')" src="<%= data.icon %>?size=128" alt="<%= data.guildName %>" style="cursor: pointer;" loading="lazy">
                                     </div>
                                     <span class="stats">
                                         <a href="/server/<%= data.guildID %>/like" data-tooltip="Rate this server" class="btn-like btn" onclick="web.events.track(web.events.EventType.VisitVote)">
-                                            <div class="icon">
-                                                <img src="/img/upvoted.svg" loading="lazy">
+                                            <div class="icon" title="<%= lingua.server.content.section.guild_card.like_title %> <%= data.guildName %>">
+                                                <img src="/img/upvoted.svg" loading="lazy" title="Number of likes for <%= data.guildName %>">
                                             </div>
                                             <%= data.likes %>
                                         </a>
                                     </span>
                                     <span class="servers btn btn-orange btn-1x" style="margin-bottom: -10px;">
-                                        <%= data.memberCount %> members
+                                        <%= data.memberCount %> <%= lingua.server.content.section.guild_card.members_count %>
                                     </span>
                                     <span class="servers btn btn-orange btn-1x" style="margin-bottom: -10px;">
-                                        <%= data.emojiCount %> emotes
+                                        <%= data.emojiCount %> <%= lingua.server.content.section.guild_card.emojis_count %>
                                     </span>
                                 </div>
                             </div>
+                            <% } else  { %>
+                                <div class="img-container"> 
+                                    <a title="Verified Discord Server" onclick="window.location.href = '/server/list-verified';" >
+                                       <img src="/img/Verified.png" alt="verified-icon" class="verifiedIcon"> 
+                                    </a>                       
+                                    <div class="guild-img">
+                                        <img onclick="window.location.href = '/server/<%= data.guildID %>';" src="<%= data.icon %>?size=128" alt="<%= data.guildName %>" style="cursor: pointer;" loading="lazy">
+                                    </div>
+                                    <span class="stats">
+                                        <a href="/server/<%= data.guildID %>/like" data-tooltip="Rate this server" class="btn-like btn" onclick="web.events.track(web.events.EventType.VisitVote)">
+                                            <div class="icon" title="<%= lingua.server.content.section.guild_card.like_title %> <%= data.guildName %>">
+                                                <img src="/img/upvoted.svg" loading="lazy" title="Number of likes for <%= data.guildName %>">
+                                            </div>
+                                            <%= data.likes %>
+                                        </a>
+                                    </span>
+                                    <span class="servers btn btn-orange btn-1x" style="margin-bottom: -10px;">
+                                        <%= data.memberCount %> <%= lingua.server.content.section.guild_card.members_count %>
+                                    </span>
+                                    <span class="servers btn btn-orange btn-1x" style="margin-bottom: -10px;">
+                                        <%= data.emojiCount %> <%= lingua.server.content.section.guild_card.emojis_count %>
+                                    </span>
+                                </div>
+
+
+                              <% } %>   
                             
                             <div class="info">
                                 <a href="/server/<%= data.guildID %>" class="guild-name" id="guild-<%= data.guildID %>" onclick="web.events.track(web.events.EventType.VisitCommunity)">
@@ -63,11 +90,11 @@
                             </div>
 
                             <div class="bottom is-flex bot-btns">
-                                <span custom-context="/server/<%= data.guildID %>" onclick="visitCommunity('/server/<%= data.guildID %>')" class="color-medium-blue btn">
-                                    View
+                                <span custom-context="/server/<%= data.guildID %>" onclick="window.location.href = '/server/<%= data.guildID %>';" class="color-medium-blue btn">
+                                    <%= lingua.server.content.section.guild_card.view_btn %>
                                 </span>
-                                <span onclick="visitCommunity('/server/join/<%= data.guildID %>')" class="color-medium-blue btn">
-                                    Join
+                                <span onclick="window.location.href = '/server/join/<%= data.guildID %>';" class="color-medium-blue btn">
+                                    <%= lingua.server.content.section.guild_card.join_btn %>
                                 </span>
                             </div>
                         </div>

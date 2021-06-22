@@ -162,5 +162,23 @@
                 }
             }
         }
+    },
+    "server": {
+        "page_title": "服务器浏览 | Noisy Penguin 服务器列表",
+        "content": {
+            "header": {
+                "title": "顶级服务器",
+                "paragraph": "最流行的 Discord 服务器"
+            },
+            "section": {
+                "guild_card": {
+                    "like_title": "喜欢的数量",
+                    "members_count": "会员",
+                    "emojis_count": "象形文字计数",
+                    "view_btn": "查看服务器",
+                    "join_btn": "加入一个服务器"
+                }
+            }
+        }
     }
 }

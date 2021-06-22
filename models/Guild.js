@@ -67,6 +67,14 @@ var guildSchema = new Schema({
     verified: {
         type: Boolean,
         default: false
+    },
+    memberCount: {
+        type: Number,
+        required: true
+    },
+    emojiCount: {
+        type: Number,
+        required: true
     }
 })
 

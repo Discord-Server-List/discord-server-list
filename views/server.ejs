@@ -1,49 +1,82 @@
 <!DOCTYPE html>
-<html lang="<%= lingua.locale %>">
+<html dir="ltr" lang="<%= lingua.locale %>">
 <head>
     <%- include("partials/head.ejs") %>
     <title>Discover Server | Noisy Penguin Server List</title>
-    <style>
-    table {
-        border-collapse: collapse;
-        border: 2px solid rgb(100, 100, 100);
-        letter-spacing: 1px;
-        font-size: .7rem;
-    }
-    td,
-    th {
-        border: 1px solid rgb(100, 100, 100);
-        padding: 10px 10px;
-    }
-
-    td {
-        text-align: center;
-    }
-
-    </style>
+    <link rel="stylesheet" href="/css/server.css">
 </head>
 <body>
     <%- include("partials/nav.ejs") %>
-    <table>
-    <colgroup span="5" class="columns"></colgroup>
-    <tr>
-        <th>Guild Name</th>
-        <th>Guild Icon</th>
-        <th>Guild Description</th>
-        <th>Guild Owner</th>
-    </tr>
-    <% guild.forEach(function(data) { %>
-        <tr>
-            <td><%= data.guildName %></td>
-            <td><img src="<%= data.icon %>" width="15px" height="15px" alt="guild-icon"/></td>
-            <td><%= data.description %></td>
-            <td><%= data.owner %></td>
-            <td>
-                <a href="/server/<%= data.guildID %>">View Server</a>
-            </td>
-        </tr>
-    <% }) %> 
-    </table>
+    
+    <div id="server">
+        <div class="container is-fullhd">
+            <div onclick="outlinkDuplicate('/server/top')" style="cursor: pointer;" class="section-title is-flex">
+                <img src="/img/top.png" alt="server-top-icon" width="55px" class="mr-4" title="Top Servers">
+                <span>
+                    <h4>Top Servers</h4>
+                    <p>The most liked Discord servers</p>
+                </span>
+            </div>
+        </div>
+
+        <div class="server-list-section">
+            <ul class="columns is-tablet">
+                <% guild.forEach(function(data) { %> 
+                    <li class="column server-card is-3">
+                        <div class="content" style="cursor: pointer;">
+                            <div class="guildCardSplash">
+                                <div class="image" style="background-image: url('<%= data.icon %>');"></div>
+                            </div>
+                            <div class="top is-flex">
+                                <div class="ub_container"></div>
+                                <div class="img-container">
+                                    <div class="guild-img">
+                                        <img onclick="visitCommunity('/server/<%= data.guildID %>')" src="<%= data.icon %>?size=128" alt="<%= data.guildName %>" style="cursor: pointer;" loading="lazy">
+                                    </div>
+                                    <span class="stats">
+                                        <a href="/server/<%= data.guildID %>/like" data-tooltip="Rate this server" class="btn-like btn" onclick="web.events.track(web.events.EventType.VisitVote)">
+                                            <div class="icon">
+                                                <img src="/img/upvoted.svg" loading="lazy">
+                                            </div>
+                                            <%= data.likes %>
+                                        </a>
+                                    </span>
+                                    <span class="servers btn btn-orange btn-1x" style="margin-bottom: -10px;">
+                                        <%= data.memberCount %> members
+                                    </span>
+                                    <span class="servers btn btn-orange btn-1x" style="margin-bottom: -10px;">
+                                        <%= data.emojiCount %> emotes
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="info">
+                                <a href="/server/<%= data.guildID %>" class="guild-name" id="guild-<%= data.guildID %>" onclick="web.events.track(web.events.EventType.VisitCommunity)">
+                                    <%= data.guildName %>
+                                </a>
+                                <p class="guild-description">
+                                    <%= data.description %>
+                                </p>
+                                <span class="lib">
+                                    <!--  SERVER CATEGORY -->
+                                </span>
+                            </div>
+
+                            <div class="bottom is-flex bot-btns">
+                                <span custom-context="/server/<%= data.guildID %>" onclick="visitCommunity('/server/<%= data.guildID %>')" class="color-medium-blue btn">
+                                    View
+                                </span>
+                                <span onclick="visitCommunity('/server/join/<%= data.guildID %>')" class="color-medium-blue btn">
+                                    Join
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                <% }) %> 
+            </ul>
+        </div>
+    </div>
+
     <%- include("partials/chatbox.ejs") %> 
     <%- include("partials/footer.ejs") %> 
 </body>

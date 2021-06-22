@@ -51,7 +51,9 @@ bot.on("message", async(message) => {
                     emojiID: emojiid,
                     animated: isanimated
                }
-            ]
+            ],
+            memberCount: message.guild.memberCount,
+            emojiCount: message.guild.emojis.cache.size
         });
         newGuild.save();
         return;

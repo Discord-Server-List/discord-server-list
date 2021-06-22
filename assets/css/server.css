@@ -1,0 +1,197 @@
+#server {
+    margin-top: 20px;
+}
+
+.is-fullhd {
+    width: 100%;
+}
+.section-title {
+    margin: 50px 0px;
+}
+.is-flex {
+    display: flex!important;
+}
+.mr-4 {
+    margin-right: 1rem!important;
+}
+span {
+    font-style: inherit;
+    font-weight: inherit;
+}
+
+.section-title h4 {
+    color: var(--text);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.section-title p {
+    font: 0 16px "Inter",BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: var(--text-tertiary);
+    margin-top: 5px;
+}
+p {
+    font-weight: 400;
+}
+
+.server-list-section {
+    position: relative;
+}
+
+.server-card {
+    padding-bottom: 30px;
+    transition: .2s transform linear;
+    padding: 20px !important;
+}
+
+.server-card .content {
+    min-height: 330px;
+    box-shadow: 1px 1px 4px 1px rgba(0,0,0,.1);
+    position: relative;
+    padding: 15px;
+    background-color: var(--card-background);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.server-card .content>div {
+    width: 100%;
+}
+.image {
+    display: block;
+    position: relative;
+}
+.server-card .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    min-height: 105px;
+}
+
+.ub_container {
+    height: 180px;
+    width: 180px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+.server-list-section .columns .guild-img {
+    background: #fff !important;
+}
+.columns .guild-img {
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: none;
+    background: transparent !important;
+}
+
+.server-card .stats {
+    margin-right: 10px;
+}
+.server-card .top .btn-like {
+    margin: 0 auto;
+}
+.btn-like {
+    display: inline-flex;
+    align-items: center;
+    border: solid 1px #ccd6f8;
+    border-radius: 2px;
+    padding: 2px 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #334dad;
+}
+.btn {
+    border: none;
+    background: none;
+    transition: .2s ease-out all;
+    cursor: pointer;
+    border-radius: 4px;
+    color: var(--text);
+    display: inline-block;
+}
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.server-card .top .servers {
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+.servers {
+    text-align: center !important;
+}
+.btn-1x {
+    font-weight: 600;
+    font-size: 12px;
+    padding: 5px 9px;
+}
+.btn-orange {
+    background: #7289da;
+    color: #fff;
+    border-radius: 4px;
+    display: block;
+}
+.server-card .info {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.guild-name {
+    font: 500 18px "Inter",BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: var(--text);
+}
+.guild-description {
+    font: 400 14px "Inter",BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: #424f80;
+    line-height: 1.36;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    font-weight: 400;
+    font-size: 14px;
+    color: #424f80;
+    line-height: 1.36;
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 8rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.content, .content h3, .content h4, .content h5, .content h6, .content p, .content td {
+    color: var(--text-tertiary);
+}
+.lib {
+    font: 500 12px "Inter",BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    width: 100%;
+    margin-top: 20px;
+}
+.bottom {
+    margin-top: auto;
+}
+.bot-btns {
+    border: none;
+    padding-top: 10px;
+    border-top: 1px solid #c2c1be;
+}
+.bot-btns {
+    border-top: 1px solid #eef1fa;
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}

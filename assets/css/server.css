@@ -106,6 +106,7 @@ p {
     font-weight: 600;
     font-size: 16px;
     color: #334dad;
+    margin-top: 20px;
 }
 .btn {
     border: none;
@@ -150,9 +151,13 @@ p {
     justify-content: space-between;
 }
 .guild-name {
-    font: 500 18px "Inter",BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
-    color: var(--text);
+        font: 500 18px "Inter",BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+        color: var(--text);
 }
+.guild-name:hover {
+    color: #7289da;
+}
+
 .guild-description {
     font: 400 14px "Inter",BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
     color: #424f80;

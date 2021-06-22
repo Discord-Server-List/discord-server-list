@@ -24,6 +24,7 @@
           font-weight: 500;
         }
     </style>
+    <link rel="stylesheet" href="/css/guild.css">
 </head>
 <body style="<%= lingua.font %>">
     <%- include("../partials/nav.ejs") %>
@@ -61,7 +62,7 @@
               </div>
               <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
-                  <h3 class="display-5"><%= lingua.guild.section1.title %> <%= ownerTag %></h3>
+                  <h3 class="display-5"><%= lingua.guild.section1.title %> <span style="cursor: pointer;" class="user-name" onclick="window.location.href = '/user/<%= userid %>';"><%= ownerTag %></span></h3>
                   <p><%= userDesc %></p>
                 </div>
               </div>

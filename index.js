@@ -166,7 +166,7 @@ app.get("/login/callback", (req, res) => {
                 if(err) {
                     res.json({message: err})
                 } else {
-                    res.redirect("/me")
+                    return res.redirect("/me")
                 }
             })
         })
@@ -174,13 +174,12 @@ app.get("/login/callback", (req, res) => {
 })
 
 app.get("/me", checkAuth, (req, res) => {
-    res.json({
-        message: req.session.user
-    })
+    res.render("me")
 })
 
 app.get("/logout", async(req, res) => {
     req.logout();
+    req.session.destroy();
     res.redirect(`/`);
 });
 
@@ -342,7 +341,8 @@ app.get("/server/:id", async(req, res) => {
             guildid: data.guildID,
             desc: data.description,
             userDesc: userD.description,
-            verify: data.verified
+            verify: data.verified,
+            userid: userD.userID
         })
     } else {
         res.send("Server not found")

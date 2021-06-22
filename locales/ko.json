@@ -52,7 +52,8 @@
         "About": "약",
         "search": {
             "title": "서버 이름을 검색"
-        }
+        },
+        "submit": "요청 생성"
     },
     "chatbox": {
         "title": "문제가 있습니까? 문의하기",
@@ -142,6 +143,22 @@
                             "desc14": "길드 기본 채널"
                         }
                     }
+                }
+            }
+        }
+    },
+    "support": {
+        "page_title": "지원 블로그 | Noisy Penguin 서버 목록",
+        "index": {
+            "content": {
+                "section_title": "지원 블로그",
+                "search_input": "검색",
+                "intro": {
+                    "h1": "도움이 필요하다? 우리는 당신의 뒤를 잡았습니다.",
+                    "p": "계정에 로그인에서 Noisy Penguin 서버 목록에서 모든 것에 대한 도움말을 찾으십시오."
+                },
+                "flex_items": {
+                    "created_at": "제작 일:"
                 }
             }
         }

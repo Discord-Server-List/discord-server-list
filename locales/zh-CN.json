@@ -52,7 +52,8 @@
         "About": "纲要",
         "search": {
             "title": "搜索服务器名称"
-        }
+        },
+        "submit": "创建一个请求"
     },
     "chatbox": {
         "title": "有问题吗？ 请联系我们",
@@ -142,6 +143,22 @@
                             "desc14": "公会默认频道"
                         }
                     }
+                }
+            }
+        }
+    },
+    "support": {
+        "page_title": "支持博客 | Noisy Penguin 服务器列表",
+        "index": {
+            "content": {
+                "section_title": "支持博客",
+                "search_input": "搜索",
+                "intro": {
+                    "h1": "需要帮助吗？我们会支持你的。",
+                    "p": "从登录到账户，在Noisy Penguin服务器列表中找到一切帮助。"
+                },
+                "flex_items": {
+                    "created_at": "创建日期:"
                 }
             }
         }

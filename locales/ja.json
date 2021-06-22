@@ -52,7 +52,8 @@
         "About": "サイト概要",
         "search": {
             "title": "サーバー名を検索"
-        }
+        },
+        "submit": "リクエストを作成する"
     },
     "chatbox": {
         "title": "問題がありますか？ ご連絡ください",
@@ -142,6 +143,22 @@
                             "desc14": "ギルドのデフォルトチャンネル"
                         }
                     }
+                }
+            }
+        }
+    },
+    "support": {
+        "page_title": "サポート・ブログ | Noisy Penguin サーバー・リスト",
+        "index": {
+            "content": {
+                "section_title": "サポート・ブログ",
+                "search_input": "検索",
+                "intro": {
+                    "h1": "助けが必要？ 私たちはあなたをサポートします。",
+                    "p": "サインインからアカウントまで、Noisy Penguin サーバー・リストですべてのヘルプを見つけてください"
+                },
+                "flex_items": {
+                    "created_at": "作成日:"
                 }
             }
         }

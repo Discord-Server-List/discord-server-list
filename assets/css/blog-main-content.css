@@ -154,6 +154,11 @@ hr {
     font-weight: 350;
     color: black;
 }
+.flex-item h6 {
+    color: black;
+    font-weight: 500;
+    margin-top: 28%;
+}
 
 .known-issues {
     background-image: url("/theme/known-issues.svg");

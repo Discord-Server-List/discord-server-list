@@ -52,10 +52,24 @@
         "About": "About",
         "search": {
             "title": "Search Server"
-        }
+        },
+        "submit": "Submit a request"
     },
     "support": {
-        "page_title": "test"
+        "page_title": "Support Blog | Noisy Penguin Server List",
+        "index": {
+            "content": {
+                "section_title": "Support Blog",
+                "search_input": "Search",
+                "intro": {
+                    "h1": "Need help? We've got your back.",
+                    "p": "From Login To Account, find help for everything at Noisy Penguin Server List"
+                },
+                "flex_items": {
+                    "created_at": "Created at:"
+                }
+            }
+        }
     },
     "chatbox": {
         "title": "Any Problem? Contact Us",

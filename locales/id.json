@@ -52,7 +52,8 @@
         "About": "Tentang Kami",
         "search": {
             "title": "Cari Server"
-        }
+        },
+        "submit": "Membuat sebuah permintaan"
     },
     "chatbox": {
         "title": "Terjadi Masalah? Kontak Kami",
@@ -142,6 +143,22 @@
                             "desc14": "channel sistem guild tersebut"
                         }
                     }
+                }
+            }
+        }
+    },
+    "support": {
+        "page_title": "Support Blog | Noisy Penguin Server List",
+        "index": {
+            "content": {
+                "section_title": "Support Blog",
+                "search_input": "Cari",
+                "intro": {
+                    "h1": "Butuh bantuan? Kami mendukung Anda.",
+                    "p": "Dari Masuk Ke Akun, temukan bantuan untuk semuanya di Daftar Server Penguin Bising"
+                },
+                "flex_items": {
+                    "created_at": "Dibuat:"
                 }
             }
         }

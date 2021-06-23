@@ -1,6 +1,6 @@
 {
     "locale": "ko",
-    "font": "font-family: 'Do Hyeon', sans-serif;",
+    "font": "font-family: 'Noto Serif KR', serif;",
     "index": {
         "page_title": "Noisy Chicken 서버 목록",
         "header": {
@@ -62,7 +62,7 @@
             "msg": "메시지",
             "msg_btn": "메시지 입력 ..",
             "send_btn": "내몰다",
-            "clost_btn": "닫기",
+            "close_btn": "닫기",
             "email": "이메일",
             "email_btn": "이메일을 입력하세요"
         }
@@ -168,7 +168,15 @@
         "content": {
             "header": {
                 "title": "상위 서버",
-                "paragraph": "가장 인기있는 Discord 서버"
+                "paragraph": "가장 인기있는 Discord 서버",
+                "search_header": {
+                    "title": "Noisy Penguin Discord 서버 목록",
+                    "description": "관심있는 서버를 찾고 새로운 친구를 만나세요",
+                    "input": {
+                        "content": "특정 서버 검색 ..."
+                    },
+                    "top": "상단"
+                }
             },
             "section": {
                 "guild_card": {

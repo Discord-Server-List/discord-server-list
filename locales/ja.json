@@ -168,7 +168,15 @@
         "content": {
             "header": {
                 "title": "トップ・サーバー",
-                "paragraph": "最も人気のあるDiscordサーバー"
+                "paragraph": "最も人気のあるDiscordサーバー",
+                "search_header": {
+                    "title": "Noisy Penguin Discord サーバー・リスト",
+                    "description": "興味のあるサーバーを見つけて、新しい友達と出会う",
+                    "input": {
+                        "content": "サーバーを検索"
+                    },
+                    "top": "トップ"
+                }
             },
             "section": {
                 "guild_card": {

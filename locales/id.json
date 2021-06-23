@@ -168,7 +168,15 @@
         "content": {
             "header": {
                 "title": "Top Servers",
-                "paragraph": "Server Discord yang paling disukai"
+                "paragraph": "Server Discord yang paling disukai",
+                "search_header": {
+                    "title": "Noisy Penguin Discord Servers List",
+                    "description": "Temukan server yang Anda minati dan temui teman baru",
+                    "input": {
+                        "content": "Cari server tertentu..."
+                    },
+                    "top": "Top"
+                }
             },
             "section": {
                 "guild_card": {

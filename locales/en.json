@@ -168,7 +168,15 @@
         "content": {
             "header": {
                 "title": "Top Servers",
-                "paragraph": "The most liked Discord servers"
+                "paragraph": "The most liked Discord servers",
+                "search_header": {
+                    "title": "Noisy Penguin Discord Servers List",
+                    "description": "Discover servers you're interested in and meet new friends",
+                    "input": {
+                        "content": "Search for specific servers..."
+                    },
+                    "top": "Top"
+                }
             },
             "section": {
                 "guild_card": {

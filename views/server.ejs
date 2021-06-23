@@ -12,13 +12,13 @@
         <div class="container is-widescreen">
             <div class="columns reverse-row-order is-tablet">
                 <div class="column is-two-thirds">
-                    <h1 id="serverlisttitle">Noisy Penguin Discord Servers List</h1>
+                    <h1 id="serverlisttitle"><%= lingua.server.content.header.search_header.title %></h1>
                     <h2 id="serverlistdescription">
-                        Discover servers you're interested in and meet new friends
+                        <%= lingua.server.content.header.search_header.description %>
                     </h2>
                     <div class="relative search-wrapper" id="search-bar-container" style="max-width: 640px;">
                         <div class="input-with-btn">
-                            <input type="search" class="search-bar mainsearch" onclick="openSearchResult()" name="serverquery" id="search-input-bar" autocomplete="off" data-uri-prefix="/server" placeholder="Search for specific servers..." value required>
+                            <input type="search" class="search-bar mainsearch" onclick="openSearchResult()" name="serverquery" id="search-input-bar" autocomplete="off" data-uri-prefix="/server" placeholder="<%= lingua.server.content.header.search_header.input.content %>" value required>
                             <button id="search-button" tabindex="-1" aria-label="search">
                                 <i class="fas fa-search search-btn"></i>
                             </button>
@@ -36,16 +36,16 @@
                         <a href="/server/top" id="tag-explore">
                             <button class="ui button">
                                 <i class="list layout icon"></i>
-                                Top
+                                <%= lingua.server.content.header.search_header.top %>
                             </button>
                         </a>
                         <% serverCategory.forEach(data => { %>
-                            <a href="/server/tag/<%= data.categoryName %>" id="tag-explore">
-                                <button class="ui button">
-                                    <i class="list layout icon"></i>
-                                    <%= data.categoryName %>
-                                </button>
-                            </a>
+                                <a href="/server/tags/<%= data.categoryName.toLowerCase() %>" id="<%= data.categoryID %>-tag">
+                                    <button class="ui button">
+                                        <i class="list layout icon"></i>
+                                        <%= data.categoryName %>
+                                    </button>
+                                </a>                        
                         <% }) %>
                         
                     </div>

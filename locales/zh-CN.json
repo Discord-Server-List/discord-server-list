@@ -168,7 +168,15 @@
         "content": {
             "header": {
                 "title": "顶级服务器",
-                "paragraph": "最流行的 Discord 服务器"
+                "paragraph": "最流行的 Discord 服务器",
+                "search_header": {
+                    "title": "Noisy Penguin Discord 服务器列表",
+                    "description": "发现你感兴趣的服务器，认识新朋友",
+                    "input": {
+                        "content": "搜索特定的服务器..."
+                    },
+                    "top": "顶级服务器"
+                }
             },
             "section": {
                 "guild_card": {

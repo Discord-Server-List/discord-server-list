@@ -22,15 +22,16 @@ const Post = require("@models/Post");
 const {rateLimit} = require("./utils/rateLimit");
 const { resolveImage, Canvas } = require("canvas-constructor");
 const path = require("path");
-const { errorHandler } = require("./utils/errorHandler");
-const { connectMail } = require("./utils/connectMail");
-const FormData = require('form-data');
 const fetch = require('node-fetch');
 const { check } = require("./utils/checkVersion");
 var app = express();
 
 //Trello Board(private)
 //https://trello.com/b/sZf3SGWF/discord-server-list
+
+//ROUTES
+var login = require("@routes/api/login");
+var logout = require("@routes/api/logout");
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/assets"))
@@ -107,81 +108,22 @@ app.get("/", async(req, res) => {
     
 })
 
-app.get("/github/repo", (req, res) => {
-    res.redirect("https://github.com/Discord-Server-List")
-})
+//SOCIAL ROUTES
+app.use(require("./routes/social/index"));
 
-app.get("/twitter", (req, res) => {
-    res.redirect("https://twitter.com/penguin_noisy");
-})
+//SERVER ROUTES
+app.use(require("./routes/guild/index"));
 
-app.get("/login", (req, res) => {
-    if (req.session.user) return res.redirect('/me');
+//SUPPORT BLOG ROUTES
+app.use(require("./routes/blog/index"));
 
-    const authorizeUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Flogin%2Fcallback&response_type=code&scope=identify%20guilds%20email`;
-    res.redirect(authorizeUrl);
-})
-
-app.get("/login/callback", (req, res) => {
-    if(req.session.user) return res.redirect("/me");
-
-    const accessCode = req.query.code;
-    if (!accessCode) throw new Error('No access code returned from Discord');
-
-    var data = new FormData()
-    data.append('client_id', process.env.DISCORD_CLIENT_ID);
-    data.append('client_secret', process.env.DISCORD_CLIENT_SECRET);
-    data.append('grant_type', 'authorization_code');
-    data.append('redirect_uri', process.env.REDIRECT);
-    data.append('scope', scopes.join(" "));
-    data.append('code', accessCode);
-
-    fetch('https://discordapp.com/api/oauth2/token', {
-        method: 'POST',
-        body: data
-    })
-    .then(res => res.json())
-    .then(response => {
-        fetch('https://discordapp.com/api/users/@me', {
-            method: 'GET',
-            headers: {
-                authorization: `${response.token_type} ${response.access_token}`
-            }
-        })
-        .then(res2 => res2.json())
-        .then(userRes => {
-            userRes.tag = `${userRes.username}#${userRes.discriminator}`
-            userRes.avatarURL = userRes.avatar ? `https://cdn.discordapp.com/avatars/${userRes.id}/${userRes.avatar}.png?size=1024` : null;
-            let user = new User({
-                userID: userRes.id,
-                userTag: userRes.tag,
-                username: userRes.username,
-                userIcon: userRes.avatarURL,
-                discriminator: userRes.discriminator,
-                rtoken: userRes.refresh_token,
-                atoken: userRes.access_token,
-                userEmail: userRes.email
-            }) 
-            user.save((err) => {
-                if(err) {
-                    res.json({message: err})
-                } else {
-                    return res.redirect("/me")
-                }
-            })
-        })
-    })
-})
+app.use("/login", login)
 
 app.get("/me", checkAuth, (req, res) => {
     res.render("me")
 })
 
-app.get("/logout", async(req, res) => {
-    req.logout();
-    req.session.destroy();
-    res.redirect(`/`);
-});
+app.use("/logout", logout)
 
 
 app.get("/search", (req, res, next) => {
@@ -206,42 +148,7 @@ app.get("/search", (req, res, next) => {
     }
 });
 
-app.get("/server", async(req, res) => {
-    try {
-        let d = await Guild.find({}).lean();
-        res.render("server", {
-            guild: d,
-            icon: "/img/favicon.png",
-        })
-    } catch (error) {
-        res.sendStatus(500).json({
-            message: error,
-            statusCode: 500
-        })
-    }
-})
 
-app.get("/blog/support", async(req, res) => {
-    try {
-        let data = await Post.find({}).lean();
-        res.render("blog/index", {
-            icon: "/img/favicon.png",
-            supportData: data
-        })
-    } catch (error) {
-        res.sendStatus(500).json({
-            message: error
-        })  
-    }
-})
-
-
-app.get("/blog/support/new", (req, res) => {
-    res.render("blog/new", {
-        title: "New Post | Noisy Chicken Support",
-        icon: "/img/favicon.png"
-    })
-})
 //https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
 app.post("/api/blog/support/new", (req, res) => {
         let p = new Post({
@@ -283,18 +190,6 @@ app.get("/admin/add/category", (req, res) => {
     });
 })
 
-app.get("/support/blog/articles/:support_id", async(req, res, next) => {
-    let supportParam = req.params.support_id;
-    let data = await Post.findOne({_id: supportParam});
-    if(data) {
-        res.render("blog/views", {
-            icon: "/img/favicon.png",
-            supportData: data
-        })
-    } else {
-        next();
-    }
-})
 
 //サーバーのカテゴリー追加するとPOSTリクエスト
 app.post("/api/admin/add/category", (req, res) => {
@@ -325,55 +220,7 @@ app.post("/api/server/add", async(req, res) => {
     
 })
 
-app.get("/server/:id", async(req, res) => {
-    //TODO: render server page
-    var data = await Guild.findOne({guildID: req.params.id});
-    var userD = await User.findOne({})
-    if(data) {
-        return res.render("guild/views", {
-            title: data.guildName, 
-            header: data.guildName,
-            icon: "/img/favicon.png",
-            add: data.ownerID,
-            join: data.guildID,
-            ownerTag: data.owner,
-            ownerAvatar: data.ownerIcon,
-            guildid: data.guildID,
-            desc: data.description,
-            userDesc: userD.description,
-            verify: data.verified,
-            userid: userD.userID
-        })
-    } else {
-        res.send("Server not found")
-    }
-})
 
-/*
-    encoded url
-    https://www.url-encode-decode.com
-*/
-app.get("/server/:guild_id/share/twitter", async(req, res) => {
-    let guildid = req.params.guild_id;
-    let data = await Guild.findOne({guildID: guildid});
-    let uri = `http://localhost:5000/server/${data.guildID}`
-    res.redirect(`https://twitter.com/intent/tweet?text=Check+out+${data.guildName}+Page+on+Noisy+Penguin+Server+List+%23noisy_penguin+${uri}`)
-})
-
-app.get("/server/:guild_id/share/facebook", async(req, res) => {
-    let guildid = req.params.guild_id;
-    let data = await Guild.findOne({guildID: guildid});
-    let uri = `http%3A%2F%2Flocalhost%3A5000%2Fserver%2F${data.guildID}`
-    res.redirect(`https://www.facebook.com/dialog/share?app_id=${process.env.FB_APP_ID}&href=${uri}&display=popup`)
-})
-
-app.get("/server/:guild_id/share/whatsapp", async(req, res) => {
-    let guildid = req.params.guild_id;
-    let data = await Guild.findOne({guildID: guildid});
-    let uri = `http%3A%2F%2Flocalhost%3A5000%2Fserver%2F${data.guildID}`
-    let redirect = `https://api.whatsapp.com/send/?phone&text=Check+out+${data.guildName}+Page+on+Noisy+Penguin+Server+List+${uri}&app_absent=0`
-    res.redirect(redirect);
-})
 
 app.get("/server/:guild_id/share/reddit", async(req, res) => {
     let guildid = req.params.guild_id;

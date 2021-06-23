@@ -53,6 +53,8 @@
     "@bot": "./bot",
     "@routes": "./routes",
     "@models": "./models",
-    "@utils": "./utils"
+    "@utils": "./utils",
+    "@locales": "./locales",
+    "@assets": "./assets"
   }
 }

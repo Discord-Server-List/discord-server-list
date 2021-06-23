@@ -5,9 +5,60 @@
     <title><%= lingua.server.page_title %></title>
     <link rel="stylesheet" href="/css/server.css">
 </head>
-<body>
+<body onclick="closeSearchResult()">
     <%- include("partials/nav.ejs") %>
     
+    <header>
+        <div class="container is-widescreen">
+            <div class="columns reverse-row-order is-tablet">
+                <div class="column is-two-thirds">
+                    <h1 id="serverlisttitle">Noisy Penguin Discord Servers List</h1>
+                    <h2 id="serverlistdescription">
+                        Discover servers you're interested in and meet new friends
+                    </h2>
+                    <div class="relative search-wrapper" id="search-bar-container" style="max-width: 640px;">
+                        <div class="input-with-btn">
+                            <input type="search" class="search-bar mainsearch" onclick="openSearchResult()" name="serverquery" id="search-input-bar" autocomplete="off" data-uri-prefix="/server" placeholder="Search for specific servers..." value required>
+                            <button id="search-button" tabindex="-1" aria-label="search">
+                                <i class="fas fa-search search-btn"></i>
+                            </button>
+                        </div>
+                        <div role="listbox" class="expandedsearchres" id="search-results" aria-live="polite" style="display: none;">
+                            <div id="recent-search" style="display: block;">
+                                <a role="option" class="flex stretch center-vertical">
+                                    <i class="icon "></i>
+                                    <h4>Type what you want, and we'll find it!</h4>
+                                </a>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="featuredbuttonss">
+                        <a href="/server/top" id="tag-explore">
+                            <button class="ui button">
+                                <i class="list layout icon"></i>
+                                Top
+                            </button>
+                        </a>
+                        <% serverCategory.forEach(data => { %>
+                            <a href="/server/tag/<%= data.categoryName %>" id="tag-explore">
+                                <button class="ui button">
+                                    <i class="list layout icon"></i>
+                                    <%= data.categoryName %>
+                                </button>
+                            </a>
+                        <% }) %>
+                        
+                    </div>
+                </div>
+                <div class="column">
+                    <div id="illustration">
+                        <img src="<%= icon %>"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <div id="server">
         <div class="container is-fullhd">
             <div onclick="window.location.href = '/server/top';" style="cursor: pointer;" class="section-title is-flex">
@@ -43,10 +94,10 @@
                                         </a>
                                     </span>
                                     <span class="servers btn btn-orange btn-1x" style="margin-bottom: -10px;">
-                                        <%= data.memberCount %> <%= lingua.server.content.section.guild_card.members_count %>
+                                        <%= lingua.server.content.section.guild_card.members_count(data.memberCount) %>
                                     </span>
                                     <span class="servers btn btn-orange btn-1x" style="margin-bottom: -10px;">
-                                        <%= data.emojiCount %> <%= lingua.server.content.section.guild_card.emojis_count %>
+                                         <%= lingua.server.content.section.guild_card.emojis_count(data.emojiCount) %>
                                     </span>
                                 </div>
                             </div>
@@ -103,6 +154,18 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        function openSearchResult() {
+            let d = document.getElementById("search-results")
+            d.style.display = "block";
+        }
+
+        function closeSearchResult() {
+            let d = document.getElementById("search-results")
+            d.style.display = "none";
+        }
+    </script>
 
     <%- include("partials/chatbox.ejs") %> 
     <%- include("partials/footer.ejs") %> 

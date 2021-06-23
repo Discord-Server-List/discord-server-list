@@ -1,6 +1,7 @@
 const { Router } = require("express");
 var Guild = require("@models/Guild");
 var User = require("@models/User");
+var Category = require("../../models/Category");
 var router = Router();
 
 router
@@ -8,9 +9,11 @@ router
 .get(async(req, res, next) => {
     try {
         let d = await Guild.find({}).lean();
+        var category = await Category.find({}).lean();
         res.render("server", {
             guild: d,
             icon: "/img/favicon.png",
+            serverCategory: category
         })
     } catch (error) {
         //if there is error forward the error
@@ -23,7 +26,8 @@ router
 .get(async(req, res, next) => {
     try {
         var data = await Guild.findOne({guildID: req.params.id});
-        var userD = await User.findOne({})
+        var userD = await User.findOne({});
+        var category = Category.find({}).lean();
         res.render("guild/views", {
             title: data.guildName, 
             header: data.guildName,
@@ -37,7 +41,8 @@ router
             userDesc: userD.description,
             verify: data.verified,
             userid: userD.userID,
-            icon: "/img/favicon.png"
+            icon: "/img/favicon.png",
+            serverCategory: category
         })
     } catch (error) {
         next(error)

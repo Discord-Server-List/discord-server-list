@@ -10,6 +10,11 @@ var categorySchemas = new Schema({
         index: true,
         auto: true,
         required: true
+    },
+    locale: {
+        type: String,
+        required: true,
+        default: "en-US"
     }
 })
 

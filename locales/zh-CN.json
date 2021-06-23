@@ -173,8 +173,8 @@
             "section": {
                 "guild_card": {
                     "like_title": "喜欢的数量",
-                    "members_count": "会员",
-                    "emojis_count": "象形文字计数",
+                    "members_count": "会员数 {membercount}",
+                    "emojis_count": "象形文字计数 {emojicount}",
                     "view_btn": "查看服务器",
                     "join_btn": "加入一个服务器"
                 }

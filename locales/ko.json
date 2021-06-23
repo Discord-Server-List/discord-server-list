@@ -173,8 +173,8 @@
             "section": {
                 "guild_card": {
                     "like_title": "호가 수",
-                    "members_count": "회원",
-                    "emojis_count": "이모티콘 수",
+                    "members_count": "회원 수 {membercount}",
+                    "emojis_count": "이모티콘 수 {emojicount}",
                     "view_btn": "서버보기",
                     "join_btn": "서버를 등록한다"
                 }

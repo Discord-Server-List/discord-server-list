@@ -24,25 +24,25 @@
           font-weight: 500;
         }
     </style>
-    <link rel="stylesheet" href="/css/guild.css">
+    <link rel="stylesheet" href="/css/guild.css" media="screen">
 </head>
 <body style="<%= lingua.font %>">
     <%- include("../partials/nav.ejs") %>
     <header class="masthead text-center text-white">
         <div class="masthead-content">
             <div class="container">
-                <img class="img-fluid bot-avatar rounded-circle" src="<%= icon %>" width="200px" height="200px"
+                <img class="img-fluid bot-avatar rounded-circle" src="<%= guildicon %>" width="200px" height="200px"
               alt="">
               <h3 class="masthead-heading mb-0" style="font-size: 3em !important;"><%= header %></h3>
               <br />
-              <a class="btn" href="/server/join/<%= join %>" role="button" target="blank" style="color: white;">
+              <a class="btn" title="Join <%= header %>" onclick="window.location.href= '/server/join/<%= join %>';" role="button" target="blank" style="color: white;">
                 <span>
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </span>
                 <%= lingua.guild.header.join_btn %>
               </a>
               
-              <a class="btn loginHB" href="/user/add/<%= add %>" role="button" style="color: white;">
+              <a class="btn loginHB" title="Add <%= ownerTag %> as friend" onclick="window.location.href= '/user/add/<%= add %>';" role="button" style="color: white;">
                 <span>
                   <i class="fa fa-sign-in" aria-hidden="true"></i>
                 </span>
@@ -77,7 +77,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6">
             <div class="p-5">
-              <img class="img-fluid" src="<%= icon %>" alt="server-icon">
+              <img class="img-fluid" src="<%= guildicon %>"  width="300px" height="300px" alt="server-icon">
             </div>
           </div>
           <div class="col-lg-6">

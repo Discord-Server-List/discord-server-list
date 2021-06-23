@@ -27,7 +27,7 @@ router
         res.render("guild/views", {
             title: data.guildName, 
             header: data.guildName,
-            icon: "/img/favicon.png",
+            guildicon: data.icon,
             add: data.ownerID,
             join: data.guildID,
             ownerTag: data.owner,
@@ -36,7 +36,8 @@ router
             desc: data.description,
             userDesc: userD.description,
             verify: data.verified,
-            userid: userD.userID
+            userid: userD.userID,
+            icon: "/img/favicon.png"
         })
     } catch (error) {
         next(error)
@@ -91,6 +92,20 @@ router
         return res.redirect(redirect);
     } catch (error) {
         next(error);
+    }
+})
+
+router
+.route("/join/:guild_id")
+.get(async(req, res) => {
+    var serv = await Guild.findOne({guildID: req.params.guild_id});
+    if(serv) {
+        return res.redirect(serv.guildInvite)
+    } else {
+        return res.sendStatus(404).json({
+            message: "No Invite Link Was Found",
+            errorCode: 404
+        })
     }
 })
 

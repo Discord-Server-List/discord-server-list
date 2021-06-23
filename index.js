@@ -4,8 +4,6 @@ var express = require("express");
 const { connectDB } = require("@utils/db");
 var session = require("express-session");
 var lingua = require("lingua");
-var fs = require("fs");
-var {admin} = require("./admin.json");
 var imageCache = require('image-cache');
 const Guild  = require("@models/Guild");
 var device = require('express-device');
@@ -15,8 +13,6 @@ const Support = require("./models/Support");
 const Chat_Support = require("./models/Chat_Support");
 var Category = require("./models/Category");
 var bot = require("@bot/index");
-const { Strategy } = require('passport-discord');
-const passport = require('passport');
 const { checkAuth } = require("@utils/auth");
 const Post = require("@models/Post");
 const {rateLimit} = require("./utils/rateLimit");
@@ -85,8 +81,6 @@ app.use(session({
     }
 }));
 
-var scopes = ['identify', 'email', 'guilds'];
-
 let API_KEY = process.env.IPREGISTRY_API_KEY
 
 
@@ -119,9 +113,7 @@ app.use(require("./routes/blog/index"));
 
 app.use("/login", login)
 
-app.get("/me", checkAuth, (req, res) => {
-    res.render("me")
-})
+app.use("/me", require("./routes/me"));
 
 app.use("/logout", logout)
 
@@ -149,38 +141,12 @@ app.get("/search", (req, res, next) => {
 });
 
 
-//https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
-app.post("/api/blog/support/new", (req, res) => {
-        let p = new Post({
-            username: req.body.username,
-            email: req.body.email,
-            title: req.body.title,
-            body: req.body.body
-        })
-        p.save((err) => { 
-            if(err)  {
-             res.json({
-                 message: err
-             })
-            } else {
-                res.redirect("/blog/support?status=submitted");
-            }
-        })
-})
+app.use("/api", require("./routes/api/index"));
 
 app.post("/support/blog/search", (req, res, next) => {
     Post.findOne({title: req.body.blogquery}).exec(function(data) {
         res.redirect(`/support/blog/search/${req.body.blogquery}`)
     })
-})
-
-app.get("/support/blog/search/:title", async(req, res) => {
-    let post = await Post.find(req.params.title);
-    if(post) {
-        res.redirect(`/support/blog/articles/${post._id}`)
-    } else {
-        res.redirect(`/support/blog/search/404?name=${req.params.title}`)
-    }
 })
 
 app.get("/admin/add/category", (req, res) => {
@@ -221,15 +187,6 @@ app.post("/api/server/add", async(req, res) => {
 })
 
 
-
-app.get("/server/:guild_id/share/reddit", async(req, res) => {
-    let guildid = req.params.guild_id;
-    let data = await Guild.findOne({guildID: guildid});
-    let uri = `http%3A%2F%2Flocalhost%3A5000%2Fserver%2F${data.guildID}`
-    let redirect = `https://www.reddit.com/submit?url=${uri}&title=Check+out+${data.guildName}+Page+on+Noisy+Penguin+Server+List`
-    res.redirect(redirect);
-})
-
 app.get("/server/:guild_id/edit", async(req, res) => {
     let guildid = req.params.guild_id;
     let data = await Guild.findOne({guildID: guildid});
@@ -256,11 +213,17 @@ app.get("/server/:guild_id/edit", async(req, res) => {
 */
 app.put("/server/:guild_id/desc/edit", (req, res, next) => {
     var Data = Guild.findById({guildID: req.params.guild_id});
-    if(!Data) {
-        next();
-    } else {
-        Data.description = req.body.desc;
-    }
+    Data.description = req.body.desc;
+    
+    Data.save((err) => {
+        if(err) {
+            res.json({
+                message: err
+            })
+        } else {
+            res.redirect(`/server/${Data.guildID}`)
+        }
+    })
 })
 
 app.get("/api", (req, res) => {
@@ -330,43 +293,7 @@ app.get("/api/embed/server/:id", rateLimit(15000, 4), async(req, res) => {
     }
 })
 
-app.get("/server/join/:guildid", async(req, res) => {
-    var serv = await Guild.findOne({guildID: req.params.guildid});
-    if(serv) {
-        res.redirect(serv.guildInvite)
-    } else {
-        res.send("No Invite Link")
-    }
-})
-
-
-app.get("/user/:userid", async(req, res) => {
-    var userData = await User.findOne({userID: req.params.userid});
-    if(userData) {
-        res.render("user/views", {
-            title: userData.username + " Profile",
-            icon: userData.userIcon,
-            id: userData.userID
-        })
-    } else {
-        res.send("User Not Found")
-    }
-})
-
-app.get("/user/add/:ownerid", async(req, res) => {
-    var d = await Guild.findOne({ownerID: req.params.ownerid});
-    if(d) {
-        res.redirect(`https://discord.com/users/${d.ownerID}`)
-    } else {
-        res.send("User Not Found")
-    }
-})
-
-app.get("/donate", (req, res) => {
-    res.render("donate", {
-        icon: "img/favicon.png"
-    })
-})
+app.use(require("./routes/index"));
 
 
 app.get("/support", async(req, res) => {
@@ -417,22 +344,6 @@ app.get("/support/:userid/:ticketid", async(req, res) => {
     res.json(data);
 })
 
-app.post("/api/send", (req, res) => {
-    let m = new Chat_Support({
-        message: req.body.message,
-        userEmail: req.body.email_input
-    }) 
-
-    m.save((err) => {
-        if(err) {
-            res.json({
-                message: err
-            })
-        } else {
-            res.redirect("/");
-        }
-    })
-})
 
 app.get("/admin/message", async(req, res) => {
     try {
@@ -464,23 +375,6 @@ app.get("/admin/message/:message_id", async(req, res, next) => {
 app.get("/api/guilds/:server_id", async(req, res) => {
     let d = await Guild.findOne({guildID: req.params.server_id});
     res.json(d);
-})
-
-
-app.all("/js", (req, res, next) => {
-    return res.sendStatus(403).send(
-    {
-            message: 'Access Forbidden'
-    });
-    next();
-})
-
-app.all("/css", (req, res, next) => {
-    return res.sendStatus(403).send(
-    {
-            message: 'Access Forbidden'
-    });
-    next();
 })
 
 bot.login(process.env.DISCORD_CLIENT_SECRET)

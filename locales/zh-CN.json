@@ -180,5 +180,22 @@
                 }
             }
         }
+    },
+    "terms": {
+        "page_title": "条款 | Noisy Penguin 服务器列表",
+        "content": {
+            "header": {
+                "title": "条款"
+            },
+            "section": {
+                "privacy": "隐私政策",
+                "tos": "服务条款",
+                "mainContent": {
+                    "p1": "使用本网站即表示接受本条款和条件以及隐私政策。",
+                    "p2": "所有版权、商标、服务标志都属于相应的所有者。",
+                    "p3": "如需支持，请发送电子邮件至 wislyong8@gmail.com 或致电 +62 812 6709 9612"
+                }
+            }
+        }
     }
 }

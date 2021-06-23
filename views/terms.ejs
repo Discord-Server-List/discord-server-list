@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="<%= lingua.locale %>">
+<head>
+    <%- include("partials/head.ejs") %>
+    <title><%= lingua.terms.page_title %></title>
+    <link rel="stylesheet" href="/css/terms.css">
+</head>
+<body style="<%= lingua.font %>">
+    <%- include("partials/nav.ejs") %>
+
+    <header>
+        <div class="container is-widescreen">
+            <div class="columns is-tablet">
+                <div class="column is-two-thirds">
+                    <h1 id="serverlisttitle"><%= lingua.terms.content.header.title %></h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div id="termcontent">
+            <div class="container is-fullhd">
+                <div class="server-list-section">
+                    <div class="maincon">
+                        <div class="content">
+                            <div class="tos">
+                                <a href="/privacy" title="Privacy"><%= lingua.terms.content.section.privacy %></a>
+                                <a href="/tos" title="Terms of service"><%= lingua.terms.content.section.tos %></a>
+                                <%= lingua.terms.content.section.mainContent.p1 %>
+                                <%= lingua.terms.content.section.mainContent.p2 %>
+                                <%= lingua.terms.content.section.mainContent.p3 %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <%- include("partials/footer.ejs") %>
+</body>
+</html>

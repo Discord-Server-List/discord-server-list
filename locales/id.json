@@ -180,5 +180,22 @@
                 }
             }
         }
+    },
+    "terms": {
+        "page_title": "Syarat | Noisy Penguin Server List",
+        "content": {
+            "header": {
+                "title": "Syarat"
+            },
+            "section": {
+                "privacy": "Kebijakan pribadi",
+                "tos": "Syarat Dan Ketentuan",
+                "mainContent": {
+                    "p1": "PENGGUNAAN SITUS WEB INI MERUPAKAN PENERIMAAN SYARAT DAN KETENTUAN DAN KEBIJAKAN PRIVASI.",
+                    "p2": "SEMUA HAK CIPTA, MEREK DAGANG, MEREK LAYANAN MILIK PEMILIK YANG SESUATU.",
+                    "p3": "UNTUK DUKUNGAN EMAIL KAMI DI wislyong8@gmail.com ATAU HUBUNGI DI +62 812 6709 9612"
+                }
+            }
+        }
     }
 }

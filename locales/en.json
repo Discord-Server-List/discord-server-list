@@ -180,5 +180,22 @@
                 }
             }
         }
+    },
+    "terms": {
+        "page_title": "Terms | Noisy Penguin Server List",
+        "content": {
+            "header": {
+                "title": "Terms"
+            },
+            "section": {
+                "privacy": "Privacy Policy",
+                "tos": "Terms of Service",
+                "mainContent": {
+                    "p1": "USE OF THIS WEB SITE CONSTITUTES ACCEPTANCE OF THE TERMS AND CONDITIONS AND PRIVACY POLICY.",
+                    "p2": "ALL COPYRIGHTS, TRADEMARKS, SERVICE MARKS BELONG TO THE CORRESPONDING OWNERS.",
+                    "p3": "FOR SUPPORT EMAIL US AT wislyong8@gmail.com OR CALL AT +62 812 6709 9612"
+                }
+            }
+        }
     }
 }

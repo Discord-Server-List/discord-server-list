@@ -35,18 +35,18 @@
               alt="">
               <h3 class="masthead-heading mb-0" style="font-size: 3em !important;"><%= header %></h3>
               <br />
-              <a class="btn" title="Join <%= header %>" onclick="window.location.href= '/server/join/<%= join %>';" role="button" target="blank" style="color: white;">
+              <a class="btn" title="Add <%= ownerTag %> as friend" onclick="window.location.href= '/user/add/<%= add %>';" onclick="window.location.href= '/server/join/<%= join %>';" role="button" target="blank" style="color: white;">
                 <span>
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </span>
-                <%= lingua.guild.header.join_btn %>
+                <%= lingua.guild.header.contact_btn %>
               </a>
               
-              <a class="btn loginHB" title="Add <%= ownerTag %> as friend" onclick="window.location.href= '/user/add/<%= add %>';" role="button" style="color: white;">
+              <a class="btn loginHB" title="Join <%= header %>"  onclick="window.location.href= '/server/join/<%= join %>';" role="button" style="color: white;">
                 <span>
                   <i class="fa fa-sign-in" aria-hidden="true"></i>
                 </span>
-                <%= lingua.guild.header.contact_btn %>
+                <%= lingua.guild.header.join_btn %>
               </a>
           </div>
         </div>

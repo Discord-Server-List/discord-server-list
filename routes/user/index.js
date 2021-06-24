@@ -8,8 +8,11 @@ router.get("/:user_id", async(req, res) => {
     if(userData) {
         res.render("user/views", {
             title: userData.username + " Profile",
-            icon: userData.userIcon,
-            id: userData.userID
+            icon: "/img/favicon.png",
+            id: userData.userID,
+            favicon: userData.userIcon,
+            username: userData.username,
+            userDesc: userData.description
         })
     } else {
         res.send("User Not Found")

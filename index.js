@@ -10,7 +10,6 @@ var device = require('express-device');
 const nodemailer = require('nodemailer');
 const User = require("./models/User");
 const Support = require("./models/Support");
-var Category = require("./models/Category");
 var bot = require("@bot/index");
 const { checkAuth } = require("@utils/auth");
 const Post = require("@models/Post");
@@ -84,6 +83,8 @@ app.use(session({
 
 let API_KEY = process.env.IPREGISTRY_API_KEY
 
+const { detect } = require('detect-browser');
+const browser = detect();
 
 app.get("/", async(req, res) => {
     fetch(`https://api.ipregistry.co?key=${API_KEY}`)
@@ -93,6 +94,7 @@ app.get("/", async(req, res) => {
     .then(function (json) {
         res.cookie('country', json['location']['country']['code']);
         res.cookie('theme', 'light')
+        res.cookie('client', browser.name)
         //res.cookie('locale', json['location']['country']['languages']['0']['code']);
         res.cookie('device', req.device.type)
         res.render("index", {
@@ -119,29 +121,6 @@ app.use("/me", require("./routes/me"));
 app.use("/logout", logout)
 
 
-app.get("/search", (req, res, next) => {
-    try {
-        Guild.find({$or: [{guildName: { '$regex':req.query.guildsearch }}]}, (err, data) => {
-            if(err) {
-                res.json({
-                    message: err
-                })
-            } else {
-                res.render("search", {
-                    icon: "/img/favicon.png",
-                    guild: data
-                })
-            }
-        })
-    } catch (error) {
-        res.sendStatus(500).json({
-            message: error,
-            statusCode: 500
-        })
-    }
-});
-
-
 app.use("/api", require("./routes/api/index"));
 
 app.post("/support/blog/search", (req, res, next) => {
@@ -163,32 +142,6 @@ app.post("/api/server/add", async(req, res) => {
 })
 
 
-app.get("/support", async(req, res) => {
-    let d = await User.findOne({});
-    res.render("support", {
-        icon: "/img/favicon.png"
-    })
-})
-
-app.post("/add/support", async(req, res) => {
-    let s = new Support()
-    s.title = req.body.title;
-    s.body = req.body.body;
-    //s.locale = req.body.locale;
-    s.username = req.body.username;
-    s.userID = data.userID;
-    s.email = data.userEmail;
-    s.file = req.body.attachments;
-    s.save((err) => {
-        if(err) {
-            res.json({
-                message: err
-            })
-        } else {
-            res.redirect("")
-        }
-    });
-})
 
 app.get("/support/:ticketid", async(req, res) => {
     let data = await Support.findOne({userID: req.params.userid, supportID: req.params.ticketid});

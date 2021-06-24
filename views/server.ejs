@@ -166,6 +166,14 @@
             d.style.display = "none";
         }
     </script>
+      <script>
+        const node = document.getElementById("search-input-bar");
+        node.addEventListener("keyup", function(event) {
+              if(event.key === "Enter") {
+                    location.href = `/guild/search/?q=${node.value}`
+              }
+        })
+  </script>
 
     <%- include("partials/chatbox.ejs") %> 
     <%- include("partials/footer.ejs") %> 

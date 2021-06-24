@@ -44,7 +44,7 @@
     <span class="navbar-text" style="margin-right: 15px; padding: 10px;">
       <a href="/blog/support/new"><%= lingua.navbar.submit %></a>
     </span>
-    <form class="d-flex input-group w-auto" method="GET" action="/search">
+    <form class="d-flex input-group w-auto" method="GET" action="/guild/search">
       <input
         type="search"
         class="form-control rounded"
@@ -52,6 +52,7 @@
         aria-label="Search"
         aria-describedby="search-addon"
         name="guildsearch"
+        id="searchbar"
       />     
       <span class="input-group-text border-0" id="search-addon">
         <button class="fas fa-search search-btn" type="submit"></button>

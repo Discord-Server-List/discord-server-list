@@ -22,9 +22,8 @@ var app = express();
 //Trello Board(private)
 //https://trello.com/b/sZf3SGWF/discord-server-list
 
-//ROUTES
-var login = require("@routes/api/login");
-var logout = require("@routes/api/logout");
+
+
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/assets"))
@@ -57,6 +56,11 @@ app.use(lingua(app, {
         httpOnly: true
     }
 }));
+
+//ROUTES
+var login = require("@routes/api/login");
+var logout = require("@routes/api/logout");
+app.use(require("./routes/index"));
 
 imageCache.setOptions({
     compressed: false,
@@ -223,14 +227,7 @@ app.put("/server/:guild_id/desc/edit", (req, res, next) => {
     })
 })
 
-app.get("/api", (req, res) => {
-    res.render("api/index", {
-        icon: "/img/favicon.png" 
-    })
-})
 
-
-app.use(require("./routes/index"));
 
 
 app.get("/support", async(req, res) => {
@@ -241,7 +238,6 @@ app.get("/support", async(req, res) => {
 })
 
 app.post("/add/support", async(req, res) => {
-    let data = await User.findOne({userID: req.params.id});
     let s = new Support()
     s.title = req.body.title;
     s.body = req.body.body;
@@ -250,26 +246,18 @@ app.post("/add/support", async(req, res) => {
     s.userID = data.userID;
     s.email = data.userEmail;
     s.file = req.body.attachments;
-
-    const message = {
-        from: data.userEmail, // Sender address
-        to: process.env.EMAIL,         // List of recipients
-        subject: s.title, // Subject line
-        text: s.body // Plain text body
-    };
-
-    transport.sendMail(message, (err, info) => {
-        if (err) {
-            console.log(err)
+    s.save((err) => {
+        if(err) {
+            res.json({
+                message: err
+            })
         } else {
-            console.log(info);
+            res.redirect("")
         }
-    })
-
-    s.save();
+    });
 })
 
-app.get("/support/:userid/:ticketid", async(req, res) => {
+app.get("/support/:ticketid", async(req, res) => {
     let data = await Support.findOne({userID: req.params.userid, supportID: req.params.ticketid});
     if(!data) {
         res.sendStatus(404).json({
@@ -282,11 +270,6 @@ app.get("/support/:userid/:ticketid", async(req, res) => {
 })
 
 
-
-app.get("/api/guilds/:server_id", async(req, res) => {
-    let d = await Guild.findOne({guildID: req.params.server_id});
-    res.json(d);
-})
 
 bot.login(process.env.DISCORD_CLIENT_SECRET)
 

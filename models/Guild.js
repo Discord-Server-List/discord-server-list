@@ -80,4 +80,12 @@ var guildSchema = new Schema({
 
 guildSchema.plugin(findOrCreate);
 
+guildSchema.virtual('type').get(function () {
+    return 'widget';
+})
+
+guildSchema.set('toObject', {
+    virtuals: true
+})
+
 module.exports = model("Guild", guildSchema);

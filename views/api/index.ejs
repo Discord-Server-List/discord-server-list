@@ -135,6 +135,76 @@
           </div>
         </section>
 
+        <section>
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-6">
+                <div class="p-5">
+                      <div class="http-req">
+                              <h2 class="h2-2MZoq3  http-req-title" id="get-guild">
+                                    Get Guild
+                              </h2>
+                              <span class="http-req-verb">get</span>
+                              <span class="http-req-url">
+                                  <span>/api/guilds</span><a href="/api/#guild-object" class="http-req-variable">/:guild_id</a>
+                              </span>
+                      </div>
+                      <span class="paragraph-mttuxw"> 
+                              Return the <a href="/api/#guild-object" class="link-3NP4-r ">guild</a> object for the given id.
+                      </span>
+                </div>
+              </div>
+              <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                  <h3 class="display-5 h6-3ZuB-g">Example Response</h3>
+                  <pre class="pre-1AN_2u">
+                        <code class="hljs json codeBlock-2WGtNR">
+                          "_id": {
+                            "$oid": "60d43dad73fe4d2d9ca44520"
+                          },
+                          "description": "This Server has no description.",
+                          "category": [],
+                          "guildWebsite": "",
+                          "likes": 0,
+                          "dislikes": 0,
+                          "nsfw": false,
+                          "guildInvite": "https://discord.gg/pErSSK5zjx",
+                          "verified": false,
+                          "guildID": "851320736147701771",
+                          "owner": "RealPenguin#0808",
+                          "ownerID": "332109764286742529",
+                          "icon": "https://cdn.discordapp.com/icons/851320736147701771/92a554186922d29cba97b3f0df323f3a.png?size=512",
+                          "guildRegion": "singapore",
+                          "guildCreatedAt": {
+                            "$date": "2021-06-07T04:44:40Z"
+                          },
+                          "guildName": "Discord Server List",
+                          "defaultChannel": "<#851320736937017356>",
+                          "ownerIcon": "https://cdn.discordapp.com/avatars/332109764286742529/55fe9166c5cb6848b3846743a0fe59b3.png?size=512",
+                          "emojis": [
+                            {
+                              "animated": false,
+                              "_id": {
+                                "$oid": "60d43dad73fe4d2d9ca44521"
+                              },
+                              "emojiName": "<:uk:851396975152463872>",
+                              "emojiID": "<:uk:851396975152463872>"
+                            }
+                          ],
+                          "memberCount": 2,
+                          "emojiCount": 2,
+                          "addedAt": {
+                            "$date": "2021-06-24T08:09:17.122Z"
+                          },
+                          "__v": 0
+                        </code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
     <%- include("../partials/chatbox.ejs") %>
     <%- include("../partials/footer.ejs") %>
 </body>

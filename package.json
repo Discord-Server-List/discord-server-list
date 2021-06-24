@@ -33,6 +33,7 @@
     "module-alias": "^2.2.2",
     "mongoose": "^5.12.13",
     "mongoose-findorcreate": "^3.0.0",
+    "mongoose-rest-api": "^1.2.5",
     "morgan": "^1.10.0",
     "mv": "^2.1.1",
     "nanoid": "^3.1.23",

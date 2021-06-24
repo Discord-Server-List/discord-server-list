@@ -10,13 +10,10 @@ var device = require('express-device');
 const nodemailer = require('nodemailer');
 const User = require("./models/User");
 const Support = require("./models/Support");
-const Chat_Support = require("./models/Chat_Support");
 var Category = require("./models/Category");
 var bot = require("@bot/index");
 const { checkAuth } = require("@utils/auth");
 const Post = require("@models/Post");
-const {rateLimit} = require("./utils/rateLimit");
-const { resolveImage, Canvas } = require("canvas-constructor");
 const path = require("path");
 const fetch = require('node-fetch');
 const { check } = require("./utils/checkVersion");
@@ -233,66 +230,6 @@ app.get("/api", (req, res) => {
 })
 
 
-app.get("/api/stats/server/:id", rateLimit(15000, 4), async(req, res) => {
-    let guildData = await Guild.findOne({guildID: req.params.id});
-    if(!guildData) {
-        res.sendStatus(404).json({
-            error: true,
-            code: 404,
-            message: "Server not found"
-        })
-    } 
-    try {
-        res.send(guildData)
-    } catch(e) {
-        throw e;
-    }
-})
-
-app.get("/api/embed/server/:id", rateLimit(15000, 4), async(req, res) => {
-    let data = await Guild.findOne({guildID: req.params.id});
-
-    if(!data){
-        res.sendStatus(404).json({
-            error: true,
-            code: 404,
-            message: "Server not found"
-        })
-    }
-    try {
-        let avatar = await resolveImage(data.icon);
-        //let admin = await resolveImage(path.join(__dirname + "/assets/img/admin.png"));
-        let verified = await resolveImage(path.join(__dirname + "/assets/img/Verified.png"));
-
-        let img = new Canvas()
-        .setColor("#404E5C")
-        .printRectangle(0, 0, 500, 250)
-        .setColor("#DCE2F9")
-        .setTextFont("bold 35px sans")
-        .printText(data.guildName, 120, 75)
-        .printRoundedImage(avatar, 30, 30, 70, 70, 20)
-        .setTextAlign("left")
-        .setTextFont('bold 12px Verdana')
-        if(data.verified == true)
-            img.printImage(verified, 420, 55)
-        img
-            .printText(`Server Region: ${data.guildRegion}`, 30, 145)
-            .setTextFont('normal 15px Verdana')
-            .printWrappedText(data.description,  30, 175, 440, 15)
-            .setTextFont('bold 12px sans-serif')
-            .printText(data.owner, 10, 245)
-            .setTextAlign("right")
-            .printText(process.env.DOMAIN, 490, 245);
-        res.writeHead(200, {
-            "Content-Type": "image/png"
-        })
-        res.end(await img.toBuffer(), "binary")
-    } catch (error) {
-        throw error;
-        res.sendStatus(500);
-    }
-})
-
 app.use(require("./routes/index"));
 
 
@@ -345,32 +282,6 @@ app.get("/support/:userid/:ticketid", async(req, res) => {
 })
 
 
-app.get("/admin/message", async(req, res) => {
-    try {
-        let m = await Chat_Support.find({}).lean();
-        res.render("admin/message", {
-            data: m
-        })
-    } catch (error) {
-        res.sendStatus(500).json({
-            message: error
-        })
-    }
-})
-
-app.get("/admin/message/:message_id", async(req, res, next) => {
-    let data = await Chat_Support.findOne({messageID: req.params.message_id});
-    if(data) {
-        res.render("admin/chat_support.ejs", {
-            page_title: data.userEmail + " | Noisy Penguin Server List Support",
-            msg: data.message,
-            id: data._id,
-            email: data.userEmail
-        })
-    } else {
-        next()
-    }
-})
 
 app.get("/api/guilds/:server_id", async(req, res) => {
     let d = await Guild.findOne({guildID: req.params.server_id});

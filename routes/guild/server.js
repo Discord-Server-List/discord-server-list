@@ -114,4 +114,39 @@ router
     }
 })
 
+router.route("/:guild_id/edit")
+.get(async(req, res, next) => {
+    try {
+        let guildData = await Guild.findOne({guildID: req.params.guild_id});
+        return res.render("guild/edit", {
+            icon: "/img/favicon.png",
+            title:  "Edit " + guildData.guildName + " | Noisy Penguin Server List",
+            name: guildData.guildName,
+            servIcon: guildData.icon,
+            servID: guildData.guildID,
+            servDesc: guildData.description
+        })
+    } catch(err) {
+        next(err)
+    }
+})
+router.route("/:guild_id/desc/edit")
+.put((req, res, next) => {
+    try {
+        var Data = Guild.findById({guildID: req.params.guild_id, description: req.body.desc});
+    
+        Data.save((err) => {
+            if(err) {
+                res.json({
+                    message: err
+                })
+            } else {
+                res.redirect(`/server/${Data.guildID}`)
+        }
+    })
+    } catch(e) {
+        next(e)
+    }
+})
+
 module.exports = router;

@@ -11,20 +11,28 @@
 </head>
 <body style="<%= lingua.font %>">
     <%- include("partials/nav.ejs") %>
+    <header class="masthead text-center text-white">
+        <div class="masthead-content">
+            <div class="container">
+                <img class="img-fluid bot-avatar rounded-circle" src="<%= icon %>" width="200px" height="200px"
+              alt="">
+          </div>
+        </div>
+        </header>
     <form action="/add/support" method="post" accept-charset="UTF-8">
         <label for="username">Username(4 to 12 characters):</label>
         <input type="text" id="username" name="username" required
-        minlength="4" maxlength="12" size="20">
+        minlength="4" maxlength="12" size="20" class="form-control">
         <br/>
 
         <label for="title">Subject:</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" required class="form-control">
 
         <br/>
 
         <label for="body">Description</label>
         <br/>
-        <textarea name="body" id="body" cols="50" rows="10"></textarea>
+        <textarea name="body" id="body" cols="50" rows="10"></textarea class="form-control"> 
 
         <br/>
 
@@ -32,7 +40,9 @@
         <input type="file" name="attachments" id="attachments">
 
         <br/>
-        <input type="submit" value="Send Request">
+        <button type="submit" class="btn btn-light" data-mdb-ripple-color="dark" style="margin: 10px 10px !important;">Submit</button>
     </form>
+
+    <%- include("partials/footer.ejs") %> 
 </body>
 </html>

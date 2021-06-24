@@ -150,31 +150,6 @@ app.post("/support/blog/search", (req, res, next) => {
     })
 })
 
-app.get("/admin/add/category", (req, res) => {
-    res.render("admin/add_category.ejs", {
-        icon: "/img/favicon.png",
-        title: "Admin Add Category | Noisy Penguin Server List"
-    });
-})
-
-
-//サーバーのカテゴリー追加するとPOSTリクエスト
-app.post("/api/admin/add/category", (req, res) => {
-    var c = new Category({
-        categoryName: req.body.name
-    });
-    c.save((err) => {
-        if(err) {
-            return res.json({
-                message: err
-            })
-        } else {
-            return res.redirect("/")
-        }
-    })
-    
-})
-
 app.get("/error", (req, res) => {
     res.render("error")
 })
@@ -186,48 +161,6 @@ app.get("/server/add", checkAuth, async(req, res) => {
 app.post("/api/server/add", async(req, res) => {
     
 })
-
-
-app.get("/server/:guild_id/edit", async(req, res) => {
-    let guildid = req.params.guild_id;
-    let data = await Guild.findOne({guildID: guildid});
-    if(data)  return res.render("guild/edit", {
-        icon: "/img/favicon.png",
-        title:  "Edit " + data.guildName + " | Noisy Penguin Server List",
-        name: data.guildName,
-        servIcon: data.icon,
-        servID: data.guildID,
-        servDesc: data.description
-    })
-    else res.json({
-        message: 'Server Not Found',
-        statusCode: 404
-    }).sendStatus(404)
-})
-
-/*
-    JP:サーバーの概要を変更するのPOSTリクエスト
-    EN: POST request for updating server description
-    ID: Method POST untuk memperbarui deskripsi server
-    zh_CN: 更新服务器描述的POST请求
-    ko: 서버 설명 업데이트를위한 POST 요청
-*/
-app.put("/server/:guild_id/desc/edit", (req, res, next) => {
-    var Data = Guild.findById({guildID: req.params.guild_id});
-    Data.description = req.body.desc;
-    
-    Data.save((err) => {
-        if(err) {
-            res.json({
-                message: err
-            })
-        } else {
-            res.redirect(`/server/${Data.guildID}`)
-        }
-    })
-})
-
-
 
 
 app.get("/support", async(req, res) => {

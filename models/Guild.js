@@ -88,4 +88,13 @@ guildSchema.set('toObject', {
     virtuals: true
 })
 
+guildSchema.statics.random = function(callback) {
+    this.count(function(err, guildCount) {
+            if(err)
+                return callback(err);
+            var rand = Math.floor(Math.random() * guildCount);
+            this.findOne().skip(rand).exec(callback);
+    }.bind(this))
+};
+
 module.exports = model("Guild", guildSchema);

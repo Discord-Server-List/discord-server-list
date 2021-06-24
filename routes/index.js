@@ -7,5 +7,6 @@ router.use("/admin", require("@routes/admin/index"));
 router.use("/about", require("@routes/about"));
 router.use("/terms", require("@routes/terms"));
 router.use("/invite", require("@routes/invite"));
+router.use("/app", require("@routes/app/index"));
 
 module.exports = router;

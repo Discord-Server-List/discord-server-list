@@ -24,7 +24,8 @@
             "ja": "日文",
             "id": "印度尼西亚文",
             "zh_CN": "中文(简化汉字)",
-            "ko": "韩文"
+            "ko": "韩文",
+            "ru": "俄语"
         }
     },
     "footer": {
@@ -216,6 +217,18 @@
                 "section": {
                         "description": "用户说明"
                 }
+        }
+    },
+    "help_support": {
+        "page_title": "支持 | Noisy Penguin 服务器列表",
+        "content": {
+            "form": {
+                    "username_input": "用户名(4至12个字符):",
+                    "subject_input": "主题:",
+                    "description_input": "描述",
+                    "attachments_input": "文件附件(可选):",
+                    "submit_btn": "发送"
+            }
         }
     }
 }

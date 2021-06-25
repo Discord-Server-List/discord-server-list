@@ -24,7 +24,8 @@
             "ja": "日本語",
             "id": "Bahasa Indonesia",
             "zh_CN": "中文",
-            "ko": "한국어"
+            "ko": "한국어",
+            "ru": "Русский"
         }
     },
     "footer": {
@@ -216,6 +217,18 @@
                 "section": {
                         "description": "User Description"
                 }
+        }
+    },
+    "help_support": {
+        "page_title": "Support | Noisy Penguin Server List",
+        "content": {
+            "form": {
+                    "username_input": "Username(4 to 12 characters):",
+                    "subject_input": "Subject:",
+                    "description_input": "Description",
+                    "attachments_input": "Attachments(optional):",
+                    "submit_btn": "Submit"
+            }
         }
     }
 }

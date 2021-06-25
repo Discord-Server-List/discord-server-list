@@ -24,7 +24,8 @@
             "ja": "Bahasa Jepang",
             "id": "Bahasa Indonesia",
             "zh_CN": "Bahasa Cina(Sederhana)",
-            "ko": "Bahasa Korea"
+            "ko": "Bahasa Korea",
+            "ru": "Bahasa Rusia"
         }
     },
     "footer": {
@@ -216,6 +217,18 @@
                 "section": {
                         "description": "Deskripsi User"
                 }
+        }
+    },
+    "help_support": {
+        "page_title": "Bantuan | Noisy Penguin Server List",
+        "content": {
+            "form": {
+                    "username_input": "Username(4 hingga 12 karakter):",
+                    "subject_input": "Subyek:",
+                    "description_input": "Deskripsi",
+                    "attachments_input": "Lampiran File(opsional):",
+                    "submit_btn": "Kirim"
+            }
         }
     }
 }

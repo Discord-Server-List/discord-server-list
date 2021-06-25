@@ -24,7 +24,8 @@
             "ja": "日本語",
             "id": "インドネシア語",
             "zh_CN": "中国語(簡体字)",
-            "ko": "韓国語"
+            "ko": "韓国語",
+            "ru": "ロシア語"
         }
     },
     "footer": {
@@ -197,7 +198,7 @@
             },
             "section": {
                 "privacy": "個人情報保護について",
-                "tos": "ご利用規約",
+                "tos": "ご利用規約はこちら",
                 "mainContent": {
                     "p1": "このサイトを利用することで、利用規約およびプライバシーポリシーに同意したものとみなされます。",
                     "p2": "すべての著作権、商標、サービスマークは、それぞれの所有者に帰属します。",
@@ -216,6 +217,18 @@
                 "section": {
                         "description": "ユーザー概要"
                 }
+        }
+    },
+    "help_support": {
+        "page_title": "サポート | Noisy Penguin サーバー・リスト",
+        "content": {
+            "form": {
+                    "username_input": "ユーザー名(4から12文字):",
+                    "subject_input": "件名:",
+                    "description_input": "件の概要",
+                    "attachments_input": "ファイル添付(任意):",
+                    "submit_btn": "送信"
+            }
         }
     }
 }

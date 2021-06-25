@@ -24,7 +24,8 @@
             "ja": "일본어",
             "id": "인도네시아어",
             "zh_CN": "중국어 (간체)",
-            "ko": "한국어"
+            "ko": "한국어",
+            "ru": "러시아어"
         }
     },
     "footer": {
@@ -216,6 +217,18 @@
                 "section": {
                         "description": "사용자 설명"
                 }
+        }
+    },
+    "help_support": {
+        "page_title": "지원하다 | Noisy Penguin 서버 목록",
+        "content": {
+            "form": {
+                    "username_input": "사용자 이름 (4 ~ 12 자):",
+                    "subject_input": "제목:",
+                    "description_input": "기술",
+                    "attachments_input": "파일 첨부 (옵션):",
+                    "submit_btn": "보내다"
+            }
         }
     }
 }

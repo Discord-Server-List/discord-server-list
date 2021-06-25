@@ -205,5 +205,17 @@
                 }
             }
         }
+    },
+    "user": {
+        "page_title": "Profil {userName} | Noisy Penguin Server List",
+        "content": {
+                "header": {
+                    "add_btn": "Tambahkan sebagai teman",
+                    "add_title": "Tambahkan {userName} sebagai teman"
+                },
+                "section": {
+                        "description": "Deskripsi User"
+                }
+        }
     }
 }

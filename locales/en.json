@@ -205,5 +205,17 @@
                 }
             }
         }
+    },
+    "user": {
+        "page_title": "{userName} Profile | Noisy Penguin Server List",
+        "content": {
+                "header": {
+                    "add_btn": "Add as friend",
+                    "add_title": "Add {userName} as friend"
+                },
+                "section": {
+                        "description": "User Description"
+                }
+        }
     }
 }

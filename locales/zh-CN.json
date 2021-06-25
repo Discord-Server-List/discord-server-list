@@ -205,5 +205,17 @@
                 }
             }
         }
+    },
+    "user": {
+        "page_title": "{userName}个人资料 | Noisy Penguin 服务器列表",
+        "content": {
+                "header": {
+                    "add_btn": "添加为好友",
+                    "add_title": "添加{userName}为好友"
+                },
+                "section": {
+                        "description": "用户说明"
+                }
+        }
     }
 }

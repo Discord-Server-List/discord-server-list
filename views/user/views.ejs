@@ -2,7 +2,7 @@
 <html dir="ltr" lang="<%=  lingua.locale %>">
 <head>
     <%- include("../partials/head.ejs") %>
-    <title><%= title %></title>
+    <title><%= title %> Profile | Noisy Penguin Server List</title>
 </head>
 <body>
     <%- include("../partials/nav.ejs") %>
@@ -13,11 +13,11 @@
               alt="">
               <h3 class="masthead-heading mb-0" style="font-size: 3em !important;"><%= username %> </h3>
               <br />
-              <a class="btn" title="Add <%= username %> as friend" onclick="window.location.href = '/user/add/<%= id %>';" role="button" target="blank" style="color: white;">
+              <a class="btn" title="<%= lingua.user.content.header.add_title(username) %>" onclick="window.location.href = '/user/add/<%= id %>';" role="button" target="blank" style="color: white;">
                 <span>
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </span>
-                Add as friend
+                <%= lingua.user.content.header.add_btn %>
               </a>
               
           </div>
@@ -29,12 +29,12 @@
               <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-2">
                   <div class="p-5">
-                    <img class="img-fluid" src="<%= favicon %>" alt="<%= favicon %>-icon">
+                    <img class="img-fluid" src="<%= favicon %>" title="<%= username %>-icon" alt="<%= username %>-icon">
                   </div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                   <div class="p-5">
-                    <h3 class="display-5">User Description</h3>
+                    <h3 class="display-5"><%= lingua.user.content.section.description %></h3>
                     <p><%= userDesc %></p>
                   </div>
                 </div>

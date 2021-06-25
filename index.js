@@ -69,8 +69,8 @@ imageCache.setOptions({
 
 check();
 
-app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 var sessionid = 1000 * 60 * 60 * 24;
 app.use(session({
     secret: "DiscordServerList",

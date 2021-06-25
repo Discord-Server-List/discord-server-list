@@ -205,5 +205,17 @@
                 }
             }
         }
+    },
+    "user": {
+        "page_title": "{username} 프로필 | Noisy Penguin 서버 목록",
+        "content": {
+                "header": {
+                    "add_btn": "친구로 추가",
+                    "add_title": "{userName}을 친구로 추가"
+                },
+                "section": {
+                        "description": "사용자 설명"
+                }
+        }
     }
 }

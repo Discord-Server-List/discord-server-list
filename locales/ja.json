@@ -205,5 +205,17 @@
                 }
             }
         }
+    },
+    "user": {
+        "page_title": "{userName} プロフィール | Noisy Penguin サーバー・リスト",
+        "content": {
+                "header": {
+                    "add_btn": "フレンド申請に送って",
+                    "add_title": "{userName}にフレンド追加して"
+                },
+                "section": {
+                        "description": "ユーザー概要"
+                }
+        }
     }
 }

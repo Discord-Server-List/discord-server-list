@@ -7,7 +7,7 @@ router.get("/:user_id", async(req, res) => {
     var userData = await User.findOne({userID: req.params.user_id});
     if(userData) {
         res.render("user/views", {
-            title: userData.username + " Profile",
+            title: userData.username,
             icon: "/img/favicon.png",
             id: userData.userID,
             favicon: userData.userIcon,

@@ -9,5 +9,6 @@ router.use("/terms", require("@routes/terms"));
 router.use("/support", require("@routes/support/index"));
 router.use("/invite", require("@routes/invite"));
 router.use("/app", require("@routes/app/index"));
+router.use("/acknowledgements", require("@routes/acknowledgements"));
 
 module.exports = router;

@@ -1,0 +1,17 @@
+[
+    {
+        "id": "1",
+        "package_name": "express",
+        "package_version": "^4.17.1"
+    },
+    {
+        "id": "2",
+        "package_name": "discord.js",
+        "package_version": "^12.5.3"
+    },
+    {
+        "id": "3",
+        "package_name": "mongoose",
+        "package_version": "^5.12.13"
+    }
+]

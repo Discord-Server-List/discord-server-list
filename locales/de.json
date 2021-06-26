@@ -1,0 +1,234 @@
+{
+    "locale": "de",
+    "font": "font-family: Roboto, sans-serif;",
+    "index": {
+        "page_title": "Noisy Penguin Server-Liste",
+        "header": {
+            "title": "Noisy Penguin Server-Liste",
+            "support_btn": "Support-Server beitreten",
+            "login_btn": "Anmeldung"
+        },
+        "section1": {
+            "title": "Twitter-Zeitleiste",
+            "description": "Unsere Twitter-Timeline Sie können uns gerne folgen:"
+        },
+        "section2": {
+            "title": "Discord Server Widget",
+            "description": "Unser Support-Server-Widget"
+        }
+    },
+    "dropdown": {
+        "title": "Sprachen wählen",
+        "list": {
+            "en": "Englisch",
+            "ja": "Japanisch",
+            "id": "Indonesisch",
+            "zh_CN": "Chinesisch",
+            "ko": "Koreanisch",
+            "ru": "Russisch"
+        }
+    },
+    "footer": {
+        "row1": {
+            "title": "Kontakt",
+            "list": {
+                "link1": "wislyong8@gmail.com",
+                "link2": "Twitter"
+            }
+        },
+        "row2": {
+            "title": "Ressourcen",
+            "list": {
+                "link1": "Unterstützung",
+                "link2": "Spenden Sie"
+            }
+        },
+        "icon_Link_title": {
+            "github": "Noisy Penguin auf Github",
+            "twitter": "Noisy Penguin auf Twitter"
+        }
+    },
+    "navbar": {
+        "Server": "Server",
+        "About": "Über",
+        "search": {
+            "title": "Server suchen"
+        },
+        "submit": "Anfrage einreichen"
+    },
+    "support": {
+        "page_title": "Unterstützung Blog | Noisy Penguin Server-Liste",
+        "index": {
+            "content": {
+                "section_title": "Unterstützung Blog",
+                "search_input": "Suche",
+                "intro": {
+                    "h1": "Sie brauchen Hilfe? Wir halten Ihnen den Rücken frei.",
+                    "p": "Von der Anmeldung bis zum Konto, finden Sie Hilfe für alles bei Noisy Penguin Server-Liste"
+                },
+                "flex_items": {
+                    "created_at": "Erstellt am:"
+                }
+            }
+        }
+    },
+    "chatbox": {
+        "title": "Ein Problem? Kontaktieren Sie uns",
+        "form": {
+            "title": "Chat", 
+            "msg": "Meldung",
+            "msg_btn": "Meldung tippen...",
+            "send_btn": "Senden",
+            "close_btn": "Schließen",
+            "email": "Email",
+            "email_btn": "Ihre Email eingeben"
+        }
+    },
+    "guild": {
+        "page_title": "Noisy Chicken Server-Liste",
+        "header": {
+            "join_btn": "Server verbinden",
+            "contact_btn": "Kontakt Eigentümer"
+        },
+        "section1": {
+            "title": "Im Besitz von:"
+        },
+        "section2": {
+            "title": "Server Beschreibung"
+        },
+        "section3": {
+            "title": "Teilen Sie es:"
+        }
+    },
+    "api": {
+        "content": {
+            "section1": {
+                "title": "Guild Structure",
+                "example": "Example",
+                "table": {
+                    "row1": {
+                        "title": "Field",
+                        "content": {
+                            "td": {
+                                "name1": "guildID",
+                                "name2": "guildName",
+                                "name3": "icon",
+                                "name4": "owner",
+                                "name5": "ownerID",
+                                "name6": "guildRegion",
+                                "name7": "guildCreatedAt",
+                                "name8": "addedAt",
+                                "name9": "likes",
+                                "name10": "dislikes",
+                                "name11": "nsfw",
+                                "name12": "verified",
+                                "name13": "description",
+                                "name14": "defaultChannel"
+                            }
+                        }
+                    },
+                    "row2": {
+                        "title": "Type",
+                        "td": {
+                            "type1": "snowflake",
+                            "type2": "string",
+                            "type3": "?string",
+                            "type4": "boolean",
+                            "type5": "ISO8601 timestamp",
+                            "type6": "integer"
+                        }
+                    },
+                    "row3": {
+                        "title": "Description",
+                        "td": {
+                            "desc1": "guild id",
+                            "desc2": "guild name",
+                            "desc3": "icon hash",
+                            "desc4": "owner of the guild",
+                            "desc5": "id of owner",
+                            "desc6": {
+                                "text": "Discord",
+                                "link": "Voice Region"   
+                            },
+                            "desc7": "when this guild was created",
+                            "desc8": "when this guild was added on the server list",
+                            "desc9": "how many likes on the guild",
+                            "desc10": "how many dislikes on the guild",
+                            "desc11": "is the guild nsfw",
+                            "desc12": "is the guild verified on the server list",
+                            "desc13": "description of the guild on the server list",
+                            "desc14": "guild default channel"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "server": {
+        "page_title": "Server entdecken | Noisy Penguin Server-Liste",
+        "content": {
+            "header": {
+                "title": "Top-Servern",
+                "paragraph": "Die beliebtesten Discord-Server",
+                "search_header": {
+                    "title": "Noisy Penguin Discord Server Liste",
+                    "description": "Entdecken Sie Server, die Sie interessieren, und lernen Sie neue Freunde kennen",
+                    "input": {
+                        "content": "Suche nach bestimmten Servern..."
+                    },
+                    "top": "Top"
+                }
+            },
+            "section": {
+                "guild_card": {
+                    "like_title": "Anzahl der Likes für",
+                    "members_count": "{membercount} Mitglieder",
+                    "emojis_count": "{emojicount} Emotionen",
+                    "view_btn": "Ansicht",
+                    "join_btn": "Beitreten"
+                }
+            }
+        }
+    },
+    "terms": {
+        "page_title": "Begriffe | Noisy Penguin Server-Liste",
+        "content": {
+            "header": {
+                "title": "Begriffe"
+            },
+            "section": {
+                "privacy": "Datenschutzrichtlinie",
+                "tos": "Bedingungen für den Service",
+                "mainContent": {
+                    "p1": "MIT DER NUTZUNG DIESER WEBSITE ERKLÄREN SIE SICH MIT DEN NUTZUNGSBEDINGUNGEN UND DER DATENSCHUTZRICHTLINIE EINVERSTANDEN.",
+                    "p2": "ALLE URHEBERRECHTE, WARENZEICHEN, DIENSTLEISTUNGSMARKEN GEHÖREN DEN ENTSPRECHENDEN EIGENTÜMERN.",
+                    "p3": "FÜR UNTERSTÜTZUNG SENDEN SIE UNS EINE E-MAIL AN wislyong8@gmail.com ODER RUFEN SIE UNS AN UNTER +62 812 6709 9612"
+                }
+            }
+        }
+    },
+    "user": {
+        "page_title": "{userName} Profil | Noisy Penguin Server-Liste",
+        "content": {
+                "header": {
+                    "add_btn": "Als Freund hinzufügen",
+                    "add_title": "Hinzufügen von {userName} als Freund"
+                },
+                "section": {
+                        "description": "Benutzerbeschreibung"
+                }
+        }
+    },
+    "help_support": {
+        "page_title": "Unterstützung | Noisy Penguin Server-Liste",
+        "content": {
+            "form": {
+                    "username_input": "Benutzername (4 bis 12 Zeichen):",
+                    "subject_input": "Thema:",
+                    "description_input": "Beschreibung",
+                    "attachments_input": "Datei Anhänge (optional):",
+                    "submit_btn": "Senden"
+            }
+        }
+    }
+}

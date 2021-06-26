@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="<%= lingua.locale %>">
+<head>
+    <%- include("../partials/head.ejs") %> 
+    <title>Discover Users | Noisy Penguin Server List</title>
+    <link rel="stylesheet" href="/css/userlist.css">
+</head>
+<body>
+    <%- include("../partials/nav.ejs") %> 
+
+    <header class="masthead text-center text-white">
+        <div class="masthead-content">
+            <div class="container">
+                <img class="img-fluid bot-avatar rounded-circle" src="/img/favicon.png" width="200px" height="200px"
+              alt="">
+              <h3 class="masthead-heading mb-0" style="font-size: 3em !important;">User List</h3>
+          </div>
+        </div>
+        </header>
+    
+    <div class="default-background">
+        <div class="container container-highlight">
+            <h3>Search User</h3>
+            <div class="col-sm-12">
+                <form action="/user/search" method="get">
+                    <div class="form-row">
+                        <div class="col-md-11">
+                            <input name="userSearchBar" id="autocomplete" autocomplete="off" class="form-control search-bar-main" type="text" placeholder="Search...">
+                        </div>
+                        <div class="co-md-1">
+                            <div class="btn-group">
+                                <button class="btn btn-light" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <ul class="result-list">
+                    <% userD.forEach(function(data) { %> 
+                    <li class="list-item-usr">
+                        <div class="result-image">
+                            <img src="<%= data.userIcon %>" alt="user-<%= data.userID %>-avatar">
+                        </div>
+                        <div class="result-info">
+                            <h4 class="title">
+                                <a onclick="window.location.href='/user'" class="username"><%= data.username %></a>
+                                <p class="since">Member since <%= data.createdAt.toLocaleString() %></p>
+                                <p class="desc">
+                                    <%= data.description %>
+                                </p>
+                            </h4>                 
+                        </div>
+                        <div class="result-dash">
+                            <a href="/user/<%= data.userID %>" class="btn btn-primary" style="width:100%; text-align: center;">View Profile</a>
+                        </div>
+                    </li>
+                    <% }) %> 
+                </ul>
+            </div>      
+        </div>
+    </div>
+    <%- include("../partials/chatbox.ejs") %> 
+    <%- include("../partials/footer.ejs") %> 
+</body>
+</html>

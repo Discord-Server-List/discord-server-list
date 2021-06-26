@@ -11,5 +11,6 @@ router
 })
 
 router.use("/add", require("./add"));
+router.use("/:ticket_id", require("./views"));
 
 module.exports = router

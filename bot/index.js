@@ -59,14 +59,19 @@ bot.on("message", async(message) => {
         return;
     }
 
-    /*if(!uData){
+    if(!uData){
+        if(message.author.bot) {
+            return;
+        } else {
         User.create({
             userID: message.author.id,
             userTag: message.author.tag,
             username: message.author.username,
-            userIcon: message.author.displayAvatarURL({dynamic: true, size: 512})
+            userIcon: message.author.displayAvatarURL({dynamic: true, size: 512}),
+            createdAt: message.author.createdAt
         })
-    }*/
+        }
+    }
 
     //if (!message.content.toLowerCase().startsWith(process.env.PREFIX)) return;
     if(message.content == "r/serverinfo") {

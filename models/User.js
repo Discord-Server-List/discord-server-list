@@ -17,7 +17,7 @@ var userSchema = new Schema({
         required: true,
         default: 0
     },
-    time: {
+    addedAt: {
         type: Date,
         default: () => Date.now()
     },
@@ -45,8 +45,7 @@ var userSchema = new Schema({
         type: String
     },
     userEmail: {
-        type: String,
-        required: true
+        type: String
     },
     is_premium: {
         type: Boolean,
@@ -58,6 +57,9 @@ var userSchema = new Schema({
     locale: {
         type: String,
         default: "en-US"
+    },
+    createdAt: {
+        type: Date
     }
 })
 

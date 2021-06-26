@@ -2,7 +2,7 @@
 <html dir="ltr" lang="<%= lingua.locale %>">
 <head>
     <%- include("partials/head.ejs") %>
-    <title>Support | Noisy Penguin Server List</title>
+    <title><%= lingua.help_support.page_title %></title>
     <style>
         input {
             margin: auto;
@@ -20,27 +20,27 @@
         </div>
         </header>
     <form action="/add/support" method="post" accept-charset="UTF-8">
-        <label for="username">Username(4 to 12 characters):</label>
+        <label for="username"><%= lingua.help_support.content.form.username_input %></label>
         <input type="text" id="username" name="username" required
         minlength="4" maxlength="12" size="20" class="form-control">
         <br/>
 
-        <label for="title">Subject:</label>
+        <label for="title"><%= lingua.help_support.content.form.subject_input %></label>
         <input type="text" id="title" name="title" required class="form-control">
 
         <br/>
 
-        <label for="body">Description</label>
+        <label for="body"><%= lingua.help_support.content.form.description_input %>:</label>
         <br/>
         <textarea name="body" id="body" cols="50" rows="10"></textarea class="form-control"> 
 
         <br/>
 
-        <label for="attachments">Attachments(optional):</label>
+        <label for="attachments"><%= lingua.help_support.content.form.attachments_input %></label>
         <input type="file" name="attachments" id="attachments">
 
         <br/>
-        <button type="submit" class="btn btn-light" data-mdb-ripple-color="dark" style="margin: 10px 10px !important;">Submit</button>
+        <button type="submit" class="btn btn-light" data-mdb-ripple-color="dark" style="margin: 10px 10px !important;"><%= lingua.help_support.content.form.submit_btn %></button>
     </form>
 
     <%- include("partials/footer.ejs") %> 

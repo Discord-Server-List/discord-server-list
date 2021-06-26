@@ -18,5 +18,12 @@ router.get("/:user_id", async(req, res) => {
         res.send("User Not Found")
     }
 });
+router.get("/", async(req, res) => {
+    let data = await User.find({}).lean();
+    res.render("user/index", {
+        icon: "/img/favicon.png",
+        userD: data
+    })
+})
 
 module.exports = router;

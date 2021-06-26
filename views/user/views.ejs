@@ -2,7 +2,7 @@
 <html dir="ltr" lang="<%=  lingua.locale %>">
 <head>
     <%- include("../partials/head.ejs") %>
-    <title><%= title %> Profile | Noisy Penguin Server List</title>
+    <title><%= lingua.user.page_title(username) %></title>
 </head>
 <body>
     <%- include("../partials/nav.ejs") %>

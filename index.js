@@ -4,16 +4,10 @@ var express = require("express");
 const { connectDB } = require("@utils/db");
 var session = require("express-session");
 var lingua = require("lingua");
-var imageCache = require('image-cache');
-const Guild  = require("@models/Guild");
 var device = require('express-device');
-const nodemailer = require('nodemailer');
-const User = require("./models/User");
-const Support = require("./models/Support");
+var Announcements = require("./models/Announcements");
 var bot = require("@bot/index");
 const { checkAuth } = require("@utils/auth");
-const Post = require("@models/Post");
-const path = require("path");
 const fetch = require('node-fetch');
 const { check } = require("./utils/checkVersion");
 var app = express();
@@ -31,22 +25,6 @@ app.use(device.capture());
 connectDB(process.env.MONGODB_TEST);
 
 
-let transport = (err) => {
-    nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT,
-        auth: {
-           user: process.env.SMTP_USER,
-           pass: process.env.SMTP_PASS
-        }
-    })
-    if(err) {
-        console.error(err)
-    } else {
-        console.log(`Connected to host ${process.env.SMTP_HOST}`)
-    }
-}
-
 app.use(lingua(app, {
     defaultLocale: 'en',
     path: __dirname + '/locales',
@@ -60,12 +38,6 @@ app.use(lingua(app, {
 var login = require("@routes/api/login");
 var logout = require("@routes/api/logout");
 app.use(require("./routes/index"));
-
-imageCache.setOptions({
-    compressed: false,
-    dir: path.join(__dirname + "/assets/img/"),
-    extname: ".cacheimg"
-})
 
 check();
 
@@ -87,6 +59,7 @@ const { detect } = require('detect-browser');
 const browser = detect();
 
 app.get("/", async(req, res) => {
+    let AnnouncementsData = await  Announcements.find({}).lean();
     fetch(`https://api.ipregistry.co?key=${API_KEY}`)
     .then(function (response) {
         return response.json();
@@ -99,7 +72,8 @@ app.get("/", async(req, res) => {
         res.cookie('device', req.device.type)
         res.render("index", {
             title: "Noisy Penguin Server List",
-            icon: "/img/favicon.png"
+            icon: "/img/favicon.png",
+            Announcementsdata: AnnouncementsData
         })
     });
     
@@ -119,19 +93,9 @@ app.use("/login", login)
 app.use("/me", require("./routes/me"));
 
 app.use("/logout", logout)
-
+app.use("/support", require("./routes/support/index"))
 
 app.use("/api", require("./routes/api/index"));
-
-app.post("/support/blog/search", (req, res, next) => {
-    Post.findOne({title: req.body.blogquery}).exec(function(data) {
-        res.redirect(`/support/blog/search/${req.body.blogquery}`)
-    })
-})
-
-app.get("/error", (req, res) => {
-    res.render("error")
-})
 
 app.get("/server/add", checkAuth, async(req, res) => {
 
@@ -139,20 +103,6 @@ app.get("/server/add", checkAuth, async(req, res) => {
 
 app.post("/api/server/add", async(req, res) => {
     
-})
-
-
-
-app.get("/support/:ticketid", async(req, res) => {
-    let data = await Support.findOne({userID: req.params.userid, supportID: req.params.ticketid});
-    if(!data) {
-        res.sendStatus(404).json({
-            error: true,
-            code: 404,
-            message: "Support Ticket Not Found"
-        })
-    } 
-    res.json(data);
 })
 
 
